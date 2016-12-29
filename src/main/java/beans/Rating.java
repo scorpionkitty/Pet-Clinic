@@ -3,63 +3,78 @@ package beans;
 public class Rating {
 
 	private int ratingId;
-	private int rating;
-	private int ownerId;
-	private int doctorId;
-	private int apptId;
+	private double rating;
+	private User owner;
+	private User doctor;
+	private Appointment appointment;
 	private String comment;
-	
+
 	public Rating() {
 		super();
 	}
-	public Rating(int ratingId, int rating, int ownerId, int doctorId, int apptId, String comment) {
+
+	public Rating(int ratingId, double rating, User owner, User doctor, Appointment appointment, String comment) {
 		super();
 		this.ratingId = ratingId;
 		this.rating = rating;
-		this.ownerId = ownerId;
-		this.doctorId = doctorId;
-		this.apptId = apptId;
+		this.owner = owner;
+		this.doctor = doctor;
+		this.appointment = appointment;
 		this.comment = comment;
 	}
+
 	public int getRatingId() {
 		return ratingId;
 	}
+
 	public void setRatingId(int ratingId) {
 		this.ratingId = ratingId;
 	}
-	public int getRating() {
+
+	public double getRating() {
 		return rating;
 	}
-	public void setRating(int rating) {
+
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
-	public int getOwnerId() {
-		return ownerId;
+
+	public User getOwner() {
+		return owner;
 	}
-	public void setOwnerId(int ownerId) {
-		this.ownerId = ownerId;
+
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
-	public int getDoctorId() {
-		return doctorId;
+
+	public User getDoctor() {
+		return doctor;
 	}
-	public void setDoctorId(int doctorId) {
-		this.doctorId = doctorId;
+
+	public void setDoctor(User doctor) {
+		this.doctor = doctor;
 	}
-	public int getApptId() {
-		return apptId;
+
+	public Appointment getAppointment() {
+		return appointment;
 	}
-	public void setApptId(int apptId) {
-		this.apptId = apptId;
+
+	public void setAppointment(Appointment appointment) {
+		this.appointment = appointment;
 	}
+
 	public String getComment() {
 		return comment;
 	}
+
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
 	@Override
 	public String toString() {
-		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", ownerId=" + ownerId + ", doctorId=" + doctorId
-				+ ", apptId=" + apptId + ", comment=" + comment + "]";
+		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", owner=" + owner + ", doctor=" + doctor
+				+ ", appointment=" + appointment + ", comment=" + comment + "]";
 	}
+
 }
