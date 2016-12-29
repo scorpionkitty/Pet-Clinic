@@ -1,5 +1,5 @@
 package beans;
-
+//
 public class Pet {
 
 	private int petId;

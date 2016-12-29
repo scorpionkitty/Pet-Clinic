@@ -1,5 +1,5 @@
 package beans;
-
+//
 public class Rating {
 
 	private int ratingId;

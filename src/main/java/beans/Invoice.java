@@ -1,5 +1,5 @@
 package beans;
-
+//
 import java.sql.Timestamp;
 
 public class Invoice {

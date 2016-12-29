@@ -1,5 +1,5 @@
 package beans;
-
+//
 public class UserRole {
 
 	private int userRoleId;
