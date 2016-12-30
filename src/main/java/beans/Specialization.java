@@ -1,41 +1,50 @@
 package beans;
-
+//
 public class Specialization {
 
 	private int specializationId;
-	private int doctorId;
-	private int petTypeId;
-	
+	private User doctor;
+	private PetType petType;
+
 	public Specialization() {
 		super();
 	}
-	public Specialization(int specializationId, int doctorId, int petTypeId) {
+
+	public Specialization(int specializationId, User doctor, PetType petType) {
 		super();
 		this.specializationId = specializationId;
-		this.doctorId = doctorId;
-		this.petTypeId = petTypeId;
+		this.doctor = doctor;
+		this.petType = petType;
 	}
+
 	public int getSpecializationId() {
 		return specializationId;
 	}
+
 	public void setSpecializationId(int specializationId) {
 		this.specializationId = specializationId;
 	}
-	public int getDoctorId() {
-		return doctorId;
+
+	public User getDoctor() {
+		return doctor;
 	}
-	public void setDoctorId(int doctorId) {
-		this.doctorId = doctorId;
+
+	public void setDoctor(User doctor) {
+		this.doctor = doctor;
 	}
-	public int getPetTypeId() {
-		return petTypeId;
+
+	public PetType getPetType() {
+		return petType;
 	}
-	public void setPetTypeId(int petTypeId) {
-		this.petTypeId = petTypeId;
+
+	public void setPetType(PetType petType) {
+		this.petType = petType;
 	}
+
 	@Override
 	public String toString() {
-		return "Specialization [specializationId=" + specializationId + ", doctorId=" + doctorId + ", petTypeId="
-				+ petTypeId + "]";
+		return "Specialization [specializationId=" + specializationId + ", doctor=" + doctor + ", petType=" + petType
+				+ "]";
 	}
+
 }
