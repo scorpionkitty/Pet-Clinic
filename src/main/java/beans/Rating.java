@@ -44,9 +44,8 @@ public class Rating {
 		super();
 	}
 
-	public Rating(int ratingId, int rating, User owner, User vet, Appointment appt, String comment) {
+	public Rating(int rating, User owner, User vet, Appointment appt, String comment) {
 		super();
-		this.ratingId = ratingId;
 		this.rating = rating;
 		this.owner = owner;
 		this.vet = vet;

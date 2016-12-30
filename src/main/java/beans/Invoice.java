@@ -45,9 +45,8 @@ public class Invoice {
 		super();
 	}
     
-	public Invoice(int invoiceId, double amount, Appointment appt, boolean isPaid, String cardNumber) {
+	public Invoice(double amount, Appointment appt, boolean isPaid, String cardNumber) {
 		super();
-		this.invoiceId = invoiceId;
 		this.amount = amount;
 		this.appt = appt;
 		this.isPaid = isPaid;
@@ -87,10 +86,10 @@ public class Invoice {
 		this.isPaid = isPaid;
 	}
 
-	public String getcardNumber() {
+	public String getCardNumber() {
 		return cardNumber;
 	}
-	public void setcardNumber(String cardNumber) {
+	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
         
 	}
