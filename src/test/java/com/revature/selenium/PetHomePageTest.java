@@ -16,7 +16,7 @@ public class PetHomePageTest {
 		System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
 	
 		driver = new ChromeDriver();
-	}
+	}   
 	
 	@Test
 	public void test() {

@@ -35,7 +35,7 @@ public class PetHomePage {
 	
 	public void viewVet1() {
 		driver.findElement(By.id("vet1"));
-	}
+	}  
 	
 	
 }
