@@ -9,8 +9,10 @@ import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 
 import beans.Appointment;
+import beans.Invoice;
 import beans.Pet;
 import beans.PetType;
+import beans.Rating;
 import beans.Specialization;
 import beans.User;
 import beans.UserRole;
@@ -49,6 +51,11 @@ public class PetClinicTest {
 		
 		Appointment appt1 = new Appointment(vet1, pet1, "Has a cold.", placedDate, apptDate);
 		
+		appt1.setPrescription("Get some sleep.");
+		
+		Invoice invoice1 = new Invoice(40.00, appt1, true, "1234567890");
+		
+		Rating rating1 = new Rating(4, appt1, "Loved it!");	
 		
 	}
 }

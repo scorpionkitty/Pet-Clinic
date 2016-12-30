@@ -25,14 +25,6 @@ public class Rating {
 	private double rating;
 	
 	@OneToOne
-	@JoinColumn(name="OWNER_ID", nullable=false, updatable=false)
-	private User owner;
-	
-	@OneToOne
-	@JoinColumn(name="VET_ID", nullable=false, updatable=false)
-	private User vet;
-	
-	@OneToOne
 	@JoinColumn(name="APPT_ID", nullable=false, updatable=false)
 	private Appointment appt;
 	
@@ -44,11 +36,9 @@ public class Rating {
 		super();
 	}
 
-	public Rating(int rating, User owner, User vet, Appointment appt, String comment) {
+	public Rating(int rating, Appointment appt, String comment) {
 		super();
 		this.rating = rating;
-		this.owner = owner;
-		this.vet = vet;
 		this.appt = appt;
 		this.comment = comment;
 	}
@@ -67,22 +57,6 @@ public class Rating {
 
 	public void setRating(double rating) {
 		this.rating = rating;
-	}
-
-	public User getOwner() {
-		return owner;
-	}
-    
-	public void setOwner(User owner) {
-		this.owner = owner;
-	}
-    
-	public User getVet() {
-		return vet;
-	}
-    
-	public void setVet(User vet) {
-		this.vet = vet;
 	}
     
 	public Appointment getAppt() {
@@ -103,8 +77,7 @@ public class Rating {
 
 	@Override
 	public String toString() {
-		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", owner=" + owner + ", vet=" + vet
-				+ ", appt=" + appt + ", comment=" + comment + "]";
+		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", appt=" + appt + ", comment=" + comment + "]";
 	}
 
 }
