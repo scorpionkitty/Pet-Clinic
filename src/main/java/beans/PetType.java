@@ -22,26 +22,32 @@ public class PetType {
 	@OneToOne
 	@Column(name="PET_TYPE_NAME", nullable=false, updatable=false)
 	private String petTypeName;
-	
+
 	public PetType() {
 		super();
 	}
+
 	public PetType(String petTypeName) {
 		super();
 		this.petTypeName = petTypeName;
 	}
+
 	public int getPetTypeId() {
 		return petTypeId;
 	}
+
 	public void setPetTypeId(int petTypeId) {
 		this.petTypeId = petTypeId;
 	}
+
 	public String getPetTypeName() {
 		return petTypeName;
 	}
+
 	public void setPetTypeName(String petTypeName) {
 		this.petTypeName = petTypeName;
 	}
+
 	@Override
 	public String toString() {
 		return "PetType [petTypeId=" + petTypeId + ", petTypeName=" + petTypeName + "]";

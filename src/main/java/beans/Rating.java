@@ -39,10 +39,11 @@ public class Rating {
 	@OneToOne
 	@Column(name="COMMENT")
 	private String comment;
-	
+
 	public Rating() {
 		super();
 	}
+
 	public Rating(int ratingId, int rating, User owner, User vet, Appointment appt, String comment) {
 		super();
 		this.ratingId = ratingId;
@@ -52,45 +53,59 @@ public class Rating {
 		this.appt = appt;
 		this.comment = comment;
 	}
+
 	public int getRatingId() {
 		return ratingId;
 	}
+
 	public void setRatingId(int ratingId) {
 		this.ratingId = ratingId;
 	}
-	public int getRating() {
+
+	public double getRating() {
 		return rating;
 	}
-	public void setRating(int rating) {
+
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
+
 	public User getOwner() {
 		return owner;
 	}
+    
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
+    
 	public User getVet() {
 		return vet;
 	}
+    
 	public void setVet(User vet) {
 		this.vet = vet;
 	}
+    
 	public Appointment getAppt() {
 		return appt;
 	}
+    
 	public void setAppt(Appointment appt) {
 		this.appt = appt;
 	}
+
 	public String getComment() {
 		return comment;
 	}
+
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
 	@Override
 	public String toString() {
 		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", owner=" + owner + ", vet=" + vet
 				+ ", appt=" + appt + ", comment=" + comment + "]";
 	}
+
 }

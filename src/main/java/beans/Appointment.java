@@ -1,5 +1,4 @@
 package beans;
-
 import java.sql.Timestamp;
 
 import javax.persistence.Cacheable;
@@ -31,6 +30,7 @@ public class Appointment {
 	
 	@OneToOne
 	@Column(name="DESCRIPTION", length = 100)
+    
 	private String description;
 	
 	@OneToOne
@@ -44,10 +44,11 @@ public class Appointment {
 	@OneToOne
 	@Column(name="PRESCRIPTION", length=100)
 	private String prescription;
-	
+
 	public Appointment() {
 		super();
 	}
+    
 	public Appointment(User vet, Pet pet, String description, Timestamp placedDate, Timestamp apptDate) {
 		super();
 		this.vet = vet;
@@ -56,52 +57,68 @@ public class Appointment {
 		this.placedDate = placedDate;
 		this.apptDate = apptDate;
 	}
+
 	public int getApptId() {
 		return apptId;
 	}
+
 	public void setApptId(int apptId) {
 		this.apptId = apptId;
 	}
+    
 	public User getVet() {
 		return vet;
 	}
+    
 	public void setVet(User vet) {
 		this.vet = vet;
 	}
+    
 	public Pet getPet() {
 		return pet;
 	}
+    
 	public void setPet(Pet pet) {
 		this.pet = pet;
 	}
+
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public Timestamp getPlacedDate() {
 		return placedDate;
 	}
+
 	public void setPlacedDate(Timestamp placedDate) {
 		this.placedDate = placedDate;
 	}
+
 	public Timestamp getApptDate() {
 		return apptDate;
 	}
+
 	public void setApptDate(Timestamp apptDate) {
 		this.apptDate = apptDate;
 	}
+
 	public String getPrescription() {
 		return prescription;
 	}
+
 	public void setPrescription(String prescription) {
 		this.prescription = prescription;
 	}
+
 	@Override
 	public String toString() {
 		return "Appointment [apptId=" + apptId + ", vet=" + vet + ", pet=" + pet + ", description="
 				+ description + ", placedDate=" + placedDate + ", apptDate=" + apptDate 
 				+ ", prescription=" + prescription + "]";
 	}
+
 }

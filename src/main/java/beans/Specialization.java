@@ -20,7 +20,6 @@ public class Specialization {
 	//spring -- @Digits(integer=999999, fraction=0)
 	private int specializationId;
 	
-	
 	@JoinColumn(name="VET_ID", nullable=false, updatable=false)
 	private User vet;
 	
@@ -30,32 +29,41 @@ public class Specialization {
 	public Specialization() {
 		super();
 	}
+    
 	public Specialization(User vet, PetType petType) {
 		super();
 		this.vet = vet;
 		this.petType = petType;
 	}
+
 	public int getSpecializationId() {
 		return specializationId;
 	}
+
 	public void setSpecializationId(int specializationId) {
 		this.specializationId = specializationId;
 	}
+
 	public User getVet() {
 		return vet;
 	}
+    
 	public void setVet(User vet) {
 		this.vet = vet;
 	}
+    
 	public PetType getPetType() {
 		return petType;
 	}
+    
 	public void setPetType(PetType petType) {
 		this.petType = petType;
 	}
+
 	@Override
 	public String toString() {
 		return "Specialization [specializationId=" + specializationId + ", vet=" + vet + ", petType="
 				+ petType + "]";
 	}
+
 }

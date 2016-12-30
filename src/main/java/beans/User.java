@@ -40,6 +40,7 @@ public class User {
 	public User() {
 		super();
 	}
+    
 	public User(String username, String firstName, String lastName, String phone, String email, UserRole userRole) {
 		super();
 		this.username = username;
@@ -49,36 +50,47 @@ public class User {
 		this.email = email;
 		this.userRole = userRole;
 	}
+
 	public int getUserId() {
 		return userId;
 	}
+
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public String getPhone() {
 		return phone;
 	}
+
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -88,12 +100,15 @@ public class User {
 	public UserRole getUserRole() {
 		return userRole;
 	}
+
 	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", phone=" + phone + ", email=" + email + ", userRole=" + userRole + "]";
 	}
+
 }
