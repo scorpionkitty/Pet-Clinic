@@ -1,21 +1,45 @@
 package beans;
 
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Cacheable
+@Entity //Entity says it is going to be mapped by hibernate
+@Table(name = "PET") //rename Physical table even though the bean is different
 public class Pet {
 
+	@Id
+	@Column(name = "PET_ID", nullable=false, updatable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int petId;
+	
+	@OneToOne
+	@Column(name="PET_NAME", nullable=false)
 	private String petName;
-	private int ownerId;
-	private int petTypeId;
+	
+	@OneToOne
+	@JoinColumn(name="OWNER_ID", nullable=false, updatable=false)
+	private User owner;
+	
+	@OneToOne
+	@JoinColumn(name="PET_TYPE_ID", nullable=false, updatable=false)
+	private PetType petType;
 	
 	public Pet() {
 		super();
 	}
-	public Pet(int petId, String petName, int ownerId, int petTypeId) {
+	public Pet(String petName, User owner, PetType petType) {
 		super();
-		this.petId = petId;
 		this.petName = petName;
-		this.ownerId = ownerId;
-		this.petTypeId = petTypeId;
+		this.owner = owner;
+		this.petType = petType;
 	}
 	public int getPetId() {
 		return petId;
@@ -29,20 +53,20 @@ public class Pet {
 	public void setPetName(String petName) {
 		this.petName = petName;
 	}
-	public int getownerId() {
-		return ownerId;
+	public User getOwner() {
+		return owner;
 	}
-	public void setownerId(int ownerId) {
-		this.ownerId = ownerId;
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
-	public int getPetTypeId() {
-		return petTypeId;
+	public PetType getPetType() {
+		return petType;
 	}
-	public void setPetTypeId(int petTypeId) {
-		this.petTypeId = petTypeId;
+	public void setPetType(PetType petType) {
+		this.petType = petType;
 	}
 	@Override
 	public String toString() {
-		return "Pet [petId=" + petId + ", petName=" + petName + ", ownerId=" + ownerId + ", petTypeId=" + petTypeId + "]";
+		return "Pet [petId=" + petId + ", petName=" + petName + ", owner=" + owner + ", petType=" + petType + "]";
 	}
 }

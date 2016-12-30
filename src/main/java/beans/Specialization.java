@@ -1,19 +1,39 @@
 package beans;
 
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
+
+@Cacheable
+@Entity //Entity says it is going to be mapped by hibernate
+@Table(name = "SPECIALIZATION") //rename Physical table even though the bean is different
 public class Specialization {
 
+	@Id
+	@Column(name = "SPECIALIZATION_ID", nullable=false, updatable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	//spring -- @Digits(integer=999999, fraction=0)
 	private int specializationId;
-	private int doctorId;
-	private int petTypeId;
+	
+	
+	@JoinColumn(name="VET_ID", nullable=false, updatable=false)
+	private User vet;
+	
+	@JoinColumn(name="PET_TYPE_ID", nullable=false, updatable=false)
+	private PetType petType;
 	
 	public Specialization() {
 		super();
 	}
-	public Specialization(int specializationId, int doctorId, int petTypeId) {
+	public Specialization(User vet, PetType petType) {
 		super();
-		this.specializationId = specializationId;
-		this.doctorId = doctorId;
-		this.petTypeId = petTypeId;
+		this.vet = vet;
+		this.petType = petType;
 	}
 	public int getSpecializationId() {
 		return specializationId;
@@ -21,21 +41,21 @@ public class Specialization {
 	public void setSpecializationId(int specializationId) {
 		this.specializationId = specializationId;
 	}
-	public int getDoctorId() {
-		return doctorId;
+	public User getVet() {
+		return vet;
 	}
-	public void setDoctorId(int doctorId) {
-		this.doctorId = doctorId;
+	public void setVet(User vet) {
+		this.vet = vet;
 	}
-	public int getPetTypeId() {
-		return petTypeId;
+	public PetType getPetType() {
+		return petType;
 	}
-	public void setPetTypeId(int petTypeId) {
-		this.petTypeId = petTypeId;
+	public void setPetType(PetType petType) {
+		this.petType = petType;
 	}
 	@Override
 	public String toString() {
-		return "Specialization [specializationId=" + specializationId + ", doctorId=" + doctorId + ", petTypeId="
-				+ petTypeId + "]";
+		return "Specialization [specializationId=" + specializationId + ", vet=" + vet + ", petType="
+				+ petType + "]";
 	}
 }

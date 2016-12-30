@@ -1,27 +1,52 @@
 package beans;
 
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Table;
+
+@Cacheable
+@Entity //Entity says it is going to be mapped by hibernate
+@Table(name = "USER") //rename Physical table even though the bean is different
 public class User {
 
+	@Id
+	@Column(name = "USER_ID", nullable=false, updatable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int userId;
+	
+	@Column(name="USERNAME", nullable=false, updatable=false)
 	private String username;
+	
+	@Column(name="FNAME", nullable=false)
 	private String firstName;
+	
+	@Column(name="LNAME", nullable=false)
 	private String lastName;
+	
+	@Column(name="PHONE", nullable=false)
 	private String phone;
-	private String address;
-	private int userRole;
+	
+	@Column(name="EMAIL", length=50, nullable=false)
+	private String email;
+	
+	@JoinColumn(name="USER_ROLE_ID", nullable=false, updatable=false)
+	private UserRole userRole;
 	
 	public User() {
 		super();
 	}
-	public User(int userId, String username, String firstName, String lastName, String phone, String address,
-			int userRole) {
+	public User(String username, String firstName, String lastName, String phone, String email, UserRole userRole) {
 		super();
-		this.userId = userId;
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
-		this.address = address;
+		this.email = email;
 		this.userRole = userRole;
 	}
 	public int getUserId() {
@@ -54,21 +79,21 @@ public class User {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getAddress() {
-		return address;
+	public String getEmail() {
+		return email;
 	}
-	public void setAddress(String address) {
-		this.address = address;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	public int getUserRole() {
+	public UserRole getUserRole() {
 		return userRole;
 	}
-	public void setUserRole(int userRole) {
+	public void setUserRole(UserRole userRole) {
 		this.userRole = userRole;
 	}
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", phone=" + phone + ", address=" + address + ", userRole=" + userRole + "]";
+				+ lastName + ", phone=" + phone + ", email=" + email + ", userRole=" + userRole + "]";
 	}
 }

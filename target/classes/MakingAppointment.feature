@@ -1,34 +1,45 @@
 Feature: Making appointment
 	As a pet owner
-	I want to be able to fill out a 'New appointment' form 
-	So that can schedule an appointment with the doctor and date of my choosing
-	
-	Background: Login as a pet owner
-		Given that the pet owner is presented with the new appointment form after clicking a date slot of a vet
+	I want to be able to fill out a New appointment form 
+	So that can schedule an appointment with the vet and date of my choosing
 		
-	Scenario: Submit a new appointment with all the field filled out
-		Given that I select an open appointment slot of the doctor I want
-		When I make a new appointment with pet name, pet type, description, and contact method preference
-		Then I will see my newly-created appointment under my upcoming appointments box
-	
-	Scenario: Submit a new appointment with pet name not filled out
-		Given that I select an open appointment slot of the doctor I want
-		When I make a new appointment with pet type, description, and contact method preference
-		Then I will see a message saying ERROR: Must provide a pet name before processing
-	
-	Scenario: Submit a new appointment with a pet type not chosen
-		Given that I select an open appointment slot of the doctor I want
-		When I make a new appointment with pet name, description, and contact method preference
-		Then I will see a message saying ERROR: Must pick a pet type before processing
+	Scenario Outline: Submit a new appointment with all the field filled out
+		Given I select an open appointment slot with "<vet>"
+		When I make a new appointment with description: "<description>", contact method: "<contact>", and credit card: <information>
+		Then  I get "<result>"
 		
-	Scenario: Submit a new appointment with description not filled out
-		Given that I select an open appointment slot of the doctor I want
-		When I make a new appointment with pet name, pet type, and contact method preference
-		Then I will see a message saying ERROR: Must provide a description must be filled before processing
-		
-	Scenario: Submit a new appointment with contact method preference not chosen
-		Given that I select an open appointment slot of the doctor I want
-		When I make a new appointment with pet name, pet type, and description
-		Then I will see a message saying ERROR: Must pick a contact method preference before processing
+			Examples:
+			|	vet						|	description									|	contact |	information	|	result	|
+			|	George Perez	|	My cat is purring too much	|	Email		|	123456789		|	Success	|
+			|	Jeffrey Lau		|	My dog is vomitting					|	Phone		|	987654321		|	Success	|	
 	
-	Scenario:
+	Scenario Outline: Submit a new appointment with description not filled out
+		Given I select an open appointment slot with "<vet>"
+		When I make a new appointment with contact method: "<contact>" and credit card: <information>
+		Then  I get "<result>"
+		
+			Examples:
+			|	vet						|	description		|	contact |	information	|	result	|
+			|	George Perez	|								|	Email		|	123456789		|	Success	|
+			|	Jeffrey Lau		|								|	Phone		|	987654321		|	Success	|	
+	
+	Scenario Outline: Submit a new appointment with a contact method method not chosen
+		Given I select an open appointment slot with "<vet>"
+		When I make a new appointment with description: "<description>" and credit card: <information>
+		Then  I get "<result>"
+		
+			Examples:
+			|	vet						|	description									|	contact |	information	|	result	|
+			|	George Perez	|	My cat is purring too much	|					|	123456789		|	Failed	|
+			|	Jeffrey Lau		|	My dog is vomitting					|					|	987654321		|	Failed	|	
+		 
+	Scenario Outline: Submit a new appointment with credit card information not filled out
+		Given I select an open appointment slot with "<vet>"
+		When I make a new appointment with description: "<description>" and contact method: "<contact>"
+		Then  I get "<result>"
+		
+			Examples:
+			|	vet						|	description									|	contact |	information	|	result	|
+			|	George Perez	|	My cat is purring too much	|	Email		|							|	Failed	|
+			|	Jeffrey Lau		|	My dog is vomitting					|	Phone		|							|	Failed	|	
+		

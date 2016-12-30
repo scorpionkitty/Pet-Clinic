@@ -1,24 +1,55 @@
 package beans;
 
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Cacheable
+@Entity //Entity says it is going to be mapped by hibernate
+@Table(name = "RATING") //rename Physical table even though the bean is different
 public class Rating {
 
+	@Id
+	@Column(name = "RATING_ID", nullable=false, updatable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ratingId;
+	
+	@OneToOne
+	@Column(name="RATING", nullable=false, updatable=false)
 	private int rating;
-	private int ownerId;
-	private int doctorId;
-	private int apptId;
+	
+	@OneToOne
+	@JoinColumn(name="OWNER_ID", nullable=false, updatable=false)
+	private User owner;
+	
+	@OneToOne
+	@JoinColumn(name="VET_ID", nullable=false, updatable=false)
+	private User vet;
+	
+	@OneToOne
+	@JoinColumn(name="APPT_ID", nullable=false, updatable=false)
+	private Appointment appt;
+	
+	@OneToOne
+	@Column(name="COMMENT")
 	private String comment;
 	
 	public Rating() {
 		super();
 	}
-	public Rating(int ratingId, int rating, int ownerId, int doctorId, int apptId, String comment) {
+	public Rating(int ratingId, int rating, User owner, User vet, Appointment appt, String comment) {
 		super();
 		this.ratingId = ratingId;
 		this.rating = rating;
-		this.ownerId = ownerId;
-		this.doctorId = doctorId;
-		this.apptId = apptId;
+		this.owner = owner;
+		this.vet = vet;
+		this.appt = appt;
 		this.comment = comment;
 	}
 	public int getRatingId() {
@@ -33,23 +64,23 @@ public class Rating {
 	public void setRating(int rating) {
 		this.rating = rating;
 	}
-	public int getOwnerId() {
-		return ownerId;
+	public User getOwner() {
+		return owner;
 	}
-	public void setOwnerId(int ownerId) {
-		this.ownerId = ownerId;
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
-	public int getDoctorId() {
-		return doctorId;
+	public User getVet() {
+		return vet;
 	}
-	public void setDoctorId(int doctorId) {
-		this.doctorId = doctorId;
+	public void setVet(User vet) {
+		this.vet = vet;
 	}
-	public int getApptId() {
-		return apptId;
+	public Appointment getAppt() {
+		return appt;
 	}
-	public void setApptId(int apptId) {
-		this.apptId = apptId;
+	public void setAppt(Appointment appt) {
+		this.appt = appt;
 	}
 	public String getComment() {
 		return comment;
@@ -59,7 +90,7 @@ public class Rating {
 	}
 	@Override
 	public String toString() {
-		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", ownerId=" + ownerId + ", doctorId=" + doctorId
-				+ ", apptId=" + apptId + ", comment=" + comment + "]";
+		return "Rating [ratingId=" + ratingId + ", rating=" + rating + ", owner=" + owner + ", vet=" + vet
+				+ ", appt=" + appt + ", comment=" + comment + "]";
 	}
 }

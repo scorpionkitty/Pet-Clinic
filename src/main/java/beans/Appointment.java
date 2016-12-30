@@ -2,31 +2,59 @@ package beans;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Cacheable
+@Entity //Entity says it is going to be mapped by hibernate
+@Table(name = "APPOINTMENT") //rename Physical table even though the bean is different
 public class Appointment {
 
+	@Id
+	@Column(name = "APPT_ID", nullable=false, updatable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int apptId;
-	private int doctorId;
-	private int petId;
+	
+	@JoinColumn(name="VET_ID", nullable = false)
+	private User vet;
+	
+	@OneToOne
+	@JoinColumn(name="PET_ID", nullable = false)
+	private Pet pet;
+	
+	@OneToOne
+	@Column(name="DESCRIPTION", length = 100)
 	private String description;
+	
+	@OneToOne
+	@Column(name="PLACED_DATE", nullable=false, updatable = false)
 	private Timestamp placedDate;
+	
+	@OneToOne
+	@Column(name="APPT_DATE", nullable=false)
 	private Timestamp apptDate;
-	private double invoiceId;
+	
+	@OneToOne
+	@Column(name="PRESCRIPTION", length=100)
 	private String prescription;
 	
 	public Appointment() {
 		super();
 	}
-	public Appointment(int apptId, int doctorId, int petId, String description, Timestamp placedDate,
-			Timestamp apptDate, double invoiceId, String prescription) {
+	public Appointment(User vet, Pet pet, String description, Timestamp placedDate, Timestamp apptDate) {
 		super();
-		this.apptId = apptId;
-		this.doctorId = doctorId;
-		this.petId = petId;
+		this.vet = vet;
+		this.pet = pet;
 		this.description = description;
 		this.placedDate = placedDate;
 		this.apptDate = apptDate;
-		this.invoiceId = invoiceId;
-		this.prescription = prescription;
 	}
 	public int getApptId() {
 		return apptId;
@@ -34,17 +62,17 @@ public class Appointment {
 	public void setApptId(int apptId) {
 		this.apptId = apptId;
 	}
-	public int getDoctorId() {
-		return doctorId;
+	public User getVet() {
+		return vet;
 	}
-	public void setDoctorId(int doctorId) {
-		this.doctorId = doctorId;
+	public void setVet(User vet) {
+		this.vet = vet;
 	}
-	public int getPetId() {
-		return petId;
+	public Pet getPet() {
+		return pet;
 	}
-	public void setPetId(int petId) {
-		this.petId = petId;
+	public void setPet(Pet pet) {
+		this.pet = pet;
 	}
 	public String getDescription() {
 		return description;
@@ -64,12 +92,6 @@ public class Appointment {
 	public void setApptDate(Timestamp apptDate) {
 		this.apptDate = apptDate;
 	}
-	public double getInvoiceId() {
-		return invoiceId;
-	}
-	public void setInvoiceId(double invoiceId) {
-		this.invoiceId = invoiceId;
-	}
 	public String getPrescription() {
 		return prescription;
 	}
@@ -78,8 +100,8 @@ public class Appointment {
 	}
 	@Override
 	public String toString() {
-		return "Appointment [apptId=" + apptId + ", doctorId=" + doctorId + ", petId=" + petId + ", description="
-				+ description + ", placedDate=" + placedDate + ", apptDate=" + apptDate + ", invoiceId=" + invoiceId
+		return "Appointment [apptId=" + apptId + ", vet=" + vet + ", pet=" + pet + ", description="
+				+ description + ", placedDate=" + placedDate + ", apptDate=" + apptDate 
 				+ ", prescription=" + prescription + "]";
 	}
 }
