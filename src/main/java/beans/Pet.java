@@ -35,65 +35,38 @@ public class Pet {
 	public Pet() {
 		super();
 	}
-    
 	public Pet(String petName, User owner, PetType petType) {
 		super();
 		this.petName = petName;
 		this.owner = owner;
 		this.petType = petType;
 	}
-
 	public int getPetId() {
 		return petId;
 	}
-
-	public User getOwner() {
-		return owner;
-	}
-
-	public void setOwner(User owner) {
-		this.owner = owner;
-	}
-
-	public PetType getPetType() {
-		return petType;
-	}
-
-	public void setPetType(PetType petType) {
-		this.petType = petType;
-	}
-
 	public void setPetId(int petId) {
 		this.petId = petId;
 	}
-
 	public String getPetName() {
 		return petName;
 	}
-
 	public void setPetName(String petName) {
 		this.petName = petName;
 	}
-
 	public User getOwner() {
 		return owner;
 	}
-    
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
-    
 	public PetType getPetType() {
 		return petType;
 	}
-    
 	public void setPetType(PetType petType) {
 		this.petType = petType;
 	}
-
 	@Override
 	public String toString() {
 		return "Pet [petId=" + petId + ", petName=" + petName + ", owner=" + owner + ", petType=" + petType + "]";
 	}
-
 }

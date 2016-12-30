@@ -22,7 +22,7 @@ public class Rating {
 	
 	@OneToOne
 	@Column(name="RATING", nullable=false, updatable=false)
-	private int rating;
+	private double rating;
 	
 	@OneToOne
 	@JoinColumn(name="OWNER_ID", nullable=false, updatable=false)
