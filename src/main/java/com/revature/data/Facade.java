@@ -5,10 +5,17 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import beans.User;
 
+/**
+ * 
+ * @author David Sibrian
+ * The facade class in charge of calling all the DAO classes
+ *
+ */
 @Component(value="facade")
 public class Facade {
 
@@ -21,20 +28,20 @@ public class Facade {
 	}
 		
 	//CRUD OPERATIONS START
-	public List<User> getVetBySpecialty() {
+	public List<User> getAllVets() {
 		
 		//SessionFactory call goes here
 		Session session = sf.openSession();
 		
 		//Transaction
-		VetDAO dao = context.getBean("vetdao", VetDAO.class);
+		UserDAO dao = context.getBean("userdao", UserDAO.class);
 		dao.setSession(session);
 		
 		//DAO
-		//List<User> vet = VetDAO.getAll();
+		List<User> vetUsers = dao.getAll();
+		session.close();
 		
-		
-		return null;
+		return vetUsers;
 	}
 	
 }
