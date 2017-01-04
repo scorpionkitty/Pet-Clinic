@@ -1,4 +1,4 @@
-package com.revature.data;
+package com.sherlockHomies.data;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import beans.User;
+import com.sherlockHomies.beans.User;
 
 /**
  * DAO to perform actions on the DB.
