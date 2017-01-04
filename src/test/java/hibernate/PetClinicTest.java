@@ -22,7 +22,7 @@ public class PetClinicTest {
 	private SessionFactory sf = new Configuration().configure().buildSessionFactory();
 	
 	@Test
-	public void testMappings(){
+	public void testMappings() {
 		Session session = sf.openSession();
 		Transaction tx = session.beginTransaction();
 		
