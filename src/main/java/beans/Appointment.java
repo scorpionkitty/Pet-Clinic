@@ -21,16 +21,16 @@ public class Appointment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int apptId;
 	
-	@OneToOne
 	@JoinColumn(name="VET_ID", nullable = false)
 	private User vet;
 	
-	@OneToOne
+	//@OneToOne
 	@JoinColumn(name="PET_ID", nullable = false)
 	private Pet pet;
 	
 	//@OneToOne
 	@Column(name="DESCRIPTION", length = 100)
+    
 	private String description;
 	
 	//@OneToOne

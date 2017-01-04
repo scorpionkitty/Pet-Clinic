@@ -20,11 +20,9 @@ public class Specialization {
 	//spring -- @Digits(integer=999999, fraction=0)
 	private int specializationId;
 	
-	//should be many to one
 	@JoinColumn(name="VET_ID", nullable=false, updatable=false)
 	private User vet;
 	
-	//should be many to one
 	@JoinColumn(name="PET_TYPE_ID", nullable=false, updatable=false)
 	private PetType petType;
 	

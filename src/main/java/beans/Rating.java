@@ -15,7 +15,6 @@ import javax.persistence.Table;
 @Table(name = "RATING") //rename Physical table even though the bean is different
 public class Rating {
 
-	//should we add the vet id and the user id to this as well?
 	@Id
 	@Column(name = "RATING_ID", nullable=false, updatable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,7 +24,7 @@ public class Rating {
 	@Column(name="RATING", nullable=false, updatable=false)
 	private double rating;
 	
-	@OneToOne
+	//@OneToOne
 	@JoinColumn(name="APPT_ID", nullable=false, updatable=false)
 	private Appointment appt;
 	

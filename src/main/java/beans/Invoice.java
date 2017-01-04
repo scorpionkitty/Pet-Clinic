@@ -25,7 +25,7 @@ public class Invoice {
 	@Column(name="AMOUNT", nullable=false)
 	private double amount;
 	
-	@OneToOne
+	//@OneToOne
 	@JoinColumn(name="APPT_ID", nullable=false)
 	private Appointment appt;
 	

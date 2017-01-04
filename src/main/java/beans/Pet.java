@@ -24,11 +24,11 @@ public class Pet {
 	@Column(name="PET_NAME", nullable=false)
 	private String petName;
 	
-	@OneToOne
+	//@OneToOne
 	@JoinColumn(name="OWNER_ID", nullable=false, updatable=false)
 	private User owner;
 	
-	@OneToOne
+	//@OneToOne
 	@JoinColumn(name="PET_TYPE_ID", nullable=false, updatable=false)
 	private PetType petType;
 	

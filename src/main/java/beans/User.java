@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Cacheable
 @Entity //Entity says it is going to be mapped by hibernate
-@Table(name = "USERZ") //changed this from USER. user is a reserved word in sql we can rename it after it works
+@Table(name = "USER") //rename Physical table even though the bean is different
 public class User {
 
 	@Id
@@ -34,7 +34,6 @@ public class User {
 	@Column(name="EMAIL", length=50, nullable=false)
 	private String email;
 	
-	//one to one
 	@JoinColumn(name="USER_ROLE_ID", nullable=false, updatable=false)
 	private UserRole userRole;
 	
