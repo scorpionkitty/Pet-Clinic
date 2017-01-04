@@ -1,4 +1,4 @@
-package hibernate;
+package com.sherlockHomies.hibernate;
 
 import java.sql.Timestamp;
 

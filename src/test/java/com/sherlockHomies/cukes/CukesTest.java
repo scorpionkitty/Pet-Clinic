@@ -1,4 +1,4 @@
-package cukes;
+package com.sherlockHomies.cukes;
 
 import org.junit.runner.RunWith;
 

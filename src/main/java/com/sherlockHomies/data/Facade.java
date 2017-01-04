@@ -1,4 +1,4 @@
-package com.revature.data;
+package com.sherlockHomies.data;
 
 import java.util.List;
 

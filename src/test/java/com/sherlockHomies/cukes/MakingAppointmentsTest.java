@@ -1,4 +1,4 @@
-package cukes;
+package com.sherlockHomies.cukes;
 
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
