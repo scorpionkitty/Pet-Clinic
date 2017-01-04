@@ -1,4 +1,4 @@
-package beans;
+package com.sherlockHomies.beans;
 import java.sql.Timestamp;
 
 import javax.persistence.Cacheable;
@@ -8,41 +8,45 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
 
 @Cacheable
-@Entity //Entity says it is going to be mapped by hibernate
-@Table(name = "APPOINTMENT") //rename Physical table even though the bean is different
+@Entity
+@Table(name = "APPOINTMENT")
 public class Appointment {
 
 	@Id
-	@Column(name = "APPT_ID", nullable=false, updatable = false)
+	@Column(name = "APPT_ID", nullable=false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Digits(integer=999999, fraction=0)
 	private int apptId;
 	
+	@OneToMany
 	@JoinColumn(name="VET_ID", nullable = false)
+	@NotNull
 	private User vet;
 	
-	//@OneToOne
+	@OneToMany
 	@JoinColumn(name="PET_ID", nullable = false)
+	@NotNull
 	private Pet pet;
 	
-	//@OneToOne
 	@Column(name="DESCRIPTION", length = 100)
-    
 	private String description;
 	
-	//@OneToOne
-	@Column(name="PLACED_DATE", nullable=false, updatable = false)
+	@Column(name="PLACED_DATE", nullable=false)
+	@NotNull
 	private Timestamp placedDate;
 	
-	//@OneToOne
 	@Column(name="APPT_DATE", nullable=false)
+	@NotNull
 	private Timestamp apptDate;
 	
-	//@OneToOne
 	@Column(name="PRESCRIPTION", length=100)
+	@NotNull
 	private String prescription;
 
 	public Appointment() {

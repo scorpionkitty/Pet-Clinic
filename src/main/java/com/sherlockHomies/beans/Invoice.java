@@ -1,4 +1,4 @@
-package beans;
+package com.sherlockHomies.beans;
 import java.sql.Timestamp;
 
 import javax.persistence.Cacheable;
@@ -10,34 +10,35 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Cacheable
-@Entity //Entity says it is going to be mapped by hibernate
-@Table(name = "INVOICE") //rename Physical table even though the bean is different
+@Entity
+@Table(name = "INVOICE")
 public class Invoice {
 
 	@Id
-	@Column(name = "INVOICE_ID", nullable=false, updatable = false)
+	@Column(name = "INVOICE_ID", nullable=false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int invoiceId;
 	
-	//@OneToOne
 	@Column(name="AMOUNT", nullable=false)
+	@NotNull
 	private double amount;
 	
-	//@OneToOne
+	@OneToOne
 	@JoinColumn(name="APPT_ID", nullable=false)
+	@NotNull
 	private Appointment appt;
 	
-	//@OneToOne
 	@Column(name="IS_PAID", nullable=false)
+	@NotNull
 	private boolean isPaid;
 	
-	//@OneToOne
 	@Column(name="PAYMENT_METHOD", nullable=false)
+	@NotNull
 	private String cardNumber;
 	
-	//@OneToOne
 	@Column(name="PAYMENT_DATE")
 	private Timestamp paymentDate;
 

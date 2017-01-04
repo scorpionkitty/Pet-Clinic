@@ -37,5 +37,4 @@ public class PetHomePage {
 		driver.findElement(By.id("vet1"));
 	}  
 	
-	
 }

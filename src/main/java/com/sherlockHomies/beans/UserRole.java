@@ -1,4 +1,4 @@
-package beans;
+package com.sherlockHomies.beans;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;

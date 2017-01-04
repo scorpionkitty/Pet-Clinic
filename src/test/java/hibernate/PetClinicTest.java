@@ -8,14 +8,14 @@ import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.junit.Test;
 
-import beans.Appointment;
-import beans.Invoice;
-import beans.Pet;
-import beans.PetType;
-import beans.Rating;
-import beans.Specialization;
-import beans.User;
-import beans.UserRole;
+import com.sherlockHomies.beans.Appointment;
+import com.sherlockHomies.beans.Invoice;
+import com.sherlockHomies.beans.Pet;
+import com.sherlockHomies.beans.PetType;
+import com.sherlockHomies.beans.Rating;
+import com.sherlockHomies.beans.Specialization;
+import com.sherlockHomies.beans.User;
+import com.sherlockHomies.beans.UserRole;
 
 public class PetClinicTest {
 

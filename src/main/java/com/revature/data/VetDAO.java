@@ -2,7 +2,7 @@ package com.revature.data;
 
 import java.util.List;
 import org.hibernate.Session;
-import beans.User;
+import com.sherlockHomies.beans.User;
 
 public class VetDAO {
 	private Session session;

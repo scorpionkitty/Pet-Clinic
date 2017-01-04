@@ -7,7 +7,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import beans.User;
+import com.sherlockHomies.beans.User;
+
 
 @Component(value="facade")
 public class Facade {

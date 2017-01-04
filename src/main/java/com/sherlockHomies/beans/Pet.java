@@ -1,4 +1,4 @@
-package beans;
+package com.sherlockHomies.beans;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -16,19 +17,18 @@ import javax.persistence.Table;
 public class Pet {
 
 	@Id
-	@Column(name = "PET_ID", nullable=false, updatable = false)
+	@Column(name = "PET_ID", nullable=false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int petId;
 	
-	//@OneToOne
 	@Column(name="PET_NAME", nullable=false)
 	private String petName;
 	
-	//@OneToOne
+	@OneToOne
 	@JoinColumn(name="OWNER_ID", nullable=false, updatable=false)
 	private User owner;
 	
-	//@OneToOne
+	@OneToMany
 	@JoinColumn(name="PET_TYPE_ID", nullable=false, updatable=false)
 	private PetType petType;
 	
