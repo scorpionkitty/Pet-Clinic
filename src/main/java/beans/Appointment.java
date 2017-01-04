@@ -24,24 +24,24 @@ public class Appointment {
 	@JoinColumn(name="VET_ID", nullable = false)
 	private User vet;
 	
-	@OneToOne
+	//@OneToOne
 	@JoinColumn(name="PET_ID", nullable = false)
 	private Pet pet;
 	
-	@OneToOne
+	//@OneToOne
 	@Column(name="DESCRIPTION", length = 100)
     
 	private String description;
 	
-	@OneToOne
+	//@OneToOne
 	@Column(name="PLACED_DATE", nullable=false, updatable = false)
 	private Timestamp placedDate;
 	
-	@OneToOne
+	//@OneToOne
 	@Column(name="APPT_DATE", nullable=false)
 	private Timestamp apptDate;
 	
-	@OneToOne
+	//@OneToOne
 	@Column(name="PRESCRIPTION", length=100)
 	private String prescription;
 

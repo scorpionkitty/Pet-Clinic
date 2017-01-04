@@ -20,15 +20,15 @@ public class Rating {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ratingId;
 	
-	@OneToOne
+	//@OneToOne
 	@Column(name="RATING", nullable=false, updatable=false)
 	private double rating;
 	
-	@OneToOne
+	//@OneToOne
 	@JoinColumn(name="APPT_ID", nullable=false, updatable=false)
 	private Appointment appt;
 	
-	@OneToOne
+	//@OneToOne
 	@Column(name="COMMENT")
 	private String comment;
 

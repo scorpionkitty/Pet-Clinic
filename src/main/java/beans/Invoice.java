@@ -21,23 +21,23 @@ public class Invoice {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int invoiceId;
 	
-	@OneToOne
+	//@OneToOne
 	@Column(name="AMOUNT", nullable=false)
 	private double amount;
 	
-	@OneToOne
+	//@OneToOne
 	@JoinColumn(name="APPT_ID", nullable=false)
 	private Appointment appt;
 	
-	@OneToOne
+	//@OneToOne
 	@Column(name="IS_PAID", nullable=false)
 	private boolean isPaid;
 	
-	@OneToOne
+	//@OneToOne
 	@Column(name="PAYMENT_METHOD", nullable=false)
 	private String cardNumber;
 	
-	@OneToOne
+	//@OneToOne
 	@Column(name="PAYMENT_DATE")
 	private Timestamp paymentDate;
 
