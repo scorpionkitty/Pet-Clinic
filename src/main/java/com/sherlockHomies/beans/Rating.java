@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 
 @Cacheable
 @Entity //Entity says it is going to be mapped by hibernate
@@ -20,15 +21,14 @@ public class Rating {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int ratingId;
 	
-	//@OneToOne
 	@Column(name="RATING", nullable=false, updatable=false)
 	private double rating;
 	
-	//@OneToOne
+	@OneToOne //one rating has one appt and one appt has one rating
 	@JoinColumn(name="APPT_ID", nullable=false, updatable=false)
+	@Digits(integer=999999, fraction=0)
 	private Appointment appt;
 	
-	//@OneToOne
 	@Column(name="COMMENT")
 	private String comment;
 

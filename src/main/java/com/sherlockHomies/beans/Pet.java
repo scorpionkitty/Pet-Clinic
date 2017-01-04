@@ -1,5 +1,8 @@
 package com.sherlockHomies.beans;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -24,13 +29,16 @@ public class Pet {
 	@Column(name="PET_NAME", nullable=false)
 	private String petName;
 	
-	@OneToOne
+	@ManyToOne //one owner has many pets
 	@JoinColumn(name="OWNER_ID", nullable=false, updatable=false)
 	private User owner;
 	
-	@OneToMany
+	@ManyToOne //one petType has many pets
 	@JoinColumn(name="PET_TYPE_ID", nullable=false, updatable=false)
 	private PetType petType;
+	
+	@OneToMany(mappedBy="pet")
+	private Set<Appointment> petAppointments = new HashSet<Appointment>();
 	
 	public Pet() {
 		super();

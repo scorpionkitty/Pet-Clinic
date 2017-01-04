@@ -1,11 +1,15 @@
 package com.sherlockHomies.beans;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Cacheable
@@ -20,6 +24,9 @@ public class UserRole {
 	
 	@Column(name="USER_ROLE", nullable=false, updatable=false)
 	private String userRole;
+	
+	@OneToMany
+	private Set<User> usersofThisRole = new HashSet<>();
 
 	public UserRole() {
 		super();

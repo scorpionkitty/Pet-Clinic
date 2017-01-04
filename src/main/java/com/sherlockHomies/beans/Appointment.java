@@ -1,5 +1,7 @@
 package com.sherlockHomies.beans;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
@@ -8,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
@@ -15,7 +18,7 @@ import javax.validation.constraints.NotNull;
 
 @Cacheable
 @Entity
-@Table(name = "APPOINTMENT")
+@Table(name="APPOINTMENT")
 public class Appointment {
 
 	@Id
@@ -24,12 +27,12 @@ public class Appointment {
 	@Digits(integer=999999, fraction=0)
 	private int apptId;
 	
-	@OneToMany
+	@ManyToOne //one vet has many appointments
 	@JoinColumn(name="VET_ID", nullable = false)
 	@NotNull
 	private User vet;
 	
-	@OneToMany
+	@ManyToOne //one pet has many appointments
 	@JoinColumn(name="PET_ID", nullable = false)
 	@NotNull
 	private Pet pet;

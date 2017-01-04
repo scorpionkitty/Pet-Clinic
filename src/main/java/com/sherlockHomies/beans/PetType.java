@@ -1,17 +1,23 @@
 package com.sherlockHomies.beans;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Cacheable
 @Entity //Entity says it is going to be mapped by hibernate
-@Table(name = "PET_TYPE") //rename Physical table even though the bean is different
+@Table(name="PET_TYPE") //rename Physical table even though the bean is different
 public class PetType {
 
 	@Id
@@ -22,6 +28,14 @@ public class PetType {
 	@Column(name="PET_TYPE_NAME", nullable=false, updatable=false)
 	@NotNull
 	private String petTypeName;
+	
+	@ManyToMany
+	@JoinTable
+	private Set<User> vetSpecialization = new HashSet<>();
+	
+	@OneToMany(mappedBy="petType")
+	private Set<Pet> petsOfThisType = new HashSet<>();
+	
 
 	public PetType() {
 		super();

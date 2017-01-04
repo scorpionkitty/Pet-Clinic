@@ -13,7 +13,6 @@ import com.sherlockHomies.beans.Invoice;
 import com.sherlockHomies.beans.Pet;
 import com.sherlockHomies.beans.PetType;
 import com.sherlockHomies.beans.Rating;
-import com.sherlockHomies.beans.Specialization;
 import com.sherlockHomies.beans.User;
 import com.sherlockHomies.beans.UserRole;
 
@@ -35,9 +34,9 @@ public class PetClinicTest {
 		PetType cat = new PetType("cat");
 		PetType chicken = new PetType("chicken");
 		
-		Specialization timCat = new Specialization(vet1, cat);
+/*		Specialization timCat = new Specialization(vet1, cat);
 		Specialization timChicken = new Specialization(vet1, chicken);
-		Specialization jessicaCat = new Specialization(vet2, cat);
+		Specialization jessicaCat = new Specialization(vet2, cat);*/
 		
 		User owner1 = new User("pusheen", "Alex", "Franks", "917-225-6789", "afranks@gmail.com", owner);
 		User owner2 = new User("witcher", "Liz", "Torres", "347-789-0098", "ltorres@gmail.com", owner);

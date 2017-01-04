@@ -24,21 +24,19 @@
 		<property name="show_sql">true</property>
 
 		<!-- use only for examples. not really production-friendly -->
-<!-- 		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 
 		<property name="net.sf.ehcache.configurationResourceName">/ehcache.xml</property>
 		<property name="hibernate.cache.region.factory_class">net.sf.ehcache.hibernate.EhCacheRegionFactory</property>
 		<property name="hibernate.cache.use_second_level_cache">true</property>
 		<property name="hibernate.cache.use_query_cache">true</property>
-
-		<mapping resource="Trainee.hbm.xml"></mapping> -->
-		<mapping class="beans.Appointment"></mapping>
-		<mapping class="beans.Invoice"></mapping>
-		<mapping class="beans.Pet"></mapping>
-		<mapping class="beans.PetType"></mapping>
-		<mapping class="beans.Rating"></mapping>
-		<mapping class="beans.Specialization"></mapping>
-		<mapping class="beans.User"></mapping>
-		<mapping class="beans.UserRole"></mapping>
+		
+		<mapping class="com.sherlockHomies.beans.Appointment"></mapping>
+		<mapping class="com.sherlockHomies.beans.Invoice"></mapping>
+		<mapping class="com.sherlockHomies.beans.Pet"></mapping>
+		<mapping class="com.sherlockHomies.beans.PetType"></mapping>
+		<mapping class="com.sherlockHomies.beans.Rating"></mapping>
+		<mapping class="com.sherlockHomies.beans.User"></mapping>
+		<mapping class="com.sherlockHomies.beans.UserRole"></mapping>
 	</session-factory>
 </hibernate-configuration>
