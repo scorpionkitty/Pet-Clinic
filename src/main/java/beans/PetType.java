@@ -19,7 +19,7 @@ public class PetType {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int petTypeId;
 	
-	@OneToOne
+	//@OneToOne
 	@Column(name="PET_TYPE_NAME", nullable=false, updatable=false)
 	private String petTypeName;
 
