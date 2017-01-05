@@ -48,8 +48,8 @@ public class Appointment {
 	@NotNull
 	private Timestamp apptDate;
 	
+	//should move to Invoice table?
 	@Column(name="PRESCRIPTION", length=100)
-	@NotNull
 	private String prescription;
 
 	public Appointment() {
