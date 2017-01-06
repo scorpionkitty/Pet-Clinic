@@ -22,6 +22,10 @@ public class UserDAO {
 	public void setSession(Session session) {
 		this.session = session;
 	}
+	
+	public User getUserById(int id) {
+		return (User) session.get(User.class, id);
+	}
 
 	public List<User> getAll() {
 		return session.createCriteria(User.class).list();

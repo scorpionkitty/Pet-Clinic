@@ -1,5 +1,7 @@
 package com.sherlockHomies.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sherlockHomies.beans.User;
 
 @Controller
+@RequestMapping("/home")
 public class FrontController {
 	
 	@Autowired
@@ -20,6 +23,15 @@ public class FrontController {
 	
 	public void setBusinessDelegate(Delegate businessDelegate) {
 		this.businessDelegate = businessDelegate;
+	}
+	
+	/**
+	 * Get back a list of all the vets
+	 * @return the list of vets
+	 */
+	@RequestMapping("/vets")
+	public List<User> listVets() {
+		return businessDelegate.getAllVets();
 	}
 	
 	@RequestMapping(value={"/home"}, method=RequestMethod.GET)
@@ -36,7 +48,7 @@ public class FrontController {
 	@ResponseBody
 	@RequestMapping(value="/user/{param}", method=RequestMethod.GET, produces="application/json")
 	public User getOwner(@PathVariable(value="param") int id) {
-		return businessDelegate.getUser(id);
+		return businessDelegate.getUserById(id);
 	}
 	
 	/**
@@ -47,7 +59,7 @@ public class FrontController {
 	@ResponseBody
 	@RequestMapping(value="/vet/{param}", method=RequestMethod.GET, produces="application/json")
 	public User getVet(@PathVariable(value="param") int id) {
-		return businessDelegate.getVet(id);
+		return businessDelegate.getVetById(id);
 	}
 	/**
 	 * For whenever the user needs to be redirected to the home page 
@@ -61,9 +73,5 @@ public class FrontController {
 		ModelAndView model = new ModelAndView("homePage");
 		
 		return model;
-	}
-	
-	
-	
-	
+	}	
 }
