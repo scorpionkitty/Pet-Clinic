@@ -2,15 +2,16 @@ package com.sherlockHomies.beans;
 import java.sql.Timestamp;
 
 import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.ForeignKey;
 
 @Cacheable
 @Entity
@@ -19,15 +20,16 @@ public class Invoice {
 
 	@Id
 	@Column(name = "INVOICE_ID", nullable=false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+/*	@GeneratedValue(strategy = GenerationType.AUTO)*/
 	private int invoiceId;
 	
 	@Column(name="AMOUNT", nullable=false)
 	@NotNull
 	private double amount;
 	
-	@OneToOne //one invoice has one appointment
+	@OneToOne(cascade = CascadeType.REMOVE) //one invoice has one appointment
 	@JoinColumn(name="APPT_ID", nullable=false)
+	@ForeignKey(name="APPT_ID_FK")
 	@NotNull
 	private Appointment appt;
 	
@@ -35,7 +37,7 @@ public class Invoice {
 	@NotNull
 	private boolean isPaid;
 	
-	@Column(name="PAYMENT_METHOD", nullable=false)
+	@Column(name="CARD_NUMBER", nullable=false)
 	@NotNull
 	private String cardNumber;
 	
@@ -46,12 +48,14 @@ public class Invoice {
 		super();
 	}
     
-	public Invoice(double amount, Appointment appt, boolean isPaid, String cardNumber) {
+	public Invoice(int invoiceId, double amount, Appointment appt, boolean isPaid, String cardNumber, Timestamp paymentDate) {
 		super();
+		this.invoiceId = invoiceId;
 		this.amount = amount;
 		this.appt = appt;
 		this.isPaid = isPaid;
 		this.cardNumber = cardNumber;
+		this.paymentDate = paymentDate;
 	}
 
 	public int getInvoiceId() {

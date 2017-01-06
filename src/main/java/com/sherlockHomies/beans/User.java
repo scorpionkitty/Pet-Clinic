@@ -2,28 +2,27 @@ package com.sherlockHomies.beans;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.ForeignKey;
+
 @Cacheable
 @Entity //Entity says it is going to be mapped by hibernate
-@Table(name = "USER") //rename Physical table even though the bean is different
+@Table(name = "USERS") //rename Physical table even though the bean is different
 public class User {
 
 	@Id
 	@Column(name = "USER_ID", nullable=false, updatable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+/*	@GeneratedValue(strategy = GenerationType.AUTO)*/
 	private int userId;
 	
 	@Column(name="USERNAME", nullable=false, updatable=false)
@@ -41,8 +40,9 @@ public class User {
 	@Column(name="EMAIL", length=50, nullable=false)
 	private String email;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="USER_ROLE_ID", nullable=false, updatable=false)
+	@ForeignKey(name="USER_ROLE_ID_FK")
 	private UserRole userRole;
 	
 	@OneToMany(mappedBy="vet")
@@ -58,14 +58,16 @@ public class User {
 		super();
 	}
     
-	public User(String username, String firstName, String lastName, String phone, String email, UserRole userRole) {
+	public User(int userId, String username, String firstName, String lastName, String phone, String email, UserRole userRole) {
 		super();
+		this.userId = userId;
 		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phone = phone;
 		this.email = email;
 		this.userRole = userRole;
+		//this.userRole.setUserRoleId(userRoleId);
 	}
 
 	public int getUserId() {

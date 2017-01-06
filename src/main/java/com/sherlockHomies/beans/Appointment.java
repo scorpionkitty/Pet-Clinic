@@ -1,20 +1,18 @@
 package com.sherlockHomies.beans;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.ForeignKey;
 
 @Cacheable
 @Entity
@@ -23,17 +21,19 @@ public class Appointment {
 
 	@Id
 	@Column(name = "APPT_ID", nullable=false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+/*	@GeneratedValue(strategy = GenerationType.AUTO)*/
 	@Digits(integer=999999, fraction=0)
 	private int apptId;
 	
-	@ManyToOne //one vet has many appointments
+	@ManyToOne(cascade = CascadeType.REMOVE) //one vet has many appointments
 	@JoinColumn(name="VET_ID", nullable = false)
+	@ForeignKey(name="VET_ID_FK")
 	@NotNull
 	private User vet;
 	
-	@ManyToOne //one pet has many appointments
+	@ManyToOne(cascade = CascadeType.REMOVE) //one pet has many appointments
 	@JoinColumn(name="PET_ID", nullable = false)
+	@ForeignKey(name="PET_ID_FK")
 	@NotNull
 	private Pet pet;
 	
@@ -56,8 +56,9 @@ public class Appointment {
 		super();
 	}
     
-	public Appointment(User vet, Pet pet, String description, Timestamp placedDate, Timestamp apptDate) {
+	public Appointment(int apptId, User vet, Pet pet, String description, Timestamp placedDate, Timestamp apptDate) {
 		super();
+		this.apptId = apptId;
 		this.vet = vet;
 		this.pet = pet;
 		this.description = description;

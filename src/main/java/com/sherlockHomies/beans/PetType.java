@@ -6,9 +6,8 @@ import java.util.Set;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -22,7 +21,7 @@ public class PetType {
 
 	@Id
 	@Column(name = "PET_TYPE_ID", nullable=false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+/*	@GeneratedValue(strategy = GenerationType.AUTO)*/
 	private int petTypeId;
 	
 	@Column(name="PET_TYPE_NAME", nullable=false, updatable=false)
@@ -30,7 +29,7 @@ public class PetType {
 	private String petTypeName;
 	
 	@ManyToMany
-	@JoinTable
+	@JoinTable(name="SPECIALIZATION", joinColumns = @JoinColumn(name = "VET_ID"), inverseJoinColumns = @JoinColumn(name = "PET_TYPE_NAME"))
 	private Set<User> vetSpecialization = new HashSet<>();
 	
 	@OneToMany(mappedBy="petType")
@@ -41,8 +40,9 @@ public class PetType {
 		super();
 	}
 
-	public PetType(String petTypeName) {
+	public PetType(int petTypeId, String petTypeName) {
 		super();
+		this.petTypeId = petTypeId;
 		this.petTypeName = petTypeName;
 	}
 

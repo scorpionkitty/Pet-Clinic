@@ -1,15 +1,16 @@
 package com.sherlockHomies.beans;
 
 import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.ForeignKey;
 
 @Cacheable
 @Entity //Entity says it is going to be mapped by hibernate
@@ -18,26 +19,28 @@ public class Rating {
 
 	@Id
 	@Column(name = "RATING_ID", nullable=false, updatable = false)
-	@GeneratedValue(strategy = GenerationType.AUTO)
+/*	@GeneratedValue(strategy = GenerationType.AUTO)*/
 	private int ratingId;
 	
-	@Column(name="RATING", nullable=false, updatable=false)
+	@Column(name="RATING", nullable=false)
 	private double rating;
 	
-	@OneToOne //one rating has one appt and one appt has one rating
-	@JoinColumn(name="APPT_ID", nullable=false, updatable=false)
-	@Digits(integer=999999, fraction=0)
+	@OneToOne(cascade = CascadeType.REMOVE) //one rating has one appt and one appt has one rating
+	@JoinColumn(name="APPT_ID", nullable=false)
+	@ForeignKey(name="APPT_ID_FK")
+	@NotNull
 	private Appointment appt;
 	
-	@Column(name="COMMENT")
+	@Column(name="COMMENTS")
 	private String comment;
 
 	public Rating() {
 		super();
 	}
 
-	public Rating(int rating, Appointment appt, String comment) {
+	public Rating(int ratingId, int rating, Appointment appt, String comment) {
 		super();
+		this.ratingId = ratingId;
 		this.rating = rating;
 		this.appt = appt;
 		this.comment = comment;
