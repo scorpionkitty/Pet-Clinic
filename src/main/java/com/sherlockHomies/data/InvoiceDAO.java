@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import com.sherlockHomies.beans.Pet;
+import com.sherlockHomies.beans.Invoice;
 
 /**
  * DAO that performs crud operations on appointments
@@ -14,27 +14,26 @@ import com.sherlockHomies.beans.Pet;
  * @author Sam
  *
  */
-@Repository(value="petdao")
+@Repository(value="invoicedao")
 @Scope(value="prototype")
-public class PetDAO {
+public class InvoiceDAO {
 	
 	private Session session;
 
-	public Pet getPet(int id){
-		return (Pet) session.get(Pet.class, id);
+	public Invoice getInvoice(int id){
+		return (Invoice) session.get(Invoice.class, id);
 	}
 	
 	public void setSession(Session session){
 		this.session = session;
 	}
 	
-	public List<Pet> getAll(){
-		return session.createCriteria(Pet.class).list();
+	public List<Invoice> getAll(){
+		return session.createCriteria(Invoice.class).list();
 	}
+
 	
-	//TODO add get pet by owner;
-	
-	public void insert(Pet pet){
+	public void insert(Invoice pet){
 		session.save(pet);
 	}
 
