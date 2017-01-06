@@ -8,7 +8,10 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.sherlockHomies.beans.Appointment;
+import com.sherlockHomies.beans.Invoice;
 import com.sherlockHomies.beans.Pet;
+import com.sherlockHomies.beans.Rating;
 import com.sherlockHomies.beans.User;
 
 public class DAOTest {
@@ -53,5 +56,47 @@ public class DAOTest {
 	public void testPetGetById(){
 		Pet pet = ctxt.getBean(PetDAO.class).getById(3);
 		System.out.println(pet);
+	}
+	
+	@Ignore
+	@Test
+	public void testAppointmentGetAll(){
+		List<Appointment> appt = ctxt.getBean(AppointmentDAO.class).getAll();
+		System.out.println(appt);
+	}
+	
+	@Ignore
+	@Test
+	public void getAppointmentById(){
+		Appointment appt = ctxt.getBean(AppointmentDAO.class).getById(1);
+		System.out.println(appt);
+	}
+	
+	@Ignore
+	@Test
+	public void testInvoiceGetAll(){
+		List<Invoice> invs = ctxt.getBean(InvoiceDAO.class).getAll();
+		System.out.println(invs);
+	}
+	
+	@Ignore
+	@Test
+	public void testInvoiceGetById(){
+		Invoice inv = ctxt.getBean(InvoiceDAO.class).getById(31);
+		System.out.println(inv);
+	}
+	
+	@Ignore
+	@Test
+	public void testRatingGetAll(){
+		List<Rating> ratings = ctxt.getBean(RatingDAO.class).getAll();
+		System.out.println(ratings);
+	}
+	
+	@Ignore
+	@Test
+	public void testRatingGetById(){
+		Rating r = ctxt.getBean(RatingDAO.class).getRatingById(1);
+		System.out.println(r);
 	}
 }

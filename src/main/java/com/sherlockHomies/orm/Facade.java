@@ -21,6 +21,7 @@ public class Facade {
 	private PetDAO petdao;
 	private AppointmentDAO appointmentdao;
 	private InvoiceDAO invoicedao;
+	private RatingDAO ratingdao;
 
 	
 	public void setDao(DAO dao) {
@@ -41,6 +42,10 @@ public class Facade {
 
 	public void setInvoicedao(InvoiceDAO invoicedao) {
 		this.invoicedao = invoicedao;
+	}
+
+	public void setRatingdao(RatingDAO ratingdao) {
+		this.ratingdao = ratingdao;
 	}
 
 	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)

@@ -57,9 +57,13 @@
 	<bean name="appointmentdao" class="com.sherlockHomies.orm.AppointmentDAO">
 		<property name="sessionFactory" ref="sf" />
 	</bean>
-	
+
 	<bean name="invoicedao" class="com.sherlockHomies.orm.InvoiceDAO">
-		<property name="sessionFactory" ref="sf"/>
+		<property name="sessionFactory" ref="sf" />
+	</bean>
+
+	<bean name="ratingdao" class="com.sherlockHomies.orm.RatingDAO">
+		<property name="sessionFactory" ref="sf"></property>
 	</bean>
 
 	<!-- Facade bean -->
@@ -69,6 +73,7 @@
 		<property name="petdao" ref="petdao" />
 		<property name="appointmentdao" ref="appointmentdao" />
 		<property name="invoicedao" ref="invoicedao" />
+		<property name="ratingdao" ref="ratingdao"/>
 	</bean>
 
 </beans>
