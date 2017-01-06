@@ -5,6 +5,12 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ *  Using a Session Factory, opens a session to allow insertion of data onto our relational database.s
+ * @author Karina Macancela
+ *
+ */
+
 public class DAO {
 
 	private SessionFactory sessionFactory;

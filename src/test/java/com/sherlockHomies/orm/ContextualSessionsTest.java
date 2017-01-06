@@ -1,7 +1,6 @@
 package com.sherlockHomies.orm;
 
 import java.sql.Timestamp;
-
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -13,6 +12,12 @@ import com.sherlockHomies.beans.PetType;
 import com.sherlockHomies.beans.Rating;
 import com.sherlockHomies.beans.User;
 import com.sherlockHomies.beans.UserRole;
+
+/**
+ * Creates and tests our DAO beans using Hibernate ORM framework to map to our relational database. 
+ * @author Karina Macancela
+ *
+ */
 
 public class ContextualSessionsTest {
 
@@ -29,6 +34,12 @@ public class ContextualSessionsTest {
 	public static void setup(){
 		contxt = new ClassPathXmlApplicationContext("beans.xml");
 	}
+	
+	/**
+	 * Creates eight tables in our database: 
+	 * 		Appointment, Users, User_Role, Invoice, Pet, Pet_Type, Specialization, Rating
+	 * and populates them with data, printing 'Success!' to the console.
+	 */
 	
 	@Test
 	public void create(){
