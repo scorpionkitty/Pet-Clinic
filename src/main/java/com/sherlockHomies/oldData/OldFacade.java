@@ -1,4 +1,4 @@
-package com.sherlockHomies.data;
+package com.sherlockHomies.oldData;
 
 import java.util.List;
 
@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.sherlockHomies.beans.User;
+import com.sherlockHomies.data.HibernateSessionUtility;
 
 
 /**
@@ -18,12 +19,12 @@ import com.sherlockHomies.beans.User;
  *
  */
 @Component(value="facade")
-public class Facade {
+public class OldFacade {
 
 	private SessionFactory sf;
 	private ApplicationContext context;
 	
-	public Facade() {
+	public OldFacade() {
 		//get an instance of session factory
 		sf = new HibernateSessionUtility().getSessionFactory();
 	}
@@ -35,7 +36,7 @@ public class Facade {
 		Session session = sf.openSession();
 		
 		//Transaction
-		UserDAO dao = context.getBean("userdao", UserDAO.class);
+		OldUserDAO dao = context.getBean("userdao", OldUserDAO.class);
 		dao.setSession(session);
 		
 		//DAO
