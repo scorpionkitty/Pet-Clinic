@@ -17,11 +17,12 @@ import com.sherlockHomies.beans.UserRole;
 public class Facade {
 
 	private DAO dao;
-	
 	private UserDAO userdao;
-	
 	private PetDAO petdao;
+	private AppointmentDAO appointmentdao;
+	private InvoiceDAO invoicedao;
 
+	
 	public void setDao(DAO dao) {
 		this.dao = dao;
 	}
@@ -32,6 +33,14 @@ public class Facade {
 	
 	public void setPetdao(PetDAO petdao) {
 		this.petdao = petdao;
+	}
+	
+	public void setAppointmentdao(AppointmentDAO appointmentdao) {
+		this.appointmentdao = appointmentdao;
+	}
+
+	public void setInvoicedao(InvoiceDAO invoicedao) {
+		this.invoicedao = invoicedao;
 	}
 
 	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
