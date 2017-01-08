@@ -46,6 +46,13 @@ public class DAOTest {
 	
 	@Ignore
 	@Test
+	public void testUserGetByRole(){
+		List<User> users=ctxt.getBean(UserDAO.class).getUserByRole("Vet");
+		System.out.println(users);
+	}
+	
+	@Ignore
+	@Test
 	public void testPetGetAll(){
 		List<Pet> pets = ctxt.getBean(PetDAO.class).getAll();
 		System.out.println(pets);
@@ -98,5 +105,46 @@ public class DAOTest {
 	public void testRatingGetById(){
 		Rating r = ctxt.getBean(RatingDAO.class).getRatingById(1);
 		System.out.println(r);
+	}
+	
+	@Ignore
+	@Test
+	public void testPetByType(){
+		List<Pet> pet = ctxt.getBean(PetDAO.class).getByType(1);
+		System.out.println(pet);
+	}
+	
+	@Ignore
+	@Test
+	public void testPetByUser(){
+		List<Pet> pet = ctxt.getBean(PetDAO.class).getByUser("pusheen");
+		System.out.println(pet);
+	}
+	
+	@Ignore
+	@Test
+	public void testInvoiceByUsername(){
+		List<Invoice> invoices = ctxt.getBean(InvoiceDAO.class).getByUsername("pusheen");
+		System.out.println(invoices);
+	}
+	
+	@Ignore
+	@Test
+	public void testRatingByUsername(){
+		List<Rating> ratings = ctxt.getBean(RatingDAO.class).getRatingByUser("pusheen");
+		System.out.println(ratings);
+	}
+	
+	@Ignore
+	@Test
+	public void testRatingByVet(){
+		List<Rating> ratings = ctxt.getBean(RatingDAO.class).getRatingByVet("123unicorn");
+		System.out.println(ratings);
+	}
+	
+	@Test
+	public void testAppointmentByUser(){
+		List<Appointment> appt = ctxt.getBean(AppointmentDAO.class).getAppointmentByUsername("pusheen");
+		System.out.println(appt);
 	}
 }
