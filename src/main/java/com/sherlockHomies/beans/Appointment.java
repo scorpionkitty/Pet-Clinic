@@ -1,6 +1,6 @@
 package com.sherlockHomies.beans;
-import java.sql.Timestamp;
 
+import java.sql.Timestamp;
 import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,8 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.annotations.ForeignKey;
+
+/**
+ * Appointment bean to be mapped to APPOINTMENT table in our relational database with the following columns:
+ * 		APPT_ID, VET_ID, PET_ID, DESCRIPTION, PLACED_DATE, APPT_DATE, PRESCRIPTION
+ */
 
 @Cacheable
 @Entity
@@ -25,13 +29,13 @@ public class Appointment {
 	@Digits(integer=999999, fraction=0)
 	private int apptId;
 	
-	@ManyToOne(cascade = CascadeType.REMOVE) //one vet has many appointments
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="VET_ID", nullable = false)
 	@ForeignKey(name="VET_ID_FK")
 	@NotNull
 	private User vet;
 	
-	@ManyToOne(cascade = CascadeType.REMOVE) //one pet has many appointments
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="PET_ID", nullable = false)
 	@ForeignKey(name="PET_ID_FK")
 	@NotNull
@@ -48,7 +52,6 @@ public class Appointment {
 	@NotNull
 	private Timestamp apptDate;
 	
-	//should move to Invoice table?
 	@Column(name="PRESCRIPTION", length=100)
 	private String prescription;
 
@@ -56,7 +59,8 @@ public class Appointment {
 		super();
 	}
     
-	public Appointment(int apptId, User vet, Pet pet, String description, Timestamp placedDate, Timestamp apptDate) {
+	public Appointment(int apptId, User vet, Pet pet, String description, Timestamp placedDate, 
+			Timestamp apptDate) {
 		super();
 		this.apptId = apptId;
 		this.vet = vet;
