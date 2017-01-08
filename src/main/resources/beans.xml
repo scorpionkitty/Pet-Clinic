@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xmlns:context="http://www.springframework.org/schema/context"
- xmlns:jee="http://www.springframework.org/schema/jee"
- xmlns:tx="http://www.springframework.org/schema/tx"
- xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
   http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
-  
+
 	<!-- DataSource bean -->
 	<bean name="ds" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
-		<property name="username" value="demo"/>
-		<property name="password" value="welcome1"/>
-		<property name="url" value="jdbc:oracle:thin:@orcl.c7mfdglx6mgu.us-west-2.rds.amazonaws.com:1521:orcl"/>
+		<property name="username" value="demo" />
+		<property name="password" value="welcome1" />
+		<property name="url"
+			value="jdbc:oracle:thin:@orcl.c7mfdglx6mgu.us-west-2.rds.amazonaws.com:1521:orcl" />
 	</bean>
-	
-	<tx:annotation-driven/>
+
+	<tx:annotation-driven />
 	<!-- SessionFactory -->
-	<bean name="sf" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+	<bean name="sf"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="ds" />
-		<property name="packagesToScan" value="com.sherlockHomies.beans"/>
+		<property name="packagesToScan" value="com.sherlockHomies.beans" />
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
@@ -33,20 +33,47 @@
 			</props>
 		</property>
 	</bean>
-	
+
 	<!-- Transaction Manager -->
-	<bean name="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	<bean name="transactionManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sf" />
 	</bean>
-	
+
 	<!-- DAO bean -->
 	<bean name="dao" class="com.sherlockHomies.orm.DAO">
 		<property name="sessionFactory" ref="sf" />
 	</bean>
-	
+
+	<bean name="userdao" class="com.sherlockHomies.orm.UserDAO">
+		<property name="sessionFactory" ref="sf" />
+	</bean>
+
+
+	<bean name="petdao" class="com.sherlockHomies.orm.PetDAO">
+		<property name="sessionFactory" ref="sf" />
+	</bean>
+
+	<bean name="appointmentdao" class="com.sherlockHomies.orm.AppointmentDAO">
+		<property name="sessionFactory" ref="sf" />
+	</bean>
+
+	<bean name="invoicedao" class="com.sherlockHomies.orm.InvoiceDAO">
+		<property name="sessionFactory" ref="sf" />
+	</bean>
+
+	<bean name="ratingdao" class="com.sherlockHomies.orm.RatingDAO">
+		<property name="sessionFactory" ref="sf"></property>
+	</bean>
+
 	<!-- Facade bean -->
 	<bean name="facade" class="com.sherlockHomies.orm.Facade">
 		<property name="dao" ref="dao" />
-	</bean>  
-  
+		<property name="userdao" ref="userdao" />
+		<property name="petdao" ref="petdao" />
+		<property name="appointmentdao" ref="appointmentdao" />
+		<property name="invoicedao" ref="invoicedao" />
+		<property name="ratingdao" ref="ratingdao"/>
+	</bean>
+
 </beans>

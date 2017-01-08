@@ -1,4 +1,4 @@
-package com.sherlockHomies.data;
+package com.sherlockHomies.oldData;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import com.sherlockHomies.beans.User;
  */
 @Repository(value="userdao")
 @Scope(value="prototype")
-public class UserDAO {
+public class OldUserDAO {
 	private Session session;
 	
 	public void setSession(Session session) {

@@ -1,4 +1,4 @@
-package com.sherlockHomies.data;
+package com.sherlockHomies.oldData;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import com.sherlockHomies.beans.Pet;
  */
 @Repository(value="petdao")
 @Scope(value="prototype")
-public class PetDAO {
+public class OldPetDAO {
 	
 	private Session session;
 

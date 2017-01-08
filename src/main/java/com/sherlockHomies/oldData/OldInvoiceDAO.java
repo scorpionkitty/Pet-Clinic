@@ -1,4 +1,4 @@
-package com.sherlockHomies.data;
+package com.sherlockHomies.oldData;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import com.sherlockHomies.beans.Appointment;
+import com.sherlockHomies.beans.Invoice;
 
 /**
  * DAO that performs crud operations on appointments
@@ -14,26 +14,27 @@ import com.sherlockHomies.beans.Appointment;
  * @author Sam
  *
  */
-@Repository(value="appointmentdao")
+@Repository(value="invoicedao")
 @Scope(value="prototype")
-public class AppointmentDAO {
+public class OldInvoiceDAO {
 	
 	private Session session;
 
-	public Appointment getAppointment(int id){
-		return (Appointment) session.get(Appointment.class, id);
+	public Invoice getInvoice(int id){
+		return (Invoice) session.get(Invoice.class, id);
 	}
 	
 	public void setSession(Session session){
 		this.session = session;
 	}
 	
-	public List<Appointment> getAll(){
-		return session.createCriteria(Appointment.class).list();
+	public List<Invoice> getAll(){
+		return session.createCriteria(Invoice.class).list();
 	}
+
 	
-	public void insert(Appointment appointment){
-		session.save(appointment);
+	public void insert(Invoice pet){
+		session.save(pet);
 	}
 
 }

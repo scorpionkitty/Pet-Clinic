@@ -27,7 +27,7 @@ public class Rating {
 	
 	@OneToOne(cascade = CascadeType.REMOVE) //one rating has one appt and one appt has one rating
 	@JoinColumn(name="APPT_ID", nullable=false)
-	@ForeignKey(name="APPT_ID_FK")
+	@ForeignKey(name="APPT_ID_FK_")
 	@NotNull
 	private Appointment appt;
 	

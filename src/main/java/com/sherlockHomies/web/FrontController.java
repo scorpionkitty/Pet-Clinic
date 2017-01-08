@@ -15,13 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.sherlockHomies.beans.User;
 
 @Controller
-@RequestMapping("/home")
+//@RequestMapping("/home")
 public class FrontController {
 	
-	@Autowired
-	private Delegate businessDelegate;
+	//@Autowired
+	private BusinessDelegate businessDelegate;
 	
-	public void setBusinessDelegate(Delegate businessDelegate) {
+	public void setBusinessDelegate(BusinessDelegate businessDelegate) {
 		this.businessDelegate = businessDelegate;
 	}
 	
