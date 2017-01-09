@@ -44,5 +44,23 @@ public class AppointmentDAO {
 		return query.list();
 	}
 	
-	//TODO get by pet
+	@Transactional(isolation=Isolation.READ_COMMITTED,
+			propagation=Propagation.REQUIRED,
+			rollbackFor=Exception.class)
+	public List<Appointment> getAppointmentByPet(String petname){
+		String HQL = "select A from Appointment A join A.pet P where P.petName= :pn";
+		Query query = sessionFactory.getCurrentSession().createQuery(HQL);
+		query.setString("pn", petname);
+		return query.list();
+	}
+	
+	@Transactional(isolation=Isolation.READ_COMMITTED,
+			propagation=Propagation.REQUIRED,
+			rollbackFor=Exception.class)
+	public List<Appointment> getAppointmentByVet(String vetname){
+		String HQL = "select A from Appointment A join A.vet V where V.username=:n";
+		Query query = sessionFactory.getCurrentSession().createQuery(HQL);
+		query.setString("n", vetname);
+		return query.list();
+	}
 }

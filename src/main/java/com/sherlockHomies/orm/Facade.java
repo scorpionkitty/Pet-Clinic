@@ -95,4 +95,85 @@ public class Facade {
 		for(Rating r : rating)
 			dao.insert(r); //also requires NEW. Creates a subtransaction. We don't want this. Change to REQUIRED.
 	}
+	
+	public List<Appointment> getAllAppointments() {
+		return appointmentdao.getAll();
+	}
+
+	public Appointment getAppointmentById(int id) {
+		return appointmentdao.getById(id);
+	}
+
+	public List<Appointment> getAppointmentByUsername(String username) {
+		return appointmentdao.getAppointmentByUsername(username);
+	}
+
+	public List<Appointment> getAppointmentByPet(String petname) {
+		return appointmentdao.getAppointmentByPet(petname);
+	}
+
+	public List<Appointment> getAppointmentByVet(String vetname) {
+		return appointmentdao.getAppointmentByVet(vetname);
+	}
+
+	public List<Invoice> getAllInvoices() {
+		return invoicedao.getAll();
+	}
+
+	public Invoice getInvoiceById(int id) {
+		return invoicedao.getById(id);
+	}
+
+	public List<Invoice> getInvoiceByUsername(String username) {
+		return invoicedao.getByUsername(username);
+	}
+
+	public List<Pet> getAllPets() {
+		return petdao.getAll();
+	}
+
+	public Pet getPetById(int id) {
+		return petdao.getById(id);
+	}
+
+	public List<Pet> getPetByTypeId(int typeId) {
+		return petdao.getByType(typeId);
+	}
+
+	public List<Pet> getByUser(String username) {
+		return petdao.getByUser(username);
+	}
+
+	public List<Pet> getPetByTypeName(String typeName) {
+		return petdao.getByType(typeName);
+	}
+
+	public List<Rating> getAllRatings() {
+		return ratingdao.getAll();
+	}
+
+	public Rating getRatingById(int id) {
+		return ratingdao.getRatingById(id);
+	}
+
+	public List<Rating> getRatingByUser(String username) {
+		return ratingdao.getRatingByUser(username);
+	}
+
+	public List<Rating> getRatingByVet(String vetname) {
+		return ratingdao.getRatingByVet(vetname);
+	}
+
+	public List<User> getAllUsers() {
+		return userdao.getAll();
+	}
+
+	public User getUserById(int id) {
+		return userdao.getById(id);
+	}
+
+	public List<User> getUserByRole(String role) {
+		return userdao.getUserByRole(role);
+	}
+
 }
