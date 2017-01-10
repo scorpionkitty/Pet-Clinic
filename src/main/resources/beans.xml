@@ -45,35 +45,35 @@
 		<property name="sessionFactory" ref="sf" />
 	</bean>
 
-	<bean name="userdao" class="com.sherlockHomies.orm.UserDAO">
+	<bean name="userDao" class="com.sherlockHomies.orm.UserDAO">
 		<property name="sessionFactory" ref="sf" />
 	</bean>
 
 
-	<bean name="petdao" class="com.sherlockHomies.orm.PetDAO">
+	<bean name="petDao" class="com.sherlockHomies.orm.PetDAO">
 		<property name="sessionFactory" ref="sf" />
 	</bean>
 
-	<bean name="appointmentdao" class="com.sherlockHomies.orm.AppointmentDAO">
+	<bean name="apptDao" class="com.sherlockHomies.orm.AppointmentDAO">
 		<property name="sessionFactory" ref="sf" />
 	</bean>
 
-	<bean name="invoicedao" class="com.sherlockHomies.orm.InvoiceDAO">
+	<bean name="invoiceDao" class="com.sherlockHomies.orm.InvoiceDAO">
 		<property name="sessionFactory" ref="sf" />
 	</bean>
 
-	<bean name="ratingdao" class="com.sherlockHomies.orm.RatingDAO">
+	<bean name="ratingDao" class="com.sherlockHomies.orm.RatingDAO">
 		<property name="sessionFactory" ref="sf"></property>
 	</bean>
 
 	<!-- Facade bean -->
 	<bean name="facade" class="com.sherlockHomies.orm.Facade">
 		<property name="dao" ref="dao" />
-		<property name="userdao" ref="userdao" />
-		<property name="petdao" ref="petdao" />
-		<property name="appointmentdao" ref="appointmentdao" />
-		<property name="invoicedao" ref="invoicedao" />
-		<property name="ratingdao" ref="ratingdao"/>
+		<property name="userDao" ref="userDao" />
+		<property name="petDao" ref="petDao" />
+		<property name="apptDao" ref="apptDao" />
+		<property name="invoiceDao" ref="invoiceDao" />
+		<property name="ratingDao" ref="ratingDao"/>
 	</bean>
 
 </beans>

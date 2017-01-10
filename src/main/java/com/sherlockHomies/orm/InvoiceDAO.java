@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sherlockHomies.beans.Invoice;
 import com.sherlockHomies.beans.User;
 
-@Repository(value="InvoiceDao")
+@Repository(value="invoiceDao")
 @Scope(value="prototype")
 public class InvoiceDAO {
 	

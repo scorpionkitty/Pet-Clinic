@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sherlockHomies.beans.User;
 
-@Repository(value="UserDao")
+@Repository(value="userDao")
 @Scope(value="prototype")
 public class UserDAO {
 	
