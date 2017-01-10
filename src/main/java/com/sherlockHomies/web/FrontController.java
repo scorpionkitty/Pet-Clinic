@@ -64,7 +64,7 @@ public class FrontController {
 		//requestDispatcher.forward(req, resp)
 		return "home";
 	}
-	
+	  
 	/**
 	 * 
 	 * @param id The id of the user we will be fetching 
