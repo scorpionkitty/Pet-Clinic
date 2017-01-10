@@ -1,5 +1,9 @@
 package com.sherlockHomies.orm;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -15,36 +19,36 @@ import com.sherlockHomies.beans.UserRole;
 public class Facade {
 
 	private DAO dao;
-/*	private UserDAO userdao;
-	private PetDAO petdao;
-	private AppointmentDAO appointmentdao;
-	private InvoiceDAO invoicedao;
-	private RatingDAO ratingdao;*/
+	private AppointmentDAO apptDao;
+	private UserDAO userDao;	
+	private PetDAO petDao;
+	private InvoiceDAO invoiceDao;
+	private RatingDAO ratingDao;
 
 	
 	public void setDao(DAO dao) {
 		this.dao = dao;
 	}
+	
+	public void setApptDao(AppointmentDAO apptDao) {
+		this.apptDao = apptDao;
+	}
 
-/*	public void setUserdao(UserDAO userdao) {
-		this.userdao = userdao;
+	public void setUserDao(UserDAO userDao) {
+		this.userDao = userDao;
 	}
 	
-	public void setPetdao(PetDAO petdao) {
-		this.petdao = petdao;
-	}
-	
-	public void setAppointmentdao(AppointmentDAO appointmentdao) {
-		this.appointmentdao = appointmentdao;
+	public void setPetDao(PetDAO petDao) {
+		this.petDao = petDao;
 	}
 
-	public void setInvoicedao(InvoiceDAO invoicedao) {
-		this.invoicedao = invoicedao;
+	public void setInvoiceDao(InvoiceDAO invoiceDao) {
+		this.invoiceDao = invoiceDao;
 	}
 
-	public void setRatingdao(RatingDAO ratingdao) {
-		this.ratingdao = ratingdao;
-	}*/
+	public void setRatingDao(RatingDAO ratingDao) {
+		this.ratingDao = ratingDao;
+	}
 
 	//INSERTS
 	
@@ -124,15 +128,59 @@ public class Facade {
 			dao.delete(a);
 	}
 	
-	//
+	//OTHER
+	
+	//get appointments as a list of a pet owner
 	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
-	public List<Appointment> getAllAppt(User vetId){
-		
+	public List<Appointment> getAllOwnerAppt(User owner){
+		List<Appointment> list = apptDao.getAppointmentByUsername(owner.getUsername());
+		return list;
+	}
+	
+	//get User object given the userId entered
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public User getUser(int id) {
+		return userDao.getById(id);
+	}
+	
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public User getUser(String username) {
+		return userDao.getByUsername(username);
 	}
 
-	public User getUser(String username) {
-		// TODO Auto-generated method stub
-		return null;
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public String userRole(User user) {
+		if(user.getUserRole().getUserRole() == "Vet")
+			return "Vet";
+		else return "Owner";
+	}
+
+	//create an appointment object
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public void createAndInsertAppt(int ownerId, int vetId, int petId, String description, String apptDate, String cardNumber) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss"); //TODO double check
+		Date parsedDate = null;
+		try {
+			parsedDate = dateFormat.parse(apptDate);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Timestamp apptDateTimestamp = new java.sql.Timestamp(parsedDate.getTime());
+		//to create an appointment object you need ownerId, vetId, date placed, date of appt, description 
+		Appointment appt = apptDao.createAppt(ownerId, vetId, petId, description, getCurrentTimeStamp(), apptDateTimestamp);
+		//return appt;
+		dao.insert(appt);
+		
+		//TODO Invoice invoice = InvoiceDAO.createInvoice();
+	}
+	
+	//HELPER METHODS
+	
+	//returns the current timestamp
+	public static java.sql.Timestamp getCurrentTimeStamp(){
+	    java.util.Date today = new java.util.Date();
+	    return new java.sql.Timestamp(today.getTime());
 	}
 	
 }
