@@ -6,10 +6,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.sherlockHomies.beans.Appointment;
 import com.sherlockHomies.beans.Invoice;
 import com.sherlockHomies.beans.Pet;
@@ -18,37 +23,44 @@ import com.sherlockHomies.beans.Rating;
 import com.sherlockHomies.beans.User;
 import com.sherlockHomies.beans.UserRole;
 
-@Component(value="facade")
+@Component(value = "facade")
+/*@Repository(value="facade")
+@Scope(value="prototype")*/
 public class Facade {
 
 	private DAO dao;
 	private AppointmentDAO apptDao;
-	private UserDAO userDao;	
+	private UserDAO userDao = null;	
 	private PetDAO petDao;
 	private InvoiceDAO invoiceDao;
 	private RatingDAO ratingDao;
 
-	
+	@Autowired
 	public void setDao(DAO dao) {
 		this.dao = dao;
 	}
 	
+	@Autowired
 	public void setApptDao(AppointmentDAO apptDao) {
 		this.apptDao = apptDao;
 	}
 
+	@Autowired
 	public void setUserDao(UserDAO userDao) {
 		this.userDao = userDao;
 	}
 	
+	@Autowired
 	public void setPetDao(PetDAO petDao) {
 		this.petDao = petDao;
 	}
 
+	@Autowired
 	public void setInvoiceDao(InvoiceDAO invoiceDao) {
 		this.invoiceDao = invoiceDao;
 	}
 
+	@Autowired
 	public void setRatingDao(RatingDAO ratingDao) {
 		this.ratingDao = ratingDao;
 	}
@@ -136,8 +148,7 @@ public class Facade {
 	//get appointments as a list of a pet owner
 	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
 	public List<Appointment> getAllOwnerAppt(User owner){
-		List<Appointment> list = apptDao.getAppointmentByUsername(owner.getUsername());
-		return list;
+		return apptDao.getAppointmentByUsername(owner.getUsername());
 	}
 	
 	//get User object given the userId entered

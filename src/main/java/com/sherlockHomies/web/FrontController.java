@@ -18,7 +18,6 @@ import com.sherlockHomies.beans.User;
 
 @Controller
 public class FrontController {
-
 	@Autowired
 	private BusinessDelegate businessDelegate;
 	
@@ -66,7 +65,7 @@ public class FrontController {
 		//requestDispatcher.forward(req, resp)
 		return "home";
 	}
-	
+	  
 	/**
 	 * 
 	 * @param id The id of the user we will be fetching 
