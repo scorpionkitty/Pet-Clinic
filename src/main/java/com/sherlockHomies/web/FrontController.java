@@ -17,7 +17,6 @@ import com.sherlockHomies.beans.User;
 @Controller
 public class FrontController {
 	
-	//@Autowired
 	private BusinessDelegate businessDelegate;
 	
 	@Autowired

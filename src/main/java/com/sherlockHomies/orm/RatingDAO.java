@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sherlockHomies.beans.Invoice;
 import com.sherlockHomies.beans.Rating;
 
-@Repository(value="RatingDao")
+@Repository(value="ratingDao")
 @Scope(value="prototype")
 public class RatingDAO {
 

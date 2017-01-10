@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sherlockHomies.beans.Pet;
 import com.sherlockHomies.beans.PetType;
 
-@Repository(value="PetDao")
+@Repository(value="petDao")
 @Scope(value="prototype")
 public class PetDAO {
 	

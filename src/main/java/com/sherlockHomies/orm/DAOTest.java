@@ -6,7 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import com.sherlockHomies.beans.Appointment;
 import com.sherlockHomies.beans.Invoice;
@@ -20,7 +20,7 @@ public class DAOTest {
 	
 	@BeforeClass
 	public static void setup(){
-		ctxt = new ClassPathXmlApplicationContext("beans.xml");
+		ctxt = new FileSystemXmlApplicationContext("src/main/webapp/WEB-INF/beans.xml");
 	}
 	
 	/**
@@ -37,7 +37,7 @@ public class DAOTest {
 		System.out.println(users);
 	}
 	
-	@Ignore
+	//@Ignore
 	@Test
 	public void testUserGetById(){
 		User userman = ctxt.getBean(UserDAO.class).getById(1);
