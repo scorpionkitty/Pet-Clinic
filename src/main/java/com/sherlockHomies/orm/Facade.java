@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +18,7 @@ import com.sherlockHomies.beans.Rating;
 import com.sherlockHomies.beans.User;
 import com.sherlockHomies.beans.UserRole;
 
+@Component(value="facade")
 public class Facade {
 
 	private DAO dao;

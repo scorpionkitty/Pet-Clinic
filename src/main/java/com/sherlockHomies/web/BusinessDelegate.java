@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
 
 import com.sherlockHomies.beans.Appointment;
@@ -15,16 +17,24 @@ import com.sherlockHomies.orm.Facade;
 @Service(value="businessDelegate")
 public class BusinessDelegate {
 
-	//@Autowired
-	private Facade facade;
 	@Autowired
+	private Facade facade;
+	
+	private ClassPathXmlApplicationContext context;
+	
 	public void setFacade(Facade facade) {
 		this.facade = facade;
 	}
 	
+	
+	public void setup(){
+		context = new ClassPathXmlApplicationContext("beans.xml");
+	}
+
 	//returns a User object when given userId
 	public User getUserById(int id) {
-		User user = facade.getUser(id);
+		setup();
+		User user = context.getBean(Facade.class).getUser(id);//.facade.getUser(id);
 		if(user == null){
 			System.out.println("User not found");
 			return null;
@@ -46,6 +56,7 @@ public class BusinessDelegate {
 
 	
 	public User findUser(String username) {
+		setup();
 		User user = facade.getUser(username);
 		if(user == null){
 			System.out.println("User not found");
