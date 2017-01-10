@@ -88,17 +88,5 @@ public class FrontController {
 	public User getVet(@PathVariable(value="param") int id) {
 		return businessDelegate.getVetById(id);
 	}
-	/**
-	 * For whenever the user needs to be redirected to the home page 
-	 * (in the event of a multi-page application)
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	//TODO MAP IN THE CONFIG FILE
-	public ModelAndView viewHome(HttpServletRequest request, HttpServletResponse response) {
-		ModelAndView model = new ModelAndView("homePage");
-		
-		return model;
-	}	
+	
 }

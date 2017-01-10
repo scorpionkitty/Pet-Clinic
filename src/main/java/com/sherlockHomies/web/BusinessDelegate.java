@@ -44,14 +44,16 @@ public class BusinessDelegate {
 
 	//returns if the owner i
 	public boolean isVet(User user){
+		setup();
 		if(facade.userRole(user) == "Vet")
 			return true;
 		else return false;
 	}
 	
 	public List<User> getAllVets() {
-		// TODO Auto-generated method stub
-		return null;
+		setup();
+		List<User> vets = context.getBean(Facade.class).getUserByRole("Vet");
+		return vets;
 	}
 
 	
@@ -66,13 +68,18 @@ public class BusinessDelegate {
 	}
 
 	public void insertAppt(int userId, int vetId, int petId, String description, String apptDate, String cardNumber){
+		setup();
 		facade.createAndInsertAppt(userId, vetId, petId, description, apptDate, cardNumber);
 		//facade.insertAppt(appt);
 	}
 
 	public User getVetById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		setup();
+		User user = context.getBean(Facade.class).getUser(id);
+		if(user.getUserRole().getUserRole().equalsIgnoreCase("vet")){
+			return user;
+		}else
+			return null;
 	}
 
 }
