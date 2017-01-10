@@ -36,7 +36,6 @@ public class UserDAO {
 	
 	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
 	public User getById(int id){ //this
-		System.out.println("Entered getById(int id) in UserDAO");
 /*		User result = (User) sessionFactory.getCurrentSession().get(User.class, id);
 		if(result == null){
 			System.out.println("UserId not found");

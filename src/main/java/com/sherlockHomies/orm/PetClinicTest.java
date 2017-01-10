@@ -1,11 +1,9 @@
 package com.sherlockHomies.orm;
 
-import java.util.List;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import com.sherlockHomies.beans.Appointment;
+import com.sherlockHomies.beans.User;
 
 public class PetClinicTest {
 	
@@ -17,12 +15,12 @@ public class PetClinicTest {
 	
 	public static void main(String[] args) {
 		setup();
-/*		User u = ctxt.getBean(Facade.class).getUser(3);
-		System.out.println(u);*/
+		User u = ctxt.getBean(Facade.class).getUser(3);
+		System.out.println(u);
 		
-		List<Appointment> result = ctxt.getBean(Facade.class).getAllOwnerAppt(ctxt.getBean(Facade.class).getUser(1));
+/*		List<Appointment> result = ctxt.getBean(Facade.class).getAllOwnerAppt(ctxt.getBean(Facade.class).getUser(1));
 		for(Appointment r : result){
 			System.out.println(r);
-		}
+		}*/
 	}
 }
