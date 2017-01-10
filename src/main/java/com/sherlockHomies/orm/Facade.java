@@ -183,4 +183,100 @@ public class Facade {
 	    return new java.sql.Timestamp(today.getTime());
 	}
 	
+	//Sam's part
+	
+	//TODO need?
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Appointment> getAllAppointments() {
+		return apptDao.getAll();
+	}
+
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public Appointment getAppointmentById(int id) {
+		return apptDao.getById(id);
+	}
+
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Appointment> getAppointmentByPet(String petname) {
+		return apptDao.getAppointmentByPet(petname);
+	}
+
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Appointment> getAppointmentByVet(String vetname) {
+		return apptDao.getAppointmentByVet(vetname);
+	}
+
+	//TODO need?
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Invoice> getAllInvoices() {
+		return invoiceDao.getAll();
+	}
+
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public Invoice getInvoiceById(int id) {
+		return invoiceDao.getById(id);
+	}
+
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Invoice> getInvoiceByUsername(String username) {
+		return invoiceDao.getByUsername(username);
+	}
+
+	//TODO need?
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Pet> getAllPets() {
+		return petDao.getAll();
+	}
+
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public Pet getPetById(int id) {
+		return petDao.getById(id);
+	}
+
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Pet> getPetByTypeId(int typeId) {
+		return petDao.getByType(typeId);
+	}
+
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Pet> getByUser(String username) {
+		return petDao.getByUser(username);
+	}
+
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Pet> getPetByTypeName(String typeName) {
+		return petDao.getByType(typeName);
+	}
+
+	//TODO need?
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Rating> getAllRatings() {
+		return ratingDao.getAll();
+	}
+
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public Rating getRatingById(int id) {
+		return ratingDao.getRatingById(id);
+	}
+
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Rating> getRatingByUser(String username) {
+		return ratingDao.getRatingByUser(username);
+	}
+
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Rating> getRatingByVet(String vetname) {
+		return ratingDao.getRatingByVet(vetname);
+	}
+
+	//TODO need?
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<User> getAllUsers() {
+		return userDao.getAll();
+	}
+
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<User> getUserByRole(String role) {
+		return userDao.getUserByRole(role);
+	}
 }

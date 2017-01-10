@@ -1,7 +1,6 @@
 package com.sherlockHomies.orm;
 
 import java.util.List;
-
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.sherlockHomies.beans.Pet;
 import com.sherlockHomies.beans.PetType;
 
@@ -60,5 +58,17 @@ public class PetDAO {
 		query.setString("u", un);
 		return query.list();
 	}
+	
+	@Transactional(isolation=Isolation.READ_COMMITTED,
+			propagation=Propagation.REQUIRED,
+			rollbackFor=Exception.class)
+	public List<Pet> getByType(String type){
+		String HQL = "select P from Pet P join P.petType PT where PT.petTypeName= :t";
+		Query query = sessionFactory.getCurrentSession().createQuery(HQL);
+		query.setString("t", type);
+		return query.list();
+	}
+	
+	
 
 }

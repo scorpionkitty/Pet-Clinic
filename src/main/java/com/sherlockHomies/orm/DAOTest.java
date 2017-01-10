@@ -142,9 +142,31 @@ public class DAOTest {
 		System.out.println(ratings);
 	}
 	
+	@Ignore
 	@Test
 	public void testAppointmentByUser(){
 		List<Appointment> appt = ctxt.getBean(AppointmentDAO.class).getAppointmentByUsername("pusheen");
 		System.out.println(appt);
+	}
+	
+	@Ignore
+	@Test
+	public void testAppointmentByPet(){
+		List<Appointment> appt = ctxt.getBean(AppointmentDAO.class).getAppointmentByPet("Cucumber");
+		System.out.println(appt);
+	}
+	
+	@Ignore
+	@Test
+	public void testAppointmentByVet(){
+		List<Appointment> appt = ctxt.getBean(AppointmentDAO.class).getAppointmentByVet("123unicorn");
+		System.out.println(appt);
+	}
+	
+	@Ignore
+	@Test
+	public void testPetByType2(){
+		List<Pet> pets = ctxt.getBean(PetDAO.class).getByType("chicken");
+		System.out.println(pets);
 	}
 }
