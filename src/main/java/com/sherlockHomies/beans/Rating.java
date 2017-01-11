@@ -9,12 +9,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.annotations.ForeignKey;
 
+/**
+ * Rating bean to be mapped to RATING table in our relational database with the following columns:
+ * 		RATING_ID, RATING, APPT_ID, COMMENTS
+ */
+
 @Cacheable
-@Entity //Entity says it is going to be mapped by hibernate
-@Table(name = "RATING") //rename Physical table even though the bean is different
+@Entity
+@Table(name = "RATING")
 public class Rating {
 
 	@Id
@@ -25,7 +29,7 @@ public class Rating {
 	@Column(name="RATING", nullable=false)
 	private double rating;
 	
-	@OneToOne(cascade = CascadeType.REMOVE) //one rating has one appt and one appt has one rating
+	@OneToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="APPT_ID", nullable=false)
 	@ForeignKey(name="APPT_ID_FK_")
 	@NotNull

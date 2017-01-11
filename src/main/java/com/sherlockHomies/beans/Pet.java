@@ -11,12 +11,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.ForeignKey;
 
+/**
+ * Pet bean to be mapped to PET table in our relational database with the following columns:
+ * 		PET_ID, PET_NAME, OWNER_ID, PET_TYPE_ID
+ */
+
 @Cacheable
-@Entity //Entity says it is going to be mapped by hibernate
-@Table(name = "PET") //rename Physical table even though the bean is different
+@Entity
+@Table(name = "PET")
 public class Pet {
 
 	@Id
@@ -27,12 +31,12 @@ public class Pet {
 	@Column(name="PET_NAME", nullable=false)
 	private String petName;
 	
-	@ManyToOne(cascade = CascadeType.REMOVE) //one owner has many pets
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="OWNER_ID", nullable=false, updatable=false)
 	@ForeignKey(name="OWNER_ID_FK")
 	private User owner;
 	
-	@ManyToOne(cascade = CascadeType.REMOVE) //one petType has many pets
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="PET_TYPE_ID", nullable=false, updatable=false)
 	@ForeignKey(name="PET_TYPE_ID_FK")
 	private PetType petType;

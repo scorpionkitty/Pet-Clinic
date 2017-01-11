@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.sherlockHomies.beans.Invoice;
 import com.sherlockHomies.beans.User;
 
+@Repository(value="invoiceDao")
+@Scope(value="prototype")
 public class InvoiceDAO {
 	
 	private SessionFactory sessionFactory;

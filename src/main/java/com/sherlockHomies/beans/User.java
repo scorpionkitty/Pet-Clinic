@@ -12,12 +12,16 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.ForeignKey;
 
+/**
+ * User bean to be mapped to USERS table in our relational database with the following columns:
+ * 		USER_ID, USERNAME, FNAME, LNAME, PHONE, EMAIL, USER_ROLE_ID
+ */
+
 @Cacheable
-@Entity //Entity says it is going to be mapped by hibernate
-@Table(name = "USERS") //rename Physical table even though the bean is different
+@Entity
+@Table(name = "USERS")
 public class User {
 
 	@Id

@@ -1,6 +1,6 @@
 package com.sherlockHomies.beans;
-import java.sql.Timestamp;
 
+import java.sql.Timestamp;
 import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,8 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
 import org.hibernate.annotations.ForeignKey;
+
+/**
+ * Invoice bean to be mapped to INVOICE table in our relational database with the following columns:
+ * 		INVOICE_ID, AMOUNT, APPT_ID, IS_PAID, CARD_NUMBER, PAYMENT_DATE
+ */
 
 @Cacheable
 @Entity
@@ -27,7 +31,7 @@ public class Invoice {
 	@NotNull
 	private double amount;
 	
-	@OneToOne(cascade = CascadeType.REMOVE) //one invoice has one appointment
+	@OneToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name="APPT_ID", nullable=false)
 	@ForeignKey(name="APPT_ID_FK")
 	@NotNull
@@ -48,7 +52,8 @@ public class Invoice {
 		super();
 	}
     
-	public Invoice(int invoiceId, double amount, Appointment appt, boolean isPaid, String cardNumber, Timestamp paymentDate) {
+	public Invoice(int invoiceId, double amount, Appointment appt, boolean isPaid, String cardNumber, 
+			Timestamp paymentDate) {
 		super();
 		this.invoiceId = invoiceId;
 		this.amount = amount;

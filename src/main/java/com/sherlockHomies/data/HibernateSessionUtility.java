@@ -5,10 +5,9 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 /**
- * A class to generate new Sessions in the event one is not active
- * @author David Sibrian
- *
+ * A class to generate new Sessions in the event one is not active. 
  */
+
 public class HibernateSessionUtility {
 	private Configuration config;
 	private SessionFactory sf;

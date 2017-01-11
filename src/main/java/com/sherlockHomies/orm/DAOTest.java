@@ -6,7 +6,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import com.sherlockHomies.beans.Appointment;
 import com.sherlockHomies.beans.Invoice;
@@ -20,7 +20,7 @@ public class DAOTest {
 	
 	@BeforeClass
 	public static void setup(){
-		ctxt = new ClassPathXmlApplicationContext("beans.xml");
+		ctxt = new FileSystemXmlApplicationContext("src/main/webapp/WEB-INF/beans.xml");
 	}
 	
 	/**
@@ -37,7 +37,7 @@ public class DAOTest {
 		System.out.println(users);
 	}
 	
-	@Ignore
+	//@Ignore
 	@Test
 	public void testUserGetById(){
 		User userman = ctxt.getBean(UserDAO.class).getById(1);
@@ -142,9 +142,31 @@ public class DAOTest {
 		System.out.println(ratings);
 	}
 	
+	@Ignore
 	@Test
 	public void testAppointmentByUser(){
 		List<Appointment> appt = ctxt.getBean(AppointmentDAO.class).getAppointmentByUsername("pusheen");
 		System.out.println(appt);
+	}
+	
+	@Ignore
+	@Test
+	public void testAppointmentByPet(){
+		List<Appointment> appt = ctxt.getBean(AppointmentDAO.class).getAppointmentByPet("Cucumber");
+		System.out.println(appt);
+	}
+	
+	@Ignore
+	@Test
+	public void testAppointmentByVet(){
+		List<Appointment> appt = ctxt.getBean(AppointmentDAO.class).getAppointmentByVet("123unicorn");
+		System.out.println(appt);
+	}
+	
+	@Ignore
+	@Test
+	public void testPetByType2(){
+		List<Pet> pets = ctxt.getBean(PetDAO.class).getByType("chicken");
+		System.out.println(pets);
 	}
 }

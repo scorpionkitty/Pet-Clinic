@@ -2,7 +2,6 @@ package com.sherlockHomies.beans;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,9 +13,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+/**
+ * PetType bean to be mapped to PET_TYPE table in our relational database with the following columns:
+ * 		PET_TYPE_ID, PET_TYPE_NAME
+ * Creates join table SPECIALIZATION, joining columns VET_ID from USERS table and PET_TYPE_NAME
+ */
+
 @Cacheable
-@Entity //Entity says it is going to be mapped by hibernate
-@Table(name="PET_TYPE") //rename Physical table even though the bean is different
+@Entity
+@Table(name="PET_TYPE")
 public class PetType {
 
 	@Id
@@ -29,7 +34,8 @@ public class PetType {
 	private String petTypeName;
 	
 	@ManyToMany
-	@JoinTable(name="SPECIALIZATION", joinColumns = @JoinColumn(name = "VET_ID"), inverseJoinColumns = @JoinColumn(name = "PET_TYPE_NAME"))
+	@JoinTable(name="SPECIALIZATION", joinColumns = @JoinColumn(name = "VET_ID"), 
+									  inverseJoinColumns = @JoinColumn(name = "PET_TYPE_NAME"))
 	private Set<User> vetSpecialization = new HashSet<>();
 	
 	@OneToMany(mappedBy="petType")

@@ -2,7 +2,6 @@ package com.sherlockHomies.beans;
 
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+/**
+ * UserRole bean to be mapped to USER_ROLE table in our relational database with the following columns:
+ * 		USER_ROLE_ID, USER_ROLE
+ */
+
 @Cacheable
-@Entity //Entity says it is going to be mapped by hibernate
-@Table(name = "USER_ROLE") //rename Physical table even though the bean is different
+@Entity
+@Table(name = "USER_ROLE")
 public class UserRole {
 
 	@Id
