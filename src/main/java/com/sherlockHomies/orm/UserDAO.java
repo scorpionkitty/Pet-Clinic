@@ -27,9 +27,7 @@ public class UserDAO {
 		this.sessionFactory = sessionFactory;
 	}
 	
-	@Transactional(isolation=Isolation.READ_COMMITTED,
-			propagation=Propagation.REQUIRED,
-			rollbackFor=Exception.class)
+	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
 	public List<User> getAll(){
 		return sessionFactory.getCurrentSession().createCriteria(User.class).list();
 	}
@@ -49,9 +47,7 @@ public class UserDAO {
 		return (User)criteria.uniqueResult();
 	}
 	
-	@Transactional(isolation=Isolation.READ_COMMITTED,
-			propagation=Propagation.REQUIRED,
-			rollbackFor=Exception.class)
+	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
 	public List<User> getUserByRole(String role){
 		String HQL = "select U FROM User U JOIN U.userRole UR WHERE UR.userRole= :r";
 		Query query = sessionFactory.getCurrentSession().createQuery(HQL);

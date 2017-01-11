@@ -7,9 +7,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -24,8 +21,6 @@ import com.sherlockHomies.beans.User;
 import com.sherlockHomies.beans.UserRole;
 
 @Component(value = "facade")
-/*@Repository(value="facade")
-@Scope(value="prototype")*/
 public class Facade {
 
 	private DAO dao;

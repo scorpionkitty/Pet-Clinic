@@ -1,48 +1,27 @@
 package com.sherlockHomies.web;
 
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
-import org.apache.catalina.core.ApplicationContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
-import com.sherlockHomies.beans.Appointment;
 import com.sherlockHomies.beans.User;
 import com.sherlockHomies.orm.Facade;
 
 @Service(value="businessDelegate")
-public class BusinessDelegate {
+public class BusinessDelegate implements ApplicationContextAware{
 
-	@Autowired
 	private Facade facade;
+	private ApplicationContext context;
 	
-	private ClassPathXmlApplicationContext context;
-	
-	public void setFacade(Facade facade) {
-		this.facade = facade;
-	}
-	
-	
-	public void setup(){
-		context = new ClassPathXmlApplicationContext("beans.xml");
+	@Override
+	public void setApplicationContext(ApplicationContext context) throws BeansException {
+		this.context = context;
 	}
 
-	//returns a User object when given userId
-	public User getUserById(int id) {
-		setup();
-		User user = context.getBean(Facade.class).getUser(id);//.facade.getUser(id);
-		if(user == null){
-			System.out.println("User not found");
-			return null;
-		}
-		return user;
-	}
-
-	//returns if the owner i
+	//returns if the owner is a vet or not
 	public boolean isVet(User user){
 		if(facade.userRole(user) == "Vet")
 			return true;
@@ -50,13 +29,12 @@ public class BusinessDelegate {
 	}
 	
 	public List<User> getAllVets() {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> vets = context.getBean(Facade.class).getUserByRole("Vet");
+		return vets;
 	}
 
 	
 	public User findUser(String username) {
-		setup();
 		User user = facade.getUser(username);
 		if(user == null){
 			System.out.println("User not found");
@@ -67,12 +45,23 @@ public class BusinessDelegate {
 
 	public void insertAppt(int userId, int vetId, int petId, String description, String apptDate, String cardNumber){
 		facade.createAndInsertAppt(userId, vetId, petId, description, apptDate, cardNumber);
-		//facade.insertAppt(appt);
 	}
 
-	public User getVetById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	//returns a User object when given userId
+	public User getUserById(int id) {
+		User user = context.getBean(Facade.class).getUser(id);
+		if(user == null){
+			System.out.println("User not found");
+			return null;
+		}
+		return user;
 	}
-
+	
+/*	public User getVetById(int id) {
+		User user = context.getBean(Facade.class).getUser(id);
+		if(user.getUserRole().getUserRole().equalsIgnoreCase("vet")){
+			return user;
+		}else
+			return null;
+	}*/
 }
