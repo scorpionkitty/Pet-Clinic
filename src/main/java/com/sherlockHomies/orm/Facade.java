@@ -288,4 +288,14 @@ public class Facade {
 	public List<User> getUserByRole(String role) {
 		return userDao.getUserByRole(role);
 	}
+	
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Appointment> getPastAppointments(){
+		return apptDao.getAppointmentsBeforeToday();
+	}
+	
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Appointment> getFutureAppointments(){
+		return apptDao.getAppointmentsAfterToday();
+	}
 }
