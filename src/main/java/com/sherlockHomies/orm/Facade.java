@@ -294,23 +294,12 @@ public class Facade {
 	}
 	
 	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
-	public List<Appointment> getPastAppointments(){
-		return apptDao.getAppointmentsBeforeToday();
-	}
-	
-	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
-	public List<Appointment> getFutureAppointments(int userId){
-		return apptDao.getAppointmentsAfterToday(userId);
+	public List<Appointment> getFutureAppointmentsByUser(int userId){
+		return apptDao.getAppointmentsAfterTodayByUser(userId);
 	}
 	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
-	public List<Appointment> getPastAppointmentsByUser(String username){
-		return apptDao.getAppointmentsBeforeTodayByUser(username);
+	public List<Appointment> getPastAppointmentsByUser(int userId){
+		return apptDao.getAppointmentsBeforeTodayByUser(userId);
 	}
-	
-	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
-	public List<Appointment> getFutureAppointmentsByUser(String username){
-		return apptDao.getAppointmentsAfterTodayByUser(username);
-	}
-	
 	
 }

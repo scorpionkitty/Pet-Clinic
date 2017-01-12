@@ -34,7 +34,7 @@
         </tr>
     </table>
     
-    <table id="tabs2">
+    <table id="completed">
         <tr>
             <th>Id</th>
             <th>date</th>
@@ -80,18 +80,33 @@
        console.log("Hello. works")
        $.ajax({
            type:"GET",
-            url:"/PetClinic/completedAppts/1",
+            url:"/PetClinic/3/upcomingAppts",
             success:function(resp){
             console.log(resp[0].id);
                 for ( var appt in resp) {
-                    $("#tabs2").append("<tr><td>"+resp[appt].apptId+"</td><td>"+resp[appt].apptDate+"</td><td>"+resp[appt].description+"</td></tr>")
+                    $("#upcoming").append("<tr><td>"+resp[appt].apptId+"</td><td>"+resp[appt].apptDate+"</td><td>"+resp[appt].description+"</td></tr>")
                 }
                 
             }
        
        })
+   });
+   
+   $(document).ready(function(){
+       //alert("annimation done");
+       console.log("Hello. works")
+       $.ajax({
+           type:"GET",
+            url:"/PetClinic/3/completedAppts",
+            success:function(resp){
+            console.log(resp[0].id);
+                for ( var appt in resp) {
+                    $("#completed").append("<tr><td>"+resp[appt].apptId+"</td><td>"+resp[appt].apptDate+"</td><td>"+resp[appt].description+"</td></tr>")
+                }
+                
+            }
        
-       
+       })
    });
    </script>
 </html>

@@ -1,6 +1,7 @@
 package com.sherlockHomies.beans;
 
 import java.sql.Timestamp;
+
 import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+
 import org.hibernate.annotations.ForeignKey;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * Appointment bean to be mapped to APPOINTMENT table in our relational database with the following columns:
@@ -46,10 +50,12 @@ public class Appointment {
 	
 	@Column(name="PLACED_DATE", nullable=false)
 	@NotNull
+	@JsonFormat(pattern="MM-dd-yyyy")
 	private Timestamp placedDate;
 	
 	@Column(name="APPT_DATE", nullable=false)
 	@NotNull
+	@JsonFormat(pattern="MM-dd-yyyy")
 	private Timestamp apptDate;
 	
 	@Column(name="PRESCRIPTION", length=100)

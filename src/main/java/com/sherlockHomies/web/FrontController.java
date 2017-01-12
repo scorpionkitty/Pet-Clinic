@@ -23,77 +23,18 @@ public class FrontController {
 	public void setBusinessDelegate(BusinessDelegate businessDelegate) {
 		this.businessDelegate = businessDelegate;
 	}
-/*	
-	*//**
-	 * Used to log in TODO
-	 *//*
-	@ResponseBody
-	@RequestMapping(value={"/login"}, method={RequestMethod.POST}, consumes={"application/json"}, produces={"application/json"})
-	public String login(@RequestBody User user, HttpSession session){
-		user = businessDelegate.findUser(user.getUsername());
-		session.setAttribute("user", user);
-		if(user == null)
-			return "{ \"result\" : \"failure\" }";
-		else return "{ \"result\" : \"success\" }";
-	}
-	
-	*//**
-	 * Used to 
-	 *//*
-	@ResponseBody
-	@RequestMapping(value={"/user"}, method={RequestMethod.GET}, produces={"application/json"})
-	public User getUser(HttpSession session) {
-		session.getAttribute("user").getClass();
-		return (User)session.getAttribute("user_obj"); 
-	}
 
-	@RequestMapping(value={"/logout"}, method={RequestMethod.GET})
-	public void logout(HttpSession session) {
-		session.setAttribute("user", null);
-	}
-*/
-	
 	/**
-	 * Returns the home.html for the pet owner to view
+	 * Returns home.html
 	 */
-/*	@ResponseBody
-	@RequestMapping(value={"/owner"}, method=RequestMethod.GET, produces="application/json")
-	public String ownerHomePage() {
-		User owner = businessDelegate.getUserById(1);
-		businessDelegate.apptOfOwner(owner);
-		return "home";
-	}*/
-	  
-	/**
-	 * Used to return a user object when given the user Id
-	 */
-/*	@ResponseBody
-	@RequestMapping(value="/user/{param}", method=RequestMethod.GET, produces="application/json")
-	public User getUser(@PathVariable(value="param") int id) {
-		return businessDelegate.getUserById(id);
-	}*/
-
-	@RequestMapping(value="/user/{param}", method=RequestMethod.GET, produces="application/json")
-	public String getUser(@PathVariable(value="param") int id) {
-		businessDelegate.getUserById(id);
+	@RequestMapping(value="/home", method=RequestMethod.GET)
+	public String getHomepage() {
 		return "home";
 	}
 	
-/*	@ResponseBody
-	@RequestMapping(value="/user/{param}", method=RequestMethod.GET, produces="application/json")
-	public User getUserByUsername(@PathVariable(value="param") String username) {
-		return businessDelegate.getUserByUsername(username);
-	}*/
-	
 	/**
-	 * Used to return a list of all the vets
+	 * Returns the JSON of all the vets
 	 */
-/*	@ResponseBody
-	@RequestMapping(value="/vets", method=RequestMethod.GET, produces="application/json")
-	public List<User> listVets() {
-		return businessDelegate.getAllVets();
-	}*/
-	
 	@ResponseBody
     @RequestMapping(value="/vets", method=RequestMethod.GET, produces="application/json")
     public ResponseEntity<List<User>> listVets() {
@@ -115,9 +56,43 @@ public class FrontController {
         return new ResponseEntity<List<Appointment>>(businessDelegate.getApptById(id),HttpStatus.OK);
     }*/
 	
+	
+	/**
+	 * Returns the JSON of upcoming appointments of an owner when given ownerId as {param}
+	 * Example: http://localhost:9090/PetClinic/3/upcomingAppts
+	 */
 	@ResponseBody
-    @RequestMapping(value="/{param}/completedAppts", method=RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="/{param}/upcomingAppts", method=RequestMethod.GET, produces="application/json")
     public ResponseEntity<List<Appointment>> upcomingAppts(@PathVariable(value="param") int ownerId) {
         return new ResponseEntity<List<Appointment>>(businessDelegate.getUpcoming(ownerId),HttpStatus.OK);
+    }
+	
+	/**
+	 * Returns the JSON of completed appointments of an owner when given ownerId as {param}
+	 * Example: http://localhost:9090/PetClinic/3/completedAppts
+	 */
+	@ResponseBody
+    @RequestMapping(value="/{param}/completedAppts", method=RequestMethod.GET, produces="application/json")
+    public ResponseEntity<List<Appointment>> completedAppts(@PathVariable(value="param") int ownerId) {
+        return new ResponseEntity<List<Appointment>>(businessDelegate.getCompleted(ownerId),HttpStatus.OK);
+    }
+	
+	/**
+	 * Returns the JSON of a specific user when given the user id
+	 */
+	@ResponseBody
+    @RequestMapping(value="/user/{param}", method=RequestMethod.GET, produces="application/json")
+    public ResponseEntity<User> getUser(@PathVariable(value="param") int userId) {
+        return new ResponseEntity<User>(businessDelegate.getUserById(userId),HttpStatus.OK);
+    }
+    
+    /**
+     * Returns the JSON of a specific user when given the user's username
+     * Example: http://localhost:9090/PetClinic/username/pusheen
+     */
+    @ResponseBody
+    @RequestMapping(value="/username/{param}", method=RequestMethod.GET, produces="application/json")
+    public ResponseEntity<User> getUserByUsername(@PathVariable(value="param") String username) {
+        return new ResponseEntity<User>(businessDelegate.findUser(username),HttpStatus.OK);
     }
 }

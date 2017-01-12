@@ -6,8 +6,8 @@
     
     <!--Need for rating-->
     <link rel="stylesheet" type="text/css" src="rating.css" />
- <script type="text/javascript" src="jquery.min.js"></script> 
-    <script type="text/javascript" src="rating.js"></script>
+<!--  <script type="text/javascript" src="jquery.min.js"></script> 
+    <script type="text/javascript" src="rating.js"></script> -->
     <!--Need for styled text fields-->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css">
     <!--Need for styled calendar-->
@@ -366,8 +366,10 @@
             </div>
         </div>
     </div>
-    <div id="newFormApplication" style="display:none">
-        <!--START OF NEW APPOINTMENT PANEL-->
+    
+    <!-- start of David's part -->
+<!--     <div id="newFormApplication" style="display:none">
+        START OF NEW APPOINTMENT PANEL
         <div class="modal-body" style="margin: 0 auto; width:30%">
             <div id="datetimepicker1" class="input-append date">
                 <label for= "time" class="cols-sm-2 control-label">
@@ -375,7 +377,7 @@
                 </label>
                 <input data-format="MM/dd/yyyy hh:00" type="text" placeholder="Select a date & time" style="width:70%"></input><span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span> 
             </div>
-            <!--Name Field-->
+            Name Field
             <div class="form-group">
                 <label for="name" class="cols-sm-2 control-label"> Name <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span> </label>
                 <div class="cols-sm-10">
@@ -384,7 +386,7 @@
                     </div>
                 </div>
             </div>
-            <!--Credit Card Field-->
+            Credit Card Field
             <div class="form-group">
                 <label for="creditCard" class="cols-sm-2 control-label"> Credit Card <span class="input-group-addon"><i         class="fa fa-credit-card" aria-hidden="true"></i></span> 
                 </label>
@@ -394,7 +396,7 @@
                     </div>
                 </div>
             </div>
-            <!--Description Field-->
+            Description Field
             <div class="form-group">
                 <label for="description" class="cols-sm-2 control-label"> Description <span class="input-group-addon"><i class="fa fa-comment" aria-hidden="true"></i></span> </label>
                 <div class="cols-sm-10">
@@ -402,12 +404,37 @@
                         <input type="text" style="width:300px" class="form-control" name="desciption" id="description" placeholder="Reason for appointment? (optional)" /> </div>
                 </div>
             </div>
-            <!--Submit Button-->
+            Submit Button
             <div class="form-group ">
                 <input type="Submit" class="btn btn-primary btn-lg login-button" style="width:82%">
             </div>
         </div>
-    </div>
+    </div> --> <!-- end of David's part -->
+    <!-- start of my part -->
+    <form id ="newAppt">
+           <div class="input-container">
+                <input type="date" id="date" name="date" required="required"/>
+                <label for="date">Date of Appt</label>
+                <div class="bar"></div>
+            </div>
+            <div class="input-container">
+                <input type="text" id="card" name="card" required="required"/>
+                <label for="card">Card Number</label>
+                <div class="bar"></div>
+            </div>
+            <div class="input-container">
+                <input type="text" id="description" name="description" required="required"/>
+                <label for="description">Description</label>
+                <div class="bar"></div>
+            </div>
+            <div class="button-container">
+                <button type="submit" form="newAppt"><span>Submit New Appointment</span></button>
+			</div>
+    </form>
+    <!-- end of my part -->
+    
+    
+    
     <!--</div>-->
 </body>
 
@@ -552,7 +579,39 @@ $('#star-rating').rating(); // Call the rating plugin
     });
     
 })(jQuery);
+</script>
 
+<!-- Karina -->
+<script>
+    $(document).ready(function () {
+            $("#newAppt").submit(function (event) {
+                event.preventDefault();
+                var url = "http://localhost:9090/PetClinic/";
+                var appt = {
+                    date: $("#date").val(),
+                    card: $("#card").val(),
+                    description: $("#description").val()
+                };
+                console.log(appt);
+                $.ajax({
+                    type: "POST",
+                    contentType:"application/json",
+                    url: url + "login",
+                    cache: false,
+                    dataType: "json",
+                    data: JSON.stringify(appt),
+                    success: function (response) {
+                        console.log(response.errors);
+                        console.log("Success!")
+                    },
+                    error: function (error) {
+                        console.log(error);
+                        console.log("Failed!");
+                    }
+                })
+            });
+        }
+    )
 </script>
 
 

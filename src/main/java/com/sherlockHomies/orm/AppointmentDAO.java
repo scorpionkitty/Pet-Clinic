@@ -127,57 +127,37 @@ public class AppointmentDAO {
 		Appointment apptToDelete = (Appointment) criteria.uniqueResult();
 		sessionFactory.getCurrentSession().delete(apptToDelete);
 	}
-
-	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
-	public List<Appointment> getAppointmentsBeforeToday(){
-		Timestamp now = new Timestamp(System.currentTimeMillis());
-		String HQL= "select A from Appointment A "
-				+ "join A.vet V "
-				+ "where A.apptDate<:t";
-		Query query = sessionFactory.getCurrentSession().createQuery(HQL);
-		query.setTimestamp("t", now);
-		return query.list();
-	}
 	
+	//completed
 	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
-	public List<Appointment> getAppointmentsAfterToday(int userId){
-		Timestamp now = new Timestamp(System.currentTimeMillis());
-		String HQL= "select A from Appointment A "
-				+ "join A.vet V "
-				+ "where A.apptDate>:t";
-		Query query = sessionFactory.getCurrentSession().createQuery(HQL);
-		query.setTimestamp("t", now);
-		return query.list();
-}
-	
-	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
-	public List<Appointment> getAppointmentsBeforeTodayByUser(String username){
-		Timestamp now = new Timestamp(System.currentTimeMillis());
+	public List<Appointment> getAppointmentsBeforeTodayByUser(int userId){ //TODO
+		//Timestamp now = new Timestamp(System.currentTimeMillis());
+		Timestamp now = Facade.getCurrentTimeStamp();
 		String HQL= "select A from Appointment A "
 				+ "join A.pet P "
 				+ "join P.owner U "
-				+ "where A.apptDate<:t and U.username=:n";
+				+ "where A.apptDate<:t and U.userId=:n";
 		Query query = sessionFactory.getCurrentSession().createQuery(HQL);
 		query.setTimestamp("t", now);
-		query.setString("n", username);
+		query.setInteger("n", userId);
 		return query.list();
 	}
 	
+	//upcoming
 	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
-	public List<Appointment> getAppointmentsAfterTodayByUser(String username){
-		Timestamp now = new Timestamp(System.currentTimeMillis());
-		String HQL= "select A from Appointment A "
+	public List<Appointment> getAppointmentsAfterTodayByUser(int userId){
+		//Timestamp now = new Timestamp(System.currentTimeMillis());
+		Timestamp now = Facade.getCurrentTimeStamp();
+/*		String HQL= "select A from Appointment A "
 				+ "join A.vet V "
-				+ "where A.apptDate>:t and V.username=:n";
+				+ "where A.apptDate>:t and V.userId=:n";*/
+		String HQL= "select A from Appointment A "
+				+ "join A.pet P "
+				+ "join P.owner U "
+				+ "where A.apptDate>:t and U.userId=:n";
 		Query query = sessionFactory.getCurrentSession().createQuery(HQL);
 		query.setTimestamp("t", now);
-		query.setString("n", username);
+		query.setInteger("n", userId);
 		return query.list();
 	}
-	
-/*	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
-	public List<Appointment> getAppointmentsAfterToday2(){
-		Timestamp now = new Timestamp(System.currentTimeMillis());
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Appointment.class).add(Restrictions.eq(", value))
-	}*/
 }

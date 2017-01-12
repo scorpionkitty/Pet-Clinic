@@ -27,7 +27,7 @@ public class BusinessDelegate implements ApplicationContextAware{
 	 * Returns a user when given a username, if username is found
 	 */
 	public User findUser(String username) {
-		User user = facade.getUser(username);
+		User user = context.getBean(Facade.class).getUser(username);
 		if(user == null){
 			System.out.println("User not found");
 			return null;
@@ -66,17 +66,22 @@ public class BusinessDelegate implements ApplicationContextAware{
 		facade.createAndInsertAppt(userId, vetId, petId, description, apptDate, cardNumber);
 	}
 
-/*	public List<User> getVetsOfASpecialty(String petType) { TODO
-		facade.
-	}*/
-
 	public User getUserByUsername(String username) {
 		return facade.getUser(username);
 	}
 	
+	/**
+	 * Returns upcoming appointments of a user when given userId
+	 */
 	public List<Appointment> getUpcoming(int userId){
-		return facade.getFutureAppointments(userId);
+		return context.getBean(Facade.class).getFutureAppointmentsByUser(userId);
 	}
-
+	
+	/**
+	 * Returns completed appoints of a user when given userId
+	 */
+	public List<Appointment> getCompleted(int userId){
+		return context.getBean(Facade.class).getPastAppointmentsByUser(userId);
+	}
 	
 }
