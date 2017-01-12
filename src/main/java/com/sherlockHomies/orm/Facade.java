@@ -299,7 +299,7 @@ public class Facade {
 	}
 	
 	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
-	public List<Appointment> getFutureAppointments(){
-		return apptDao.getAppointmentsAfterToday();
+	public List<Appointment> getFutureAppointments(int userId){
+		return apptDao.getAppointmentsAfterToday(userId);
 	}
 }

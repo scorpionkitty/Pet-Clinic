@@ -59,5 +59,9 @@ public class UserDAO {
 		return (User) criteria.uniqueResult();
 	}
 	
-	
+/*	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public User addSpecialty(int vetId, int petTypeId) {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.eq("username", username));
+		return (User) criteria.uniqueResult();
+	}*/
 }

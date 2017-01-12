@@ -16,6 +16,7 @@ import com.sherlockHomies.beans.User;
 
 @Controller
 public class FrontController {
+	
 	@Autowired
 	private BusinessDelegate businessDelegate;
 	
@@ -109,8 +110,14 @@ public class FrontController {
 	}*/
 	
 /*	@ResponseBody
-    @RequestMapping(value="/completedAppts/{param}", method=RequestMethod.GET, produces="application/json")
+    @RequestMapping(value="/appt/{param}", method=RequestMethod.GET, produces="application/json")
     public ResponseEntity<List<Appointment>> listAppt(@PathVariable(value="param") int id) {
         return new ResponseEntity<List<Appointment>>(businessDelegate.getApptById(id),HttpStatus.OK);
     }*/
+	
+	@ResponseBody
+    @RequestMapping(value="/{param}/completedAppts", method=RequestMethod.GET, produces="application/json")
+    public ResponseEntity<List<Appointment>> upcomingAppts(@PathVariable(value="param") int ownerId) {
+        return new ResponseEntity<List<Appointment>>(businessDelegate.getUpcoming(ownerId),HttpStatus.OK);
+    }
 }

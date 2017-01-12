@@ -176,10 +176,10 @@ public class DAOTest {
 		List<Appointment> appts = ctxt.getBean(AppointmentDAO.class).getAppointmentsBeforeToday();
 		System.out.println(appts);
 	}
-	@Ignore
+/*	@Ignore
 	@Test
 	public void allApptsAfter(){
 		List<Appointment> appts = ctxt.getBean(AppointmentDAO.class).getAppointmentsAfterToday();
 		System.out.println(appts);
-	}
+	}*/
 }

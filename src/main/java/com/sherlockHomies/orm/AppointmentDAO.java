@@ -68,7 +68,7 @@ public class AppointmentDAO {
 		//
 		Appointment appt = new Appointment(userId, vet, pet, description, placedDate, apptDate)
 		// open a session.. always use Session-per-HTTP-request
-		Session session = sf.openSession();
+		Session session = sf.openSession(); 
 				// begin a transaction
 		Transaction tx = session.beginTransaction();
 				// save the object
@@ -140,7 +140,7 @@ public class AppointmentDAO {
 	}
 	
 	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
-	public List<Appointment> getAppointmentsAfterToday(){
+	public List<Appointment> getAppointmentsAfterToday(int userId){
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 		String HQL= "select A from Appointment A "
 				+ "join A.vet V "
@@ -149,4 +149,10 @@ public class AppointmentDAO {
 		query.setTimestamp("t", now);
 		return query.list();
 	}
+	
+/*	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public List<Appointment> getAppointmentsAfterToday2(){
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Appointment.class).add(Restrictions.eq(", value))
+	}*/
 }

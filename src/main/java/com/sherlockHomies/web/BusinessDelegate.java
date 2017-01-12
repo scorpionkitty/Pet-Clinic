@@ -74,10 +74,9 @@ public class BusinessDelegate implements ApplicationContextAware{
 		return facade.getUser(username);
 	}
 	
-	/*public List<Appointment> getApptById(int apptId){
-		List<Appointment> listAppt;
-		return listAppt.add(context.getBean(Facade.class).getAppointmentById(apptId));
-	}*/
+	public List<Appointment> getUpcoming(int userId){
+		return facade.getFutureAppointments(userId);
+	}
 
 	
 }
