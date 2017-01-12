@@ -33,28 +33,131 @@
    <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
    
    
-
+   
+   <style>
+	/* 'Open Sans' font from Google Fonts */
+	@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+	
+	body {
+	  background: #F1F1F1;
+	  font-family: 'Open Sans', sans-serif;
+	}
+	
+	.login {
+	  width: 400px;
+	  margin: 16px auto;
+	  font-size: 16px;
+	}
+	
+	/* Reset top and bottom margins from certain elements */
+	.login-header,
+	.login p {
+	  margin-top: 0;
+	  margin-bottom: 0;
+	    background-color: #5F5F5F;
+	}
+	
+	
+	/* The triangle form is achieved by a CSS hack */
+	.login-triangle {
+	  width: 0;
+	  margin-right: auto;
+	  margin-left: auto;
+	  border: 12px solid transparent;
+	  border-bottom-color: #28d;
+	}
+	
+	.login-header {
+	  background: #878a8e;
+	  padding: 20px;
+	  font-size: 1.4em;
+	  font-weight: normal;
+	  text-align: center;
+	  text-transform: uppercase;
+	  color: #fff;
+	}
+	
+	.login-container {
+	  background: #ebebeb;
+	  padding: 12px;
+	}
+	
+	/* Every row inside .login-container is defined with p tags */
+	.login p {
+	  padding: 12px;
+	}
+	
+	.login input {
+	  box-sizing: border-box;
+	  display: block;
+	  width: 100%;
+	  border-width: 1px;
+	  border-style: solid;
+	  padding: 16px;
+	  outline: 0;
+	  font-family: inherit;
+	  font-size: 0.95em;
+	}
+	
+	.login input[type="email"],
+	.login input[type="password"] {
+	  background: #fff;
+	  border-color: #bbb;
+	  color: #555;
+	}
+	
+	/* Text fields' focus effect */
+	.login input[type="email"]:focus,
+	.login input[type="password"]:focus {
+	  border-color: #888;
+	}
+	
+	.login input[type="submit"] {
+	  background: #28d;
+	  border-color: transparent;
+	  color: #fff;
+	  cursor: pointer;
+	}
+	
+	.login input[type="submit"]:hover {
+	  background: #17c;
+	}
+	
+	/* Buttons' focus effect */
+	.login input[type="submit"]:focus {
+	  border-color: #05a;
+	}
+</style>
 </head>
 <body>
-    <!-- <table id="tabs" class="table table-hover">
-        <tr>
-            <th>Id</th>
-            <th>Username</th>
-            <th>Firstname</th>
-        </tr>
-    </table> -->
-    
-    <!-- <table id="completed">
-        <tr>
-            <th>Id</th>
-            <th>date</th>
-            <th>description</th>
-        </tr>
-    </table> -->
-    
-<!--     <h1>Get Completed Appointments</h1> -->
-	<input type="text" class="form-control" id="ownerId" placeholder="Trainee ID">
-	<button id="button2" type="submit" class="btn btn-primary">Find</button>
+	<div class="navbar">
+        <div class="navbar-inner">
+            <div class="container">
+                <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+                <ul class="nav">
+                    <li class="active"> <a class="brand" href="#">Pet Clinic</a> </li>
+                    <li><a href="#">Mr.Jenkins</a></li>
+                    <li><a href="#">Cucumber</a></li>
+                    <li>
+                        <a href="#"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+	
+	
+	<div class="login">
+	  <!-- <div class="login-triangle"></div> -->
+	  	<h2 class="login-header">Welcome to Pet Clinic</h2>
+	  	<div class="login-container">
+			<p><input type="text" id="ownerId" placeholder="Enter your ID"></p>
+			<p><input id="button2" type="submit" value="Find your appointments"></p>
+		</div>
+	</div>
+	
+<!-- 	<input type="text" class="form-control" id="ownerId" placeholder="Trainee ID">
+	<button id="button2" type="submit" class="btn btn-primary">Find</button> -->
 	<h1 id="title1" style="display:none">Completed Appointments</h1>
 	<table id="table2" class="table table-hover" hidden="true" >
 		<tr>
@@ -68,9 +171,6 @@
 		</tr>
 	</table>
 	
-<!-- 	<h1>Get Future Appointments</h1>
-	<input type="text" class="form-control" id="ownerId2" placeholder="Trainee ID">
-	<button id="button5" type="submit" class="btn btn-primary">Find</button> -->
 	<h1 id="title2" style="display:none">Upcoming Appointments</h1>
 	<table id="table5" class="table table-hover" hidden="true">
 		<tr>
@@ -83,7 +183,6 @@
             <th>Rating</th>
 		</tr>
 	</table>
-	
 </body>
 <script>
    /* $(document).ready(function(){
@@ -124,7 +223,6 @@
 				$("#title1").toggle();
 				$("#table2").attr("hidden",false)
 				var owner_id = $("#ownerId").val();
-				alert(owner_id)
 				$.ajax({
 					type : "GET",
 					url : "http://localhost:9090/PetClinic/" + owner_id
@@ -152,7 +250,6 @@
 				$("#title2").toggle();
 				$("#table5").attr("hidden",false)
 				var owner_id = $("#ownerId").val();
-				alert(owner_id)
 				$.ajax({
 					type : "GET",
 					url : "http://localhost:9090/PetClinic/" + owner_id
