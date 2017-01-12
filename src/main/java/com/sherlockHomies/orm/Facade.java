@@ -292,4 +292,14 @@ public class Facade {
 	    java.util.Date today = new java.util.Date();
 	    return new java.sql.Timestamp(today.getTime());
 	}
+	
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Appointment> getPastAppointments(){
+		return apptDao.getAppointmentsBeforeToday();
+	}
+	
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Appointment> getFutureAppointments(){
+		return apptDao.getAppointmentsAfterToday();
+	}
 }

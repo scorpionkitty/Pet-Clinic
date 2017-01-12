@@ -111,7 +111,7 @@ public class AppointmentDAO {
 		query.setString("n", vetname);
 		return query.list();
 	}
-	
+
 	//Deletes an appointment of a particular user
 /*	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
 	public void deleteApptFromOwner(User user, Appointment appt){
@@ -126,5 +126,27 @@ public class AppointmentDAO {
 				.add(Restrictions.eq("apptId", appt));
 		Appointment apptToDelete = (Appointment) criteria.uniqueResult();
 		sessionFactory.getCurrentSession().delete(apptToDelete);
+	}
+
+	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public List<Appointment> getAppointmentsBeforeToday(){
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		String HQL= "select A from Appointment A "
+				+ "join A.vet V "
+				+ "where A.apptDate<:t";
+		Query query = sessionFactory.getCurrentSession().createQuery(HQL);
+		query.setTimestamp("t", now);
+		return query.list();
+	}
+	
+	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public List<Appointment> getAppointmentsAfterToday(){
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		String HQL= "select A from Appointment A "
+				+ "join A.vet V "
+				+ "where A.apptDate>:t";
+		Query query = sessionFactory.getCurrentSession().createQuery(HQL);
+		query.setTimestamp("t", now);
+		return query.list();
 	}
 }
