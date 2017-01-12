@@ -132,5 +132,30 @@ public class AppointmentDAO {
 		Query query = sessionFactory.getCurrentSession().createQuery(HQL);
 		query.setTimestamp("t", now);
 		return query.list();
+}
+	
+	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public List<Appointment> getAppointmentsBeforeTodayByUser(String username){
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		String HQL= "select A from Appointment A "
+				+ "join A.pet P "
+				+ "join P.owner U "
+				+ "where A.apptDate<:t and U.username=:n";
+		Query query = sessionFactory.getCurrentSession().createQuery(HQL);
+		query.setTimestamp("t", now);
+		query.setString("n", username);
+		return query.list();
+	}
+	
+	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public List<Appointment> getAppointmentsAfterTodayByUser(String username){
+		Timestamp now = new Timestamp(System.currentTimeMillis());
+		String HQL= "select A from Appointment A "
+				+ "join A.vet V "
+				+ "where A.apptDate>:t and V.username=:n";
+		Query query = sessionFactory.getCurrentSession().createQuery(HQL);
+		query.setTimestamp("t", now);
+		query.setString("n", username);
+		return query.list();
 	}
 }
