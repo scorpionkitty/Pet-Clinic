@@ -281,7 +281,7 @@
                     <div class="col-xs-6">
                         <div class="panel panel-default">
                             <div class="panel-heading"> <span class="pull-right clickable"><i class="glyphicon glyphicon-chevron-up"></i></span> </div>
-                            <table class="table table-bordered table-hover specialCollapse">
+ <!--                            <table class="table table-bordered table-hover specialCollapse">
                                 <thead>
                                     <tr>
                                         <th class="col-md-1">ID</th>
@@ -332,7 +332,24 @@
                                         <td><input type="submit" class="btn btn-success btn-mini" value="Submit"></td>
                                     </tr>
                                 </tbody>
-                            </table>
+                            </table> 
+ -->             
+             <table id="completed">
+        		<tr>
+		            <th>ID</th>
+                    <th>Date</th>
+                     <th>Pet</th>
+                     <th>Vet</th>
+                    <th>Issue</th>
+                     <th>Prescription</th>
+                    <th>Rating</th>
+<!--                     <th>Submit</th> -->
+        		</tr>
+   			 </table>               
+                            
+                            
+                            
+                            
                         </div>
                     </div>
                 </div>
@@ -400,7 +417,7 @@
 	    Type:<input id="type" type="text" name="Product Type"><br>
 	    tags:<input id="tag" type="text" name="tags"><br>
 	    <input id="addSubmit" type="submit" value="Add"> -->
-	    Appointment Date <input id="apptDate" type="text"><br>
+	    Appointment Date <input id="date" type="text"><br>
 	    Description <input id="description" type="text"><br>
 		<input id="addAppt" type="submit" value="Add">
 
@@ -555,57 +572,73 @@ $('#star-rating').rating(); // Call the rating plugin
 })(jQuery);
 </script>
 
-<!-- Karina -->
-<script>
-    $(#addAppt).click(function () {
-/*             $("#newAppt").submit(function (event) {
-                event.preventDefault();
-                var url = "http://localhost:9090/PetClinic/"; */
-      	var apptObj = {
-                	id: 30,
-                	vet: {"userId":2,
-                		"username":"burgers4me",
-                		"firstName":"Jessica",
-                		"lastName":"Adams",
-                		"phone":"718-900-8790",
-                		"email":"jadams@gmail.com",
-                		"userRole":{"userRoleId":1,"userRole":"Vet"}
-                		},
-                	pet: {"petId":1, 
-                		"petName":"Mr. Jenkins", 
-                		"owner":{"userId":3,"username":"pusheen","firstName":"Alex","lastName":"Franks","phone":"917-225-6789","email":"afranks@gmail.com","userRole":{"userRoleId":2,"userRole":"Owner"}},
-                		"petType":{"petTypeId":2,"petTypeName":"chicken"}
-                		},
-                	description: $("#description").val(),
-                	placedDate: "1-12-2017",
-                    apptDate: $("#date").val(),
-  /*                   prescription: */
-       };
-                /* console.log(appt); */
+	<!-- Karina -->
+	<script>
+	    $(#addAppt).click(function () {
+	/*             $("#newAppt").submit(function (event) {
+	                event.preventDefault();
+	                var url = "http://localhost:9090/PetClinic/"; */
+	        console.log("Button clicked ");
+	      	var apptObj = {
+	                	apptId: 31,
+	                	vet: {"userId":2,
+	                		"username":"burgers4me",
+	                		"firstName":"Jessica",
+	                		"lastName":"Adams",
+	                		"phone":"718-900-8790",
+	                		"email":"jadams@gmail.com",
+	                		"userRole":{"userRoleId":1,"userRole":"Vet"}
+	                		},
+	                	pet: {"petId":1, 
+	                		"petName":"Mr. Jenkins", 
+	                		"owner":{"userId":3,"username":"pusheen","firstName":"Alex","lastName":"Franks","phone":"917-225-6789","email":"afranks@gmail.com","userRole":{"userRoleId":2,"userRole":"Owner"}},
+	                		"petType":{"petTypeId":2,"petTypeName":"chicken"}
+	                		},
+	                	description: $("#description").val(),
+	                	placedDate: "1-12-2017",
+	                    apptDate: $("#date").val(),
+	  				    prescription: "none yet"
+	       };
+	                /* console.log(appt); */
+	                
+	         $.ajax({
+	                    type: "POST",
+	                    dataType: "json",
+	            		contentType: "application/json; charset=utf-8",
+	                     url: "http://localhost:9090/PetClinic/add",
+	           			 data: JSON.stringify(apptObj)
+	       	});
+	       	console.log("Added : )");
+	});
+	
+	$(document).ready(function(){
+       //alert("annimation done");
+       console.log("Hello. works")
        $.ajax({
-                    type: "POST",
-                    dataType: 'json',
-            		contentType: 'application/json; charset=utf-8',
-/*                     contentType:"application/json",
-                    url: url + "login",
-                    cache: false,
-                    dataType: "json",
-                    data: JSON.stringify(appt),
-                    success: function (response) {
-                        console.log(response.errors);
-                        console.log("Success!")
-                    },
-                    error: function (error) {
-                        console.log(error);
-                        console.log("Failed!");
-                    } */
-                     url: "http://localhost:9090/PetClinic/add",
-           			 data: JSON.stringify(apptObj)
-                    
-       	});
-       	console.log("Added : )");
-});
-</script>
-
-
-<html>
+           type:"GET",
+            url:"/PetClinic/3/completedAppts",
+            success:function(resp){
+            console.log(resp[0].id);
+                for ( var appt in resp) {
+                    $("#completed").append("<tr><td>"+
+                    resp[appt].apptId+
+                    "</td><td>"+
+                    resp[appt].apptDate+
+                    "</td><td>"+
+                    resp[appt].pet.petName+
+                    "</td><td>"+
+                    resp[appt].vet.firstName+
+                    "</td><td>"+
+                    resp[appt].description+
+                    "</td><td>"+
+                    resp[appt].prescription+
+                    "</td><td>"+
+                    resp[appt].description+
+                    "</td></tr>")
+                }
+                
+            }   
+       })
+   });
+	</script>
+</html>

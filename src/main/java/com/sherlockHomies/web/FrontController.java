@@ -2,7 +2,8 @@ package com.sherlockHomies.web;
 
 import java.util.List;
 
-import javax.validation.Valid;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,12 +13,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sherlockHomies.beans.Appointment;
 import com.sherlockHomies.beans.User;
-
-import oracle.jdbc.driver.Message;
 
 @Controller
 public class FrontController {
@@ -101,8 +103,19 @@ public class FrontController {
         return new ResponseEntity<User>(businessDelegate.findUser(username),HttpStatus.OK);
     }
     
+    /**
+     * Add a new appointment when given an appointment object newAppt
+     */
     @RequestMapping(value = "/add" , method = RequestMethod.POST)
     public void add(@RequestBody Appointment newAppt) {
     	System.out.println("New appointment: " + newAppt.toString());
+    }
+    
+    @RequestMapping(value = "/validate", method = RequestMethod.POST)
+    public ResponseEntity<User> validate(@RequestParam String username, HttpServletResponse response) throws JsonProcessingException{
+    	System.out.println("Before user obj created");
+        User user = businessDelegate.findUser(username);
+        //response.addCookie(new Cookie("user",new ObjectMapper().writeValueAsString(user)));
+        return new ResponseEntity<User>(user,HttpStatus.OK);
     }
 }

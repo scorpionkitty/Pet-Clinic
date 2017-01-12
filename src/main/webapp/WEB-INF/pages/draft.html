@@ -4,6 +4,16 @@
 <head>
    <title>Pet Clinic | A Portal for Vets and Pet Owners</title>
    
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
 
    <!--Need for styled text fields-->
    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css">
@@ -26,38 +36,57 @@
 
 </head>
 <body>
-    <table id="tabs">
+    <!-- <table id="tabs" class="table table-hover">
         <tr>
             <th>Id</th>
             <th>Username</th>
             <th>Firstname</th>
         </tr>
-    </table>
+    </table> -->
     
-    <table id="completed">
+    <!-- <table id="completed">
         <tr>
             <th>Id</th>
             <th>date</th>
             <th>description</th>
         </tr>
-    </table>
+    </table> -->
+    
+<!--     <h1>Get Completed Appointments</h1> -->
+	<input type="text" class="form-control" id="ownerId" placeholder="Trainee ID">
+	<button id="button2" type="submit" class="btn btn-primary">Find</button>
+	<h1 id="title1" style="display:none">Completed Appointments</h1>
+	<table id="table2" class="table table-hover" hidden="true" >
+		<tr>
+			<th>ID</th>
+            <th>Date</th>
+            <th>Pet</th>
+            <th>Vet</th>
+            <th>Issue</th>
+            <th>Prescription</th>
+            <th>Rating</th>
+		</tr>
+	</table>
+	
+<!-- 	<h1>Get Future Appointments</h1>
+	<input type="text" class="form-control" id="ownerId2" placeholder="Trainee ID">
+	<button id="button5" type="submit" class="btn btn-primary">Find</button> -->
+	<h1 id="title2" style="display:none">Upcoming Appointments</h1>
+	<table id="table5" class="table table-hover" hidden="true">
+		<tr>
+			<th>ID</th>
+            <th>Date</th>
+            <th>Pet</th>
+            <th>Vet</th>
+            <th>Issue</th>
+            <th>Prescription</th>
+            <th>Rating</th>
+		</tr>
+	</table>
+	
 </body>
 <script>
-/*     $("#tables").ready(function () {
-       var json = [{"User_Name":"John Doe","score":"10","team":"1"},{"User_Name":"Jane Smith","score":"15","team":"2"},{"User_Name":"Chuck Berry","score":"12","team":"2"}];
-       var json2 =[{"userId":1,"username":"123unicorn","firstName":"Tim","lastName":"Miller","phone":"718-445-4444","email":"tmiller@vet.com","userRole":{"userRoleId":1,"userRole":"Vet"}},{"userId":2,"username":"burgers4me","firstName":"Jessica","lastName":"Adams","phone":"718-900-8790","email":"jadams@gmail.com","userRole":{"userRoleId":1,"userRole":"Vet"}},{"userId":3,"username":"pusheen","firstName":"Alex","lastName":"Franks","phone":"917-225-6789","email":"afranks@gmail.com","userRole":{"userRoleId":2,"userRole":"Owner"}},{"userId":4,"username":"witcher","firstName":"Liz","lastName":"Torres","phone":"347-789-0098","email":"ltorres@gmail.com","userRole":{"userRoleId":2,"userRole":"Owner"}}];
-       var tr;
-       for (var i = 0; i < json2.length; i++) {
-           tr = $('<tr/>');
-           tr.append("<td>" + json2[i].userId + "</td>");
-           tr.append("<td>" + json2[i].username + "</td>");
-           tr.append("<td>" + json2[i].firstName + "</td>");
-           $('#tables').append(tr);
-       }
-   }); */
-   
-   $(document).ready(function(){
-       //alert("annimation done");
+   /* $(document).ready(function(){
        console.log("Hello. works")
        $.ajax({
            type:"GET",
@@ -66,13 +95,9 @@
             console.log(resp[0].id);
                 for ( var vet in resp) {
                     $("#tabs").append("<tr><td>"+resp[vet].userId+"</td><td>"+resp[vet].username+"</td><td>"+resp[vet].firstName+"</td></tr>")
-                }
-                
-            }
-       
-       })
-       
-       
+                }               
+            }      
+       })            
    });
    
    $(document).ready(function(){
@@ -85,28 +110,70 @@
             console.log(resp[0].id);
                 for ( var appt in resp) {
                     $("#upcoming").append("<tr><td>"+resp[appt].apptId+"</td><td>"+resp[appt].apptDate+"</td><td>"+resp[appt].description+"</td></tr>")
-                }
-                
-            }
-       
+                }              
+            }    
        })
-   });
+   }); */
    
-   $(document).ready(function(){
-       //alert("annimation done");
-       console.log("Hello. works")
-       $.ajax({
-           type:"GET",
-            url:"/PetClinic/3/completedAppts",
-            success:function(resp){
-            console.log(resp[0].id);
-                for ( var appt in resp) {
-                    $("#completed").append("<tr><td>"+resp[appt].apptId+"</td><td>"+resp[appt].apptDate+"</td><td>"+resp[appt].description+"</td></tr>")
-                }
-                
-            }   
-       })
-   });
+/*    $("#button2").click(function(){
+   		$("#title1").toggle();
+   	}); */
+   
+   $("#button2").click(
+			function() {
+				$("#title1").toggle();
+				$("#table2").attr("hidden",false)
+				var owner_id = $("#ownerId").val();
+				alert(owner_id)
+				$.ajax({
+					type : "GET",
+					url : "http://localhost:9090/PetClinic/" + owner_id
+							+ "\/completedAppts",
+					success : function(resp) {
+						for ( var appt in resp) {
+							console.log(resp[0].apptId)
+							//$("#table2 tbody > tr").remove();
+							$("#table2").append(
+									"<tr><td>" + resp[appt].apptId
+									+ "</td><td>"+ resp[appt].apptDate
+									+ "</td><td>"+ resp[appt].pet.petName
+									+ "</td><td>"+ resp[appt].vet.firstName
+									+ "</td><td>"+ resp[appt].description
+									+ "</td><td>"+ resp[appt].prescription
+									+ "</td><td>"+ resp[appt].description
+									+ "</td></tr>")
+						}
+					}
+				})
+			});
+			
+	$("#button2").click(
+			function() {
+				$("#title2").toggle();
+				$("#table5").attr("hidden",false)
+				var owner_id = $("#ownerId").val();
+				alert(owner_id)
+				$.ajax({
+					type : "GET",
+					url : "http://localhost:9090/PetClinic/" + owner_id
+							+ "\/upcomingAppts",
+					success : function(resp) {
+						for ( var appt in resp) {
+							console.log(resp[0].apptId)
+							//$("#table2 tbody > tr").remove();
+							$("#table5").append(
+									"<tr><td>" + resp[appt].apptId
+									+ "</td><td>"+ resp[appt].apptDate
+									+ "</td><td>"+ resp[appt].pet.petName
+									+ "</td><td>"+ resp[appt].vet.firstName
+									+ "</td><td>"+ resp[appt].description
+									+ "</td><td>"+ resp[appt].prescription
+									+ "</td><td>"+ resp[appt].description
+									+ "</td></tr>")
+						}
+					}
+				})
+			});
    
    
    </script>
