@@ -47,7 +47,7 @@ public class DAOTest {
 	@Ignore
 	@Test
 	public void testUserGetByRole(){
-		List<User> users=ctxt.getBean(UserDAO.class).getUserByRole("Vet");
+		List<User> users=ctxt.getBean(UserDAO.class).getUsersByRole("Vet");
 		System.out.println(users);
 	}
 	

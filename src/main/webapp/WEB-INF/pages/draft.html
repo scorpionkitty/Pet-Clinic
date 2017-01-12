@@ -1,112 +1,97 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Pet Clinic</title>
-<style type="text/css">
-div {
-	display: block;
-}
+   <title>Pet Clinic | A Portal for Vets and Pet Owners</title>
+   
 
-#wrapper {
-	width: 400px;
-	height: 400px;
-}
+   <!--Need for styled text fields-->
+   <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css">
+   <!--Need for styled calendar-->
+   <link rel="stylesheet" href="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2708/bootstrap-datetimepicker.min.css">
+   <!--Need for NavBar-->
+   <!--Need for calendar to popup-->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <!--Need for time to popup within calendar-->
+   <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+   <!--Need for calendar to be clickable-->
+   <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2708/bootstrap-datetimepicker.min.js"></script>
+   <!--Need for Font Awesome -->
+   <script src="https://use.fontawesome.com/1b8f96a0db.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+   <!--jQuery-->
+   <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+   
+   
 
-#first {
-	float: left;
-	width: 33%;
-	height: 100%;
-}
-
-#second {
-	float: left;
-	width: 67%;
-	height: 30%;
-}
-
-#third {
-	float: left;
-	width: 67%;
-	height: 70%;
-}
-</style>
 </head>
 <body>
-	<h1 align="center">Welcome to Pet Clinic</h1>
-	<div id="pets" align="left">
-		<div id="dropdown">Select Your Pet</div>
-		<select>
-			<option>Mittens</option>
-			<option>Spot</option>
-			<option>Sir Paws</option>
-			<option>Scooby</option>
-
-
-		</select>
-	</div>
-	<div id="appointments" align="left">
-		<h3>Upcoming appointments</h3>
-		<table border=1>
-			<tr>
-				<th>Pet Name</th>
-				<th>Issue</th>
-				<th>Vet Name</th>
-				<th>Appointment Time</th>
-				<th>Cancel</th>
-			</tr>
-			<tr>
-				<td>Mittens</td>
-				<td>Injured Paw</td>
-				<td>Dr. Acula</td>
-				<td>January 10th 2017 10:00 AM</td>
-				<td>
-					<button type="button">X</button>
-				</td>
-			</tr>
-			<tr>
-				<td>Spot</td>
-				<td>Stomach Bug</td>
-				<td>Dr. Acula</td>
-				<td>January 10th 2017 11:00 AM</td>
-				<td>
-					<button type="button">X</button>
-				</td>
-
-			</tr>
-			<tr>
-				<td>Sir Paws</td>
-				<td>Routine Checkup</td>
-				<td>Dr. Dre</td>
-				<td>January 11th 2017 10:00 AM</td>
-				<td>
-					<button type="button">X</button>
-				</td>
-			</tr>
-		</table>
-	</div>
-	<div id="vets" align="right">
-		<table border=1>
-			<h3>There are Vets in Your Area</h3>
-			<th>
-			<tr>Doctor
-			</tr>
-			<tr>Picture
-			</tr>
-			</th>
-			<tr>
-				<td>Dr. Dre</td>
-				<td><img
-					src="http://cache.umusic.com/_images/facebook/drdre/og-dre.jpg"
-					style="width: 100px; height: 100px" /></td>
-			</tr>
-			<tr>
-				<td>Dr. Pepper</td>
-				<td><img
-					src="http://s7d1.scene7.com/is/image/officedepot/207807_p?$OD-Dynamic$&wid=450&hei=450"
-					style="width: 100px; height: 100px" /></td>
-			</tr>
-		</table>
-	</div>
+    <table id="tabs">
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Firstname</th>
+        </tr>
+    </table>
+    
+    <table id="tabs2">
+        <tr>
+            <th>Id</th>
+            <th>date</th>
+            <th>description</th>
+        </tr>
+    </table>
 </body>
+<script>
+/*     $("#tables").ready(function () {
+       var json = [{"User_Name":"John Doe","score":"10","team":"1"},{"User_Name":"Jane Smith","score":"15","team":"2"},{"User_Name":"Chuck Berry","score":"12","team":"2"}];
+       var json2 =[{"userId":1,"username":"123unicorn","firstName":"Tim","lastName":"Miller","phone":"718-445-4444","email":"tmiller@vet.com","userRole":{"userRoleId":1,"userRole":"Vet"}},{"userId":2,"username":"burgers4me","firstName":"Jessica","lastName":"Adams","phone":"718-900-8790","email":"jadams@gmail.com","userRole":{"userRoleId":1,"userRole":"Vet"}},{"userId":3,"username":"pusheen","firstName":"Alex","lastName":"Franks","phone":"917-225-6789","email":"afranks@gmail.com","userRole":{"userRoleId":2,"userRole":"Owner"}},{"userId":4,"username":"witcher","firstName":"Liz","lastName":"Torres","phone":"347-789-0098","email":"ltorres@gmail.com","userRole":{"userRoleId":2,"userRole":"Owner"}}];
+       var tr;
+       for (var i = 0; i < json2.length; i++) {
+           tr = $('<tr/>');
+           tr.append("<td>" + json2[i].userId + "</td>");
+           tr.append("<td>" + json2[i].username + "</td>");
+           tr.append("<td>" + json2[i].firstName + "</td>");
+           $('#tables').append(tr);
+       }
+   }); */
+   
+   $(document).ready(function(){
+       //alert("annimation done");
+       console.log("Hello. works")
+       $.ajax({
+           type:"GET",
+            url:"/PetClinic/vets",
+            success:function(resp){
+            console.log(resp[0].id);
+                for ( var vet in resp) {
+                    $("#tabs").append("<tr><td>"+resp[vet].userId+"</td><td>"+resp[vet].username+"</td><td>"+resp[vet].firstName+"</td></tr>")
+                }
+                
+            }
+       
+       })
+       
+       
+   });
+   
+   $(document).ready(function(){
+       //alert("annimation done");
+       console.log("Hello. works")
+       $.ajax({
+           type:"GET",
+            url:"/PetClinic/completedAppts/1",
+            success:function(resp){
+            console.log(resp[0].id);
+                for ( var appt in resp) {
+                    $("#tabs2").append("<tr><td>"+resp[appt].apptId+"</td><td>"+resp[appt].apptDate+"</td><td>"+resp[appt].description+"</td></tr>")
+                }
+                
+            }
+       
+       })
+       
+       
+   });
+   </script>
 </html>

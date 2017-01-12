@@ -1,10 +1,10 @@
 package com.sherlockHomies.orm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,34 +29,34 @@ public class UserDAO {
 	
 	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
 	public List<User> getAll(){
-		return sessionFactory.getCurrentSession().createCriteria(User.class).list();
+		//return sessionFactory.getCurrentSession().createCriteria(User.class).list();
+		return new ArrayList<User>(sessionFactory.getCurrentSession().createCriteria(User.class).list());
 	}
 	
 	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
-	public User getById(int id){ //this
-/*		User result = (User) sessionFactory.getCurrentSession().get(User.class, id);
-		if(result == null){
-			System.out.println("UserId not found");
-			return null;
-		}
-		System.out.println("Before returning in UserDAO");
-		return result;*/
-		Session session  = sessionFactory.getCurrentSession();
+	public User getById(int id){
+/*		Session session  = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(User.class);
 		criteria.add(Restrictions.idEq(id));
-		return (User)criteria.uniqueResult();
+		return (User)criteria.uniqueResult();*/ //TODO delete if still works
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.idEq(id));
+		return (User) criteria.uniqueResult();
 	}
 	
+	//TODO Fix this
 	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
-	public List<User> getUserByRole(String role){
+	public List<User> getUsersByRole(String role){
 		String HQL = "select U FROM User U JOIN U.userRole UR WHERE UR.userRole= :r";
 		Query query = sessionFactory.getCurrentSession().createQuery(HQL);
 		query.setString("r", role);
 		return query.list();
 	}
 
+	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
 	public User getByUsername(String username) {
-		return (User) sessionFactory.getCurrentSession().get(User.class, username); //TODO works?
+		//return (User) sessionFactory.getCurrentSession().get(User.class, username); //TODO works?
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.eq("username", username));
+		return (User) criteria.uniqueResult();
 	}
 	
 	

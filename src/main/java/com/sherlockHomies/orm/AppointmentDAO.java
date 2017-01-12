@@ -111,4 +111,20 @@ public class AppointmentDAO {
 		query.setString("n", vetname);
 		return query.list();
 	}
+	
+	//Deletes an appointment of a particular user
+/*	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public void deleteApptFromOwner(User user, Appointment appt){
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Appointment.class)
+				.add(Restrictions.eq("user", user)).add(Restrictions.eq("appt", appt));
+		Appointment apptToDelete = (Appointment) criteria.uniqueResult();
+		sessionFactory.getCurrentSession().delete(apptToDelete);
+	}*/
+	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
+	public void deleteAppt(Appointment appt){
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Appointment.class)
+				.add(Restrictions.eq("apptId", appt));
+		Appointment apptToDelete = (Appointment) criteria.uniqueResult();
+		sessionFactory.getCurrentSession().delete(apptToDelete);
+	}
 }

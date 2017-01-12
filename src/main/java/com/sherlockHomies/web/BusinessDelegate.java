@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
+import com.sherlockHomies.beans.Appointment;
 import com.sherlockHomies.beans.User;
 import com.sherlockHomies.orm.Facade;
 
@@ -20,20 +21,11 @@ public class BusinessDelegate implements ApplicationContextAware{
 	public void setApplicationContext(ApplicationContext context) throws BeansException {
 		this.context = context;
 	}
-
-	//returns if the owner is a vet or not
-	public boolean isVet(User user){
-		if(facade.userRole(user) == "Vet")
-			return true;
-		else return false;
-	}
 	
-	public List<User> getAllVets() {
-		List<User> vets = context.getBean(Facade.class).getUserByRole("Vet");
-		return vets;
-	}
-
-	
+	/////////// USER ///////////
+	/**
+	 * Returns a user when given a username, if username is found
+	 */
 	public User findUser(String username) {
 		User user = facade.getUser(username);
 		if(user == null){
@@ -42,26 +34,50 @@ public class BusinessDelegate implements ApplicationContextAware{
 		}
 		return user;
 	}
+	
+	/**
+	 * Returns a user when given userId
+	 */
+	public User getUserById(int id) {
+		return context.getBean(Facade.class).getUser(id);
+	}
+	
+	/**
+	 * Returns if the owner is a vet or not when given a user
+	 */
+	public boolean isVet(User user){
+		if(facade.userRole(user) == "Vet")
+			return true;
+		else return false;
+	}
+	
+	//TODO deleted List<User> vets = context.getBean(Facade.class).getUserByRole("Vet");
+	public List<User> getAllVets() { //TODO Dont need
+		return context.getBean(Facade.class).getUsersByRole("Vet");
+	}
 
-	public void insertAppt(int userId, int vetId, int petId, String description, String apptDate, String cardNumber){
+	//////////////// Appointment ////////////////////
+	
+	/**
+	 * Inserts an appointment when given a user Id, vet Id, pet Id, description, appt date, and card number
+	 */
+	public void insertAppt(int userId, int vetId, int petId, String description, String apptDate, 
+			String cardNumber){
 		facade.createAndInsertAppt(userId, vetId, petId, description, apptDate, cardNumber);
 	}
 
-	//returns a User object when given userId
-	public User getUserById(int id) {
-		User user = context.getBean(Facade.class).getUser(id);
-		if(user == null){
-			System.out.println("User not found");
-			return null;
-		}
-		return user;
+/*	public List<User> getVetsOfASpecialty(String petType) { TODO
+		facade.
+	}*/
+
+	public User getUserByUsername(String username) {
+		return facade.getUser(username);
 	}
 	
-/*	public User getVetById(int id) {
-		User user = context.getBean(Facade.class).getUser(id);
-		if(user.getUserRole().getUserRole().equalsIgnoreCase("vet")){
-			return user;
-		}else
-			return null;
+	/*public List<Appointment> getApptById(int apptId){
+		List<Appointment> listAppt;
+		return listAppt.add(context.getBean(Facade.class).getAppointmentById(apptId));
 	}*/
+
+	
 }
