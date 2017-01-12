@@ -366,52 +366,9 @@
             </div>
         </div>
     </div>
-    
-    <!-- start of David's part -->
-<!--     <div id="newFormApplication" style="display:none">
-        START OF NEW APPOINTMENT PANEL
-        <div class="modal-body" style="margin: 0 auto; width:30%">
-            <div id="datetimepicker1" class="input-append date">
-                <label for= "time" class="cols-sm-2 control-label">
-                    Date and Time   <i class="fa fa-clock-o" aria-hidden="true"></i>
-                </label>
-                <input data-format="MM/dd/yyyy hh:00" type="text" placeholder="Select a date & time" style="width:70%"></input><span class="add-on"><i data-time-icon="icon-time" data-date-icon="icon-calendar"></i></span> 
-            </div>
-            Name Field
-            <div class="form-group">
-                <label for="name" class="cols-sm-2 control-label"> Name <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span> </label>
-                <div class="cols-sm-10">
-                    <div class="input-group">
-                        <input type="text" style="width:300px" class="form-control" name="name" id="name" placeholder="Enter your Name" /> 
-                    </div>
-                </div>
-            </div>
-            Credit Card Field
-            <div class="form-group">
-                <label for="creditCard" class="cols-sm-2 control-label"> Credit Card <span class="input-group-addon"><i         class="fa fa-credit-card" aria-hidden="true"></i></span> 
-                </label>
-                <div class="cols-sm-10">
-                    <div class="input-group">
-                        <input type="number" style="width: 40px; height: 5px" class="form-control" name="password" id="creditCard" placeholder="Enter your Credit Card Number" style="padding-right:10px" /> 
-                    </div>
-                </div>
-            </div>
-            Description Field
-            <div class="form-group">
-                <label for="description" class="cols-sm-2 control-label"> Description <span class="input-group-addon"><i class="fa fa-comment" aria-hidden="true"></i></span> </label>
-                <div class="cols-sm-10">
-                    <div class="input-group">
-                        <input type="text" style="width:300px" class="form-control" name="desciption" id="description" placeholder="Reason for appointment? (optional)" /> </div>
-                </div>
-            </div>
-            Submit Button
-            <div class="form-group ">
-                <input type="Submit" class="btn btn-primary btn-lg login-button" style="width:82%">
-            </div>
-        </div>
-    </div> --> <!-- end of David's part -->
+   
     <!-- start of my part -->
-    <form id ="newAppt">
+<!--     <form id ="newAppt">
            <div class="input-container">
                 <input type="date" id="date" name="date" required="required"/>
                 <label for="date">Date of Appt</label>
@@ -430,7 +387,24 @@
             <div class="button-container">
                 <button type="submit" form="newAppt"><span>Submit New Appointment</span></button>
 			</div>
-    </form>
+    </form> -->
+    <div id="addItem">
+	    <h5>Add Appointment</h5>
+	    <!-- Quantity <input id="quantity" type="text"><br>
+	    Title <input id="title" type="text"><br>
+	    Description<input id="description" type="text"><br>
+	
+	    These are fields for shopify
+	
+	    Company:<input id="company" type="text" name="Company"><br>
+	    Type:<input id="type" type="text" name="Product Type"><br>
+	    tags:<input id="tag" type="text" name="tags"><br>
+	    <input id="addSubmit" type="submit" value="Add"> -->
+	    Appointment Date <input id="apptDate" type="text"><br>
+	    Description <input id="description" type="text"><br>
+		<input id="addAppt" type="submit" value="Add">
+
+	</div>
     <!-- end of my part -->
     
     
@@ -583,19 +557,36 @@ $('#star-rating').rating(); // Call the rating plugin
 
 <!-- Karina -->
 <script>
-    $(document).ready(function () {
-            $("#newAppt").submit(function (event) {
+    $(#addAppt).click(function () {
+/*             $("#newAppt").submit(function (event) {
                 event.preventDefault();
-                var url = "http://localhost:9090/PetClinic/";
-                var appt = {
-                    date: $("#date").val(),
-                    card: $("#card").val(),
-                    description: $("#description").val()
-                };
-                console.log(appt);
-                $.ajax({
+                var url = "http://localhost:9090/PetClinic/"; */
+      	var apptObj = {
+                	id: 30,
+                	vet: {"userId":2,
+                		"username":"burgers4me",
+                		"firstName":"Jessica",
+                		"lastName":"Adams",
+                		"phone":"718-900-8790",
+                		"email":"jadams@gmail.com",
+                		"userRole":{"userRoleId":1,"userRole":"Vet"}
+                		},
+                	pet: {"petId":1, 
+                		"petName":"Mr. Jenkins", 
+                		"owner":{"userId":3,"username":"pusheen","firstName":"Alex","lastName":"Franks","phone":"917-225-6789","email":"afranks@gmail.com","userRole":{"userRoleId":2,"userRole":"Owner"}},
+                		"petType":{"petTypeId":2,"petTypeName":"chicken"}
+                		},
+                	description: $("#description").val(),
+                	placedDate: "1-12-2017",
+                    apptDate: $("#date").val(),
+  /*                   prescription: */
+       };
+                /* console.log(appt); */
+       $.ajax({
                     type: "POST",
-                    contentType:"application/json",
+                    dataType: 'json',
+            		contentType: 'application/json; charset=utf-8',
+/*                     contentType:"application/json",
                     url: url + "login",
                     cache: false,
                     dataType: "json",
@@ -607,11 +598,13 @@ $('#star-rating').rating(); // Call the rating plugin
                     error: function (error) {
                         console.log(error);
                         console.log("Failed!");
-                    }
-                })
-            });
-        }
-    )
+                    } */
+                     url: "http://localhost:9090/PetClinic/add",
+           			 data: JSON.stringify(apptObj)
+                    
+       	});
+       	console.log("Added : )");
+});
 </script>
 
 

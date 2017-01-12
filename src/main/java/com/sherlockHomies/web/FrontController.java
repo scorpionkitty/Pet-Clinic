@@ -2,17 +2,22 @@ package com.sherlockHomies.web;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sherlockHomies.beans.Appointment;
 import com.sherlockHomies.beans.User;
+
+import oracle.jdbc.driver.Message;
 
 @Controller
 public class FrontController {
@@ -94,5 +99,10 @@ public class FrontController {
     @RequestMapping(value="/username/{param}", method=RequestMethod.GET, produces="application/json")
     public ResponseEntity<User> getUserByUsername(@PathVariable(value="param") String username) {
         return new ResponseEntity<User>(businessDelegate.findUser(username),HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/add" , method = RequestMethod.POST)
+    public void add(@RequestBody Appointment newAppt) {
+    	System.out.println("New appointment: " + newAppt.toString());
     }
 }
