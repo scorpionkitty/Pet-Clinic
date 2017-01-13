@@ -141,16 +141,6 @@ public class FrontController {
         System.out.println(petId);
         System.out.println(description);
         System.out.println(apptDate);
-        
-/*    	System.out.println(newAppt.getPet().getOwner().getUserId());
-    	System.out.println(newAppt.getVet().getUserId());
-    	System.out.println(newAppt.getPet().getPetId());
-    	System.out.println(newAppt.getDescription());
-    	System.out.println(newAppt.getApptDate().toString());*/
-    	//businessDelegate.insertAppt(userId, vetId, petId, description, apptDate, cardNumber);
-/*    	businessDelegate.insertAppt(newAppt.getPet().getOwner().getUserId(), newAppt.getVet().getUserId(), 
-    			newAppt.getPet().getPetId(), newAppt.getDescription(), newAppt.getApptDate());*/
-    	//businessDelegate.getOwnerByPetId(newAppt.)
     	businessDelegate.insertAppt(ownerId, vetId, petId, description, apptDate);
     }
     

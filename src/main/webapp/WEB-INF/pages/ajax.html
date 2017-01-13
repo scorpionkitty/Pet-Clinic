@@ -123,7 +123,7 @@
 		
 		<br/><br/>
 
-		<button onClick="logout()" value="Logout">Refresh</button>
+		<button onClick="logout()" value="Logout" id="bod">Refresh</button>
 	
 </div>
 </body>
@@ -345,7 +345,7 @@
 </script>
 <script>
 function logout(){
-	location = location;
+/* 	location = location; */
 	//TODO Nothing really works except location=location which is a short refresh than everything else
 	
 /* 	$.ajax ({
@@ -357,6 +357,7 @@ function logout(){
 		}
 	}); */
 	//$('#bod').load('ajax.html');
+	$("#bod").load('ajax.html');
 }
 //refresh();
 </script>

@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <html>
-
 <head>
     <title>Pet Clinic | A Portal for Vets and Pet Owners</title>
     <!-- Latest compiled and minified CSS -->
@@ -126,120 +125,109 @@
         }
     </style>
 </head>
-
 <body>
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="container">
-                <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-                <ul class="nav">
-                    <li class="active"> <a class="brand" href="#">Pet Clinic</a> </li>
-                    <!-- <li><a href="#">Mr.Jenkins</a></li>
+    <div id="bod">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container">
+                    <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+                    <ul class="nav">
+                        <li class="active"> <a class="brand" href="#">Pet Clinic</a> </li>
+                        <!-- <li><a href="#">Mr.Jenkins</a></li>
                     <li><a href="#">Cucumber</a></li> -->
-                    <li>
-                        <a href="#"></a>
-                    </li>
-                </ul>
+                        <li>
+                            <a href="#"></a>
+                        </li>
+                    </ul> 
+                    <ul class="nav navbar-nav navbar-right">
+             			 <li role="presentation">
+		    				<!-- <button type="submit" class="btn btn-primary" style="margin-top: 8px; margin-right:8px" value="Logout">
+		              			Log off
+		              		</button> -->
+		              		<button onClick="logout()" class="btn btn-primary" style="margin-top: 8px; margin-right:8px" value="Logout">Refresh</button>
+              			</li> 
+            		</ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="login" id="login">
-        <h2 class="login-header">Welcome to Pet Clinic</h2>
-        <div class="login-container">
-            <p>
-                <input type="text" id="ownerId" placeholder="Enter your ID">
-            </p>
-            <p>
-                <input id="button2" type="submit" value="Find your appointments">
-            </p>
+        <div class="login" id="login">
+            <h2 class="login-header">Welcome to Pet Clinic</h2>
+            <div class="login-container">
+                <p>
+                    <input type="text" id="ownerId" placeholder="Enter your ID"> </p>
+                <p>
+                    <input id="button2" type="submit" value="Find your appointments"> </p>
+            </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="panel-group" id="accordion">
-            <!-- First Panel -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title" data-toggle="collapse" data-target="#collapseOne">
+        <div class="container" id="container" hidden="true">
+            <!-- <button onClick="logout()" value="Logout">Refresh</button> -->
+            <div class="panel-group" id="accordion">
+                <!-- First Panel -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title" data-toggle="collapse" data-target="#collapseOne">
                  	Completed Appointments
              	</h4> </div>
-                <div id="collapseOne" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <h1 id="title1" style="display:none">Completed Appointments</h1>
-                        <table id="table2" class="table table-hover" hidden="true">
-                            <tr>
-                                <th>ID</th>
-                                <th>Date</th>
-                                <th>Pet</th>
-                                <th>Vet</th>
-                                <th>Issue</th>
-                                <th>Prescription</th>
-                                <th>Rating</th>
-                            </tr>
-                        </table>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <h1 id="title1" style="display:none">Completed Appointments</h1>
+                            <table id="table2" class="table table-hover" hidden="true">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date</th>
+                                    <th>Pet</th>
+                                    <th>Vet</th>
+                                    <th>Issue</th>
+                                    <th>Prescription</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title" data-toggle="collapse" data-target="#collapseThree">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title" data-toggle="collapse" data-target="#collapseThree">
                  	Upcoming Appointments
              	</h4> </div>
-                <div id="collapseThree" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        <h1 id="title2" style="display:none">Upcoming Appointments</h1>
-                        <table id="table5" class="table table-hover" hidden="true">
-                            <tr>
-                                <th>ID</th>
-                                <th>Date</th>
-                                <th>Pet</th>
-                                <th>Vet</th>
-                                <th>Issue</th>
-                                <th>Prescription</th>
-                                <th>Rating</th>
-                            </tr>
-                        </table>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <h1 id="title2" style="display:none">Upcoming Appointments</h1>
+                            <table id="table5" class="table table-hover" hidden="true">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Date</th>
+                                    <th>Pet</th>
+                                    <th>Vet</th>
+                                    <th>Issue</th>
+                                    <th>Prescription</th>
+                                    <th>Rating</th>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div id="addItem">
+                <h5>Add Appointment</h5> Select vet
+                <br>
+                <select class="form-control" id="table1"> </select>
+                <br>Select pet
+                <br>
+                <select class="form-control" id="table9"> </select>
+                <br>Appointment Date
+                <input id="date" type="text">
+                <br> Description
+                <input id="description" type="text">
+                <br>
+                <input id="addAppt" type="submit" value="Add" onClick="logout()"> </div>
         </div>
-        <div id="addItem">
-            <h5>Add Appointment</h5> 
-            Select vet<br>
-            <select class="form-control" id="table1">
-			</select>
-			
-			<br>Select pet<br>
-			<select class="form-control" id="table9">
-			</select>
-			
-            <br>Appointment Date
-            <input id="date" type="text">
-            <br> Description
-            <input id="description" type="text">
-            <br>
-            <input id="addAppt" type="submit" value="Add"> 
-        </div>
-            
-            
-            
-<!--             
-       <h3>Get Pet By UserId</h3>
-		<input type="text" class="form-control" id="ownerId3"
-			placeholder="Put Owner ID">
-		<button id="button7" type="submit" class="btn btn-primary">Get Pets</button>
-		<table id="table7" hidden="true">
-			<tr>
-				<th>Pet ID</th>
-				<th>Pet Name</th>
-				<th>Pet Type</th>
-			</tr>
-		</table> -->
-            
     </div>
 </body>
 <script>
     $('#button2').click(function () {
         $('#login').toggle();
+        $("#container").attr("hidden", false)
     });
     $("#button2").click(function () {
         $("#title1").toggle();
@@ -271,49 +259,33 @@
             }
         })
     });
-    
-    $("#button2").click(
-			function() {
-/* 				$("#button1").attr("disabled", true) */
-/* 				$("#table1").attr("hidden",false) */
-				$.ajax({
-					type : "GET",
-					url : "http://localhost:9090/PetClinic/vets",
-					success : function(resp) {
-						console.log(resp[0]);
-						for ( var vet in resp) {
-							$("#table1").append(
-								/* 	"<option>" + resp[vet].username + "</option>") */
-								"<option value=\"" + resp[vet].userId + "\">" + resp[vet].username + "</option>")
-						}
-					}
-				})
-			});
-	
-	$("#button2").click(
-			function() {
-				$("#table7").attr("hidden",false)
-				var owner_id = $("#ownerId").val();
-				//alert(owner_id)
-				$.ajax({
-					type : "GET",
-					url : "http://localhost:9090/PetClinic/pets/" + owner_id+"",
-					success : function(resp) {
-						for ( var pet in resp) {
-							console.log(resp[0].apptId)
-							//$("#table2 tbody > tr").remove();
-							/* $("#table7").append(
-									"<tr><td>" + resp[pet].petId
-									+ "</td><td>"+ resp[pet].petName
-									+ "</td><td>"+ resp[pet].petType.petTypeName
-									+ "</td></tr>") */
-							$("#table9").append(
-									/* "<option>" + resp[pet].petName + "</option>") */
-									"<option value=\"" + resp[pet].petId + "\">" + resp[pet].petName + "</option>")
-						}
-					}
-				})
-			});
+    $("#button2").click(function () {
+        $.ajax({
+            type: "GET"
+            , url: "http://localhost:9090/PetClinic/vets"
+            , success: function (resp) {
+                console.log(resp[0]);
+                for (var vet in resp) {
+                    $("#table1").append("<option value=\"" + resp[vet].userId + "\">" + resp[vet].username + "</option>")
+                }
+            }
+        })
+    });
+    $("#button2").click(function () {
+        $("#table7").attr("hidden", false)
+        var owner_id = $("#ownerId").val();
+        //alert(owner_id)
+        $.ajax({
+            type: "GET"
+            , url: "http://localhost:9090/PetClinic/pets/" + owner_id + ""
+            , success: function (resp) {
+                for (var pet in resp) {
+                    console.log(resp[0].apptId)
+                    $("#table9").append("<option value=\"" + resp[pet].petId + "\">" + resp[pet].petName + "</option>")
+                }
+            }
+        })
+    });
 </script>
 <script type="text/javascript">
     $(function () {
@@ -338,69 +310,36 @@
     });
 </script>
 <script>
-		
-		
-	    $("#addAppt").click(function () {
-	        console.log("Button clicked ");
-/* 	      	var apptObj = {
-	                	apptId: 33,
-	                	vet: {"userId":2,
-	                		"username":"burgers4me",
-	                		"firstName":"Jessica",
-	                		"lastName":"Adams",
-	                		"phone":"718-900-8790",
-	                		"email":"jadams@gmail.com",
-	                		"userRole":{"userRoleId":1,"userRole":"Vet"}
-	                		},
-	                	pet: {"petId":1, 
-	                		"petName":"Mr. Jenkins", 
-	                		"owner":{"userId":3,"username":"pusheen","firstName":"Alex","lastName":"Franks","phone":"917-225-6789","email":"afranks@gmail.com","userRole":{"userRoleId":2,"userRole":"Owner"}},
-	                		"petType":{"petTypeId":2,"petTypeName":"chicken"}
-	                		},
-	                	description: $("#description").val(),
-	                	placedDate: "1-12-2017",
-	                    apptDate: $("#date").val(),
-	  				    prescription: "none yet"
-	       };        */
-	       	   var apptObj = {
-/* 	                	apptId: 33, */
-/* 	                	vet: {"userId":2,
-	                		"username":"burgers4me",
-	                		"firstName":"Jessica",
-	                		"lastName":"Adams",
-	                		"phone":"718-900-8790",
-	                		"email":"jadams@gmail.com",
-	                		"userRole":{"userRoleId":1,"userRole":"Vet"}
-	                		}, */
-	                	vetId: parseInt($("#table1").val()),
-	                	petId: parseInt($("#table9").val()),
-	                	ownerId: parseInt($("#ownerId").val()),
-	                	description: $("#description").val(),
-/* 	                	placedDate: "1-12-2017", */
-	                    apptDate: $("#date").val()
-	       };  
-	       console.log(apptObj);
-	       
-	       
-	       
-	       
-	            
-	         $.ajax({
-	                    type: "POST",
-	                    dataType: "json",
-	            		contentType: "application/json; charset=utf-8",
-	                     url: "http://localhost:9090/PetClinic/add",
-	           			 data: JSON.stringify(apptObj),
-	           			 success: function (response) {
-                                console.log(response)
-                            },
-                            error: function (response) {
-                                console.log(response);
-                            }
-	           			 
-	       	});
-	       	console.log("Added : )");
-	});
+    $("#addAppt").click(function () {
+        console.log("Button clicked ");
+        var apptObj = {
+            vetId: parseInt($("#table1").val())
+            , petId: parseInt($("#table9").val())
+            , ownerId: parseInt($("#ownerId").val())
+            , description: $("#description").val()
+            , apptDate: $("#date").val()
+        };
+        console.log(apptObj);
+        $.ajax({
+            type: "POST"
+            , dataType: "json"
+            , contentType: "application/json; charset=utf-8"
+            , url: "http://localhost:9090/PetClinic/add"
+            , data: JSON.stringify(apptObj)
+            , success: function (response) {
+                console.log(response)
+            }
+            , error: function (response) {
+                console.log(response);
+            }
+        });
+        console.log("Added : )");
+    });
+</script>
+<script>
+    function logout() {
+        $("#bod").load('draft.html');
+    }
 </script>
 
 </html>
