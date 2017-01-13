@@ -1,10 +1,15 @@
 package com.sherlockHomies.web;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,9 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sherlockHomies.beans.Appointment;
+import com.sherlockHomies.beans.Pet;
 import com.sherlockHomies.beans.User;
+
 
 @Controller
 public class FrontController {
@@ -92,6 +98,12 @@ public class FrontController {
     public ResponseEntity<User> getUser(@PathVariable(value="param") int userId) {
         return new ResponseEntity<User>(businessDelegate.getUserById(userId),HttpStatus.OK);
     }
+	
+	@ResponseBody
+    @RequestMapping(value="/pets/{param}", method=RequestMethod.GET, produces="application/json")
+    public ResponseEntity<List<Pet>> getPets(@PathVariable(value="param") int userId) {
+        return new ResponseEntity<List<Pet>>(businessDelegate.getPetByUserId(userId),HttpStatus.OK);
+    }
     
     /**
      * Returns the JSON of a specific user when given the user's username
@@ -105,18 +117,41 @@ public class FrontController {
     
     /**
      * Add a new appointment when given an appointment object newAppt
+     * @throws JSONException 
+     * @throws ParseException 
      */
     @RequestMapping(value = "/add" , method = RequestMethod.POST, consumes="application/json")
-    public void add(@RequestBody Appointment newAppt) {
+    public void add(@RequestBody String newAppt) throws JSONException, ParseException {
     	System.out.println("New appointment: " + newAppt.toString());
-    	System.out.println(newAppt.getPet().getOwner().getUserId());
+    	JSONObject jsonObject = new JSONObject(newAppt);
+    	int ownerId = jsonObject.getInt("ownerId");
+    	int vetId = jsonObject.getInt("vetId");
+    	int petId = jsonObject.getInt("petId");
+    	String description = jsonObject.getString("description");
+    	
+    	String dateStr = jsonObject.getString("apptDate");
+    	SimpleDateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
+    	Date date = sdf.parse(dateStr);
+    	Timestamp apptDate = new Timestamp(date.getTime());
+/*    	Timestamp apptDate = Timestamp.valueOf("2017-02-02 00:00:00");*/
+    	
+    	
+        System.out.println(ownerId);
+        System.out.println(vetId);
+        System.out.println(petId);
+        System.out.println(description);
+        System.out.println(apptDate);
+        
+/*    	System.out.println(newAppt.getPet().getOwner().getUserId());
     	System.out.println(newAppt.getVet().getUserId());
     	System.out.println(newAppt.getPet().getPetId());
     	System.out.println(newAppt.getDescription());
-    	System.out.println(newAppt.getApptDate().toString());
+    	System.out.println(newAppt.getApptDate().toString());*/
     	//businessDelegate.insertAppt(userId, vetId, petId, description, apptDate, cardNumber);
-    	businessDelegate.insertAppt(newAppt.getPet().getOwner().getUserId(), newAppt.getVet().getUserId(), 
-    			newAppt.getPet().getPetId(), newAppt.getDescription(), newAppt.getApptDate());
+/*    	businessDelegate.insertAppt(newAppt.getPet().getOwner().getUserId(), newAppt.getVet().getUserId(), 
+    			newAppt.getPet().getPetId(), newAppt.getDescription(), newAppt.getApptDate());*/
+    	//businessDelegate.getOwnerByPetId(newAppt.)
+    	businessDelegate.insertAppt(ownerId, vetId, petId, description, apptDate);
     }
     
     @RequestMapping(value = "/validate", method = RequestMethod.POST)

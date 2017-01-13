@@ -205,17 +205,10 @@
         <div id="addItem">
             <h5>Add Appointment</h5> 
             Select vet<br>
-            <button type="button" id="button1">View vets</button>
             <select class="form-control" id="table1">
-<!-- 				  <option value="1">1</option>
-				  <option>2</option>
-				  <option>3</option>
-				  <option>4</option>
-				  <option>5</option> -->
 			</select>
 			
 			<br>Select pet<br>
-			<button type="button" id="button9">View pets</button>
 			<select class="form-control" id="table9">
 			</select>
 			
@@ -224,9 +217,23 @@
             <br> Description
             <input id="description" type="text">
             <br>
-            <input id="addAppt" type="submit" value="Add"> </div>
+            <input id="addAppt" type="submit" value="Add"> 
+        </div>
             
             
+            
+<!--             
+       <h3>Get Pet By UserId</h3>
+		<input type="text" class="form-control" id="ownerId3"
+			placeholder="Put Owner ID">
+		<button id="button7" type="submit" class="btn btn-primary">Get Pets</button>
+		<table id="table7" hidden="true">
+			<tr>
+				<th>Pet ID</th>
+				<th>Pet Name</th>
+				<th>Pet Type</th>
+			</tr>
+		</table> -->
             
     </div>
 </body>
@@ -265,9 +272,9 @@
         })
     });
     
-    $("#button1").click(
+    $("#button2").click(
 			function() {
-				$("#button1").attr("disabled", true)
+/* 				$("#button1").attr("disabled", true) */
 /* 				$("#table1").attr("hidden",false) */
 				$.ajax({
 					type : "GET",
@@ -276,24 +283,33 @@
 						console.log(resp[0]);
 						for ( var vet in resp) {
 							$("#table1").append(
-									"<option>" + resp[vet].username + "</option>")
+								/* 	"<option>" + resp[vet].username + "</option>") */
+								"<option value=\"" + resp[vet].userId + "\">" + resp[vet].username + "</option>")
 						}
 					}
 				})
 			});
-			
-	 $("#button9").click(
+	
+	$("#button2").click(
 			function() {
-				$("#button9").attr("disabled", true)
-/* 				$("#table1").attr("hidden",false) */
+				$("#table7").attr("hidden",false)
+				var owner_id = $("#ownerId").val();
+				//alert(owner_id)
 				$.ajax({
 					type : "GET",
-					url : "http://localhost:9090/PetClinic/pets",
+					url : "http://localhost:9090/PetClinic/pets/" + owner_id+"",
 					success : function(resp) {
-						console.log(resp[0]);
 						for ( var pet in resp) {
+							console.log(resp[0].apptId)
+							//$("#table2 tbody > tr").remove();
+							/* $("#table7").append(
+									"<tr><td>" + resp[pet].petId
+									+ "</td><td>"+ resp[pet].petName
+									+ "</td><td>"+ resp[pet].petType.petTypeName
+									+ "</td></tr>") */
 							$("#table9").append(
-									"<option>" + resp[pet].petName + "</option>")
+									/* "<option>" + resp[pet].petName + "</option>") */
+									"<option value=\"" + resp[pet].petId + "\">" + resp[pet].petName + "</option>")
 						}
 					}
 				})
@@ -348,20 +364,22 @@
 	       };        */
 	       	   var apptObj = {
 /* 	                	apptId: 33, */
-	                	vet: {"userId":2,
+/* 	                	vet: {"userId":2,
 	                		"username":"burgers4me",
 	                		"firstName":"Jessica",
 	                		"lastName":"Adams",
 	                		"phone":"718-900-8790",
 	                		"email":"jadams@gmail.com",
 	                		"userRole":{"userRoleId":1,"userRole":"Vet"}
-	                		},
-	                	ownerId: $("#ownerId").val(),
+	                		}, */
+	                	vetId: parseInt($("#table1").val()),
+	                	petId: parseInt($("#table9").val()),
+	                	ownerId: parseInt($("#ownerId").val()),
 	                	description: $("#description").val(),
 /* 	                	placedDate: "1-12-2017", */
 	                    apptDate: $("#date").val()
 	       };  
-	       
+	       console.log(apptObj);
 	       
 	       
 	       
@@ -374,10 +392,10 @@
 	                     url: "http://localhost:9090/PetClinic/add",
 	           			 data: JSON.stringify(apptObj),
 	           			 success: function (response) {
-                                console.log("SUCCESS")
+                                console.log(response)
                             },
                             error: function (response) {
-                                console.log("FAILED");
+                                console.log(response);
                             }
 	           			 
 	       	});

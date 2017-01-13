@@ -34,5 +34,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry exported="true" kind="lib" path="C:/oraclexe/app/oracle/product/11.2.0/server/jdbc/lib/ojdbc6.jar"/>
+	<classpathentry kind="lib" path="C:/Users/kawee/Downloads/java-json.jar/java-json.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
