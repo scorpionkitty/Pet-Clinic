@@ -3,6 +3,8 @@ package com.sherlockHomies.orm;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -325,11 +327,27 @@ public class Facade {
 	
 	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
 	public List<Appointment> getFutureAppointmentsByUser(int userId){
-		return apptDao.getAppointmentsAfterTodayByUser(userId);
+/*		return apptDao.getAppointmentsAfterTodayByUser(userId);*/
+		List<Appointment> appts = apptDao.getAppointmentsAfterTodayByUser(userId);
+		Collections.sort(appts, new Comparator<Appointment>() {
+		    @Override
+		    public int compare(Appointment r1, Appointment r2) {
+		        return r1.getApptDate().compareTo(r2.getApptDate());
+		    }
+		}); 
+		return appts;
 	}
 	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
 	public List<Appointment> getPastAppointmentsByUser(int userId){
-		return apptDao.getAppointmentsBeforeTodayByUser(userId);
+/*		return apptDao.getAppointmentsBeforeTodayByUser(userId);*/
+		List<Appointment> appts = apptDao.getAppointmentsBeforeTodayByUser(userId);
+		Collections.sort(appts, new Comparator<Appointment>() {
+		    @Override
+		    public int compare(Appointment r1, Appointment r2) {
+		        return r2.getApptDate().compareTo(r1.getApptDate());
+		    }
+		}); 
+		return appts;
 	}
 	
 }
