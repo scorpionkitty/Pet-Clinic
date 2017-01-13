@@ -248,6 +248,14 @@ public class Facade {
 	}
 	
 	/**
+	 * Returns all pets of an owner as a list when given owner's username
+	 */
+	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
+	public List<Pet> getPetByUserId(int userId){
+		return petDao.getPetByUserId(userId);
+	}
+	
+	/**
 	 * Returns all pets of a type as a list when given type Id
 	 */
 	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)

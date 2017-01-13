@@ -33,6 +33,7 @@ public class DAOTest {
 	 * 		getbyId
 	 */
 	
+	@Ignore
 	@Test
 	public void testAddAppt(){
 		Timestamp timestamp = null;
@@ -46,8 +47,8 @@ public class DAOTest {
 		System.out.println(appt);
 	}
 	
-	@Test
 	@Ignore
+	@Test
 	public void testCompletedAppt(){
 		/*List<Appointment> appts = ctxt.getBean(AppointmentDAO.class).getAppointmentsBeforeTodayByUser(3);*/
 		List<Appointment> appts = ctxt.getBean(Facade.class).getPastAppointmentsByUser(3);
@@ -191,6 +192,12 @@ public class DAOTest {
 	@Test
 	public void testPetByType2(){
 		List<Pet> pets = ctxt.getBean(PetDAO.class).getByType("chicken");
+		System.out.println(pets);
+	}
+	
+	@Test
+	public void testPetByUserId(){
+		List<Pet> pets =ctxt.getBean(PetDAO.class).getPetByUserId(3);
 		System.out.println(pets);
 	}
 

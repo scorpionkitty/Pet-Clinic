@@ -62,6 +62,17 @@ public class PetDAO {
 	@Transactional(isolation=Isolation.READ_COMMITTED,
 			propagation=Propagation.REQUIRED,
 			rollbackFor=Exception.class)
+	public List<Pet> getPetByUserId(int userId){
+
+		String HQL = "select P from Pet P join P.owner Us where Us.userId= :u";
+		Query query = sessionFactory.getCurrentSession().createQuery(HQL);
+		query.setInteger("u", userId);
+		return query.list();
+	}
+	
+	@Transactional(isolation=Isolation.READ_COMMITTED,
+			propagation=Propagation.REQUIRED,
+			rollbackFor=Exception.class)
 	public List<Pet> getByType(String type){
 		String HQL = "select P from Pet P join P.petType PT where PT.petTypeName= :t";
 		Query query = sessionFactory.getCurrentSession().createQuery(HQL);

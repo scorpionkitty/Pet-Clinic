@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sherlockHomies.beans.Appointment;
+import com.sherlockHomies.beans.Pet;
 import com.sherlockHomies.beans.User;
 
 @Controller
@@ -91,6 +92,12 @@ public class FrontController {
     @RequestMapping(value="/user/{param}", method=RequestMethod.GET, produces="application/json")
     public ResponseEntity<User> getUser(@PathVariable(value="param") int userId) {
         return new ResponseEntity<User>(businessDelegate.getUserById(userId),HttpStatus.OK);
+    }
+	
+	@ResponseBody
+    @RequestMapping(value="/pets/{param}", method=RequestMethod.GET, produces="application/json")
+    public ResponseEntity<List<Pet>> getPets(@PathVariable(value="param") int userId) {
+        return new ResponseEntity<List<Pet>>(businessDelegate.getPetByUserId(userId),HttpStatus.OK);
     }
     
     /**

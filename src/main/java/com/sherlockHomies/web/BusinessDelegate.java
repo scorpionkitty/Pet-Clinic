@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Service;
 
 import com.sherlockHomies.beans.Appointment;
+import com.sherlockHomies.beans.Pet;
 import com.sherlockHomies.beans.User;
 import com.sherlockHomies.orm.Facade;
 
@@ -86,6 +87,12 @@ public class BusinessDelegate implements ApplicationContextAware{
 	 */
 	public List<Appointment> getCompleted(int userId){
 		return context.getBean(Facade.class).getPastAppointmentsByUser(userId);
+	}
+	
+	//////////PETS///////////////
+	
+	public List<Pet> getPetByUserId(int userId){
+		return context.getBean(Facade.class).getPetByUserId(userId);
 	}
 	
 }

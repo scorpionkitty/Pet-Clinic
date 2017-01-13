@@ -35,6 +35,7 @@
 
 </head>
 <body>
+	<div id="bod">
 	<h3>Get all vets</h3>
 	<button type="button" id="button1"></button>
 	<table id="table1" hidden="true">
@@ -49,7 +50,7 @@
 	
 	<h3>Get Past Appointments</h3>
 	<input type="text" class="form-control" id="ownerId"
-		placeholder="Trainee ID">
+		placeholder="Put Owner ID">
 	<button id="button2" type="submit" class="btn btn-primary">Find</button>
 	<table id="table2" hidden="true">
 		<tr>
@@ -63,7 +64,7 @@
 	
 	<h3>Get User by Id</h3>
 	<input type="text" class="form-control" id="userIdnum"
-		placeholder="Trainee ID">
+		placeholder="Put User ID">
 	<button id="button3" type="submit" class="btn btn-danger">Get user</button>
 	<table id="table3" hidden="true">
 			<tr>
@@ -77,7 +78,7 @@
 	
 	<h3>Get by username</h3>
 	<input type="text" class="form-control" id="username"
-		placeholder="Trainee ID">
+		placeholder="Put Username">
 	<button id="button4" type="submit" class="btn btn-danger">Get user</button>
 	<table id="table4" hidden="true">
 			<tr>
@@ -91,7 +92,7 @@
 	
 	<h3>Get Future appts</h3>
 		<input type="text" class="form-control" id="ownerId2"
-		placeholder="Trainee ID">
+		placeholder="Put Owner ID">
 	<button id="button5" type="submit" class="btn btn-primary">Find Future Appointments</button>
 	<table id="table5" hidden="true">
 		<tr>
@@ -101,7 +102,30 @@
 		</tr>
 	</table>
 	
+	<h3>Submit by appointment</h3>
+	<input type="text" class="form-control" id="date" placeholder="Put Date">
+	<input type="text" class="form-control" id="description" placeholder="Put Description">
+	<button id="button6" type="submit" class="btn btn-danger">Submit </button>
 	
+	<br/><br/>
+
+		<h3>Get Pet By UserId</h3>
+		<input type="text" class="form-control" id="ownerId3"
+			placeholder="Put Owner ID">
+		<button id="button7" type="submit" class="btn btn-primary">Get Pets</button>
+		<table id="table7" hidden="true">
+			<tr>
+				<th>Pet ID</th>
+				<th>Pet Name</th>
+				<th>Pet Type</th>
+			</tr>
+		</table>
+		
+		<br/><br/>
+
+		<button onClick="logout()" value="Logout">Refresh</button>
+	
+</div>
 </body>
 <script>
 	/*     $("#tables").ready(function () {
@@ -219,7 +243,7 @@
 	);
 	
 	
-$("#button5").click(
+	$("#button5").click(
 			function() {
 				$("#table5").attr("hidden",false)
 				var owner_id = $("#ownerId2").val();
@@ -242,5 +266,98 @@ $("#button5").click(
 				})
 			});
 			
+
+		
+	$("#button6").click(
+		function(){
+			var descrip = $("#description").val();
+			var day = $("#date").val();
+			var obj = { "apptId" : 5,
+			"vet" : {
+				"userId" : 1,
+				"username" : "123unicorn",
+				"firstName" : "Tim",
+				"lastName" : "Miller",
+				"phone" : "718-445-4444",
+				"email" : "tmiller@vet.com",
+				"userRole" : {
+					"userRoleId" : 1,
+					"userRole" : "Vet"
+				}
+			},
+			"pet" : {
+				"petId" : 1,
+				"petName" : "Mr. Jenkins",
+				"owner" : {
+					"userId" : 3,
+					"username" : "pusheen",
+					"firstName" : "Alex",
+					"lastName" : "Franks",
+					"phone" : "917-225-6789",
+					"email" : "afranks@gmail.com",
+					"userRole" : {
+						"userRoleId" : 2,
+						"userRole" : "Owner"
+					}
+				},
+				"petType" : {
+					"petTypeId" : 2,
+					"petTypeName" : "chicken"
+				}
+			},
+			"description" : "Nasal infection.",
+			"placedDate" : "01-07-2017",
+			"apptDate" : "02-08-2017",
+			"prescription" : null}
+			
+		alert(descrip + " " + day)
+		$.ajax({
+			type : "POST",
+			url : "http://localhost:9090/PetClinic/add",
+			contentType: "application/json; charset=utf-8",
+			dataType: 'json',
+	        data: JSON.stringify(obj)
+		})
+	});
+	
+		
+	$("#button7").click(
+			function() {
+				$("#table7").attr("hidden",false)
+				var owner_id = $("#ownerId3").val();
+				//alert(owner_id)
+				$.ajax({
+					type : "GET",
+					url : "http://localhost:9090/PetClinic/pets/" + owner_id+"",
+					success : function(resp) {
+						for ( var pet in resp) {
+							console.log(resp[0].apptId)
+							//$("#table2 tbody > tr").remove();
+							$("#table7").append(
+									"<tr><td>" + resp[pet].petId
+									+ "</td><td>"+ resp[pet].petName
+									+ "</td><td>"+ resp[pet].petType.petTypeName
+									+ "</td></tr>")
+						}
+					}
+				})
+			});
+</script>
+<script>
+function logout(){
+	location = location;
+	//TODO Nothing really works except location=location which is a short refresh than everything else
+	
+/* 	$.ajax ({
+		url:"",
+		dataType:"text",
+		success: function(html){
+			$('#bod').replaceWith($.parseHTML(html));
+			setTimeout(refresh,2000);
+		}
+	}); */
+	//$('#bod').load('ajax.html');
+}
+//refresh();
 </script>
 </html>
