@@ -88,4 +88,5 @@ public class BusinessDelegate implements ApplicationContextAware{
 		return context.getBean(Facade.class).getPastAppointmentsByUser(userId);
 	}
 	
+
 }

@@ -203,12 +203,31 @@
             </div>
         </div>
         <div id="addItem">
-            <h5>Add Appointment</h5> Appointment Date
+            <h5>Add Appointment</h5> 
+            Select vet<br>
+            <button type="button" id="button1">View vets</button>
+            <select class="form-control" id="table1">
+<!-- 				  <option value="1">1</option>
+				  <option>2</option>
+				  <option>3</option>
+				  <option>4</option>
+				  <option>5</option> -->
+			</select>
+			
+			<br>Select pet<br>
+			<button type="button" id="button9">View pets</button>
+			<select class="form-control" id="table9">
+			</select>
+			
+            <br>Appointment Date
             <input id="date" type="text">
             <br> Description
             <input id="description" type="text">
             <br>
             <input id="addAppt" type="submit" value="Add"> </div>
+            
+            
+            
     </div>
 </body>
 <script>
@@ -245,6 +264,40 @@
             }
         })
     });
+    
+    $("#button1").click(
+			function() {
+				$("#button1").attr("disabled", true)
+/* 				$("#table1").attr("hidden",false) */
+				$.ajax({
+					type : "GET",
+					url : "http://localhost:9090/PetClinic/vets",
+					success : function(resp) {
+						console.log(resp[0]);
+						for ( var vet in resp) {
+							$("#table1").append(
+									"<option>" + resp[vet].username + "</option>")
+						}
+					}
+				})
+			});
+			
+	 $("#button9").click(
+			function() {
+				$("#button9").attr("disabled", true)
+/* 				$("#table1").attr("hidden",false) */
+				$.ajax({
+					type : "GET",
+					url : "http://localhost:9090/PetClinic/pets",
+					success : function(resp) {
+						console.log(resp[0]);
+						for ( var pet in resp) {
+							$("#table9").append(
+									"<option>" + resp[pet].petName + "</option>")
+						}
+					}
+				})
+			});
 </script>
 <script type="text/javascript">
     $(function () {
@@ -269,9 +322,11 @@
     });
 </script>
 <script>
+		
+		
 	    $("#addAppt").click(function () {
 	        console.log("Button clicked ");
-	      	var apptObj = {
+/* 	      	var apptObj = {
 	                	apptId: 33,
 	                	vet: {"userId":2,
 	                		"username":"burgers4me",
@@ -290,13 +345,41 @@
 	                	placedDate: "1-12-2017",
 	                    apptDate: $("#date").val(),
 	  				    prescription: "none yet"
-	       };       
+	       };        */
+	       	   var apptObj = {
+/* 	                	apptId: 33, */
+	                	vet: {"userId":2,
+	                		"username":"burgers4me",
+	                		"firstName":"Jessica",
+	                		"lastName":"Adams",
+	                		"phone":"718-900-8790",
+	                		"email":"jadams@gmail.com",
+	                		"userRole":{"userRoleId":1,"userRole":"Vet"}
+	                		},
+	                	ownerId: $("#ownerId").val(),
+	                	description: $("#description").val(),
+/* 	                	placedDate: "1-12-2017", */
+	                    apptDate: $("#date").val()
+	       };  
+	       
+	       
+	       
+	       
+	       
+	            
 	         $.ajax({
 	                    type: "POST",
 	                    dataType: "json",
 	            		contentType: "application/json; charset=utf-8",
 	                     url: "http://localhost:9090/PetClinic/add",
-	           			 data: JSON.stringify(apptObj)
+	           			 data: JSON.stringify(apptObj),
+	           			 success: function (response) {
+                                console.log("SUCCESS")
+                            },
+                            error: function (response) {
+                                console.log("FAILED");
+                            }
+	           			 
 	       	});
 	       	console.log("Added : )");
 	});
