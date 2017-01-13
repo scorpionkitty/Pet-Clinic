@@ -123,6 +123,28 @@
         .panel-title:hover {
             cursor: pointer;
         }
+        
+        
+        #left {
+    position:absolute;
+    left:0px;
+ 
+    width:50%;
+}
+
+#right {
+    position:absolute;
+    right:0px;
+    
+    width:50%;
+  
+}
+
+.padding {
+    margin:20px;
+}
+
+
     </style>
 </head>
 <body>
@@ -159,16 +181,21 @@
                     <input id="button2" type="submit" value="Find your appointments"> </p>
             </div>
         </div>
+        
         <div class="container" id="container" hidden="true">
+        <div id="left">
+        <div class="padding">
             <!-- <button onClick="logout()" value="Logout">Refresh</button> -->
-            <div class="panel-group" id="accordion">
-                <!-- First Panel -->
+<!--             <div class="panel-group" id="accordion">
+                First Panel
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title" data-toggle="collapse" data-target="#collapseOne">
                  	Completed Appointments
              	</h4> </div>
                     <div id="collapseOne" class="panel-collapse collapse">
+                        <div class="panel-body"> -->
+                        <div class="panel panel-default">
                         <div class="panel-body">
                             <h1 id="title1" style="display:none">Completed Appointments</h1>
                             <table id="table2" class="table table-hover" hidden="true">
@@ -182,7 +209,9 @@
                                     <th>Rating</th>
                                 </tr>
                             </table>
-                        </div>
+                            </div>
+                            </div>
+ <!--                        </div>
                     </div>
                 </div>
                 <div class="panel panel-default">
@@ -191,6 +220,8 @@
                  	Upcoming Appointments
              	</h4> </div>
                     <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body"> -->
+                        <div class="panel panel-default">
                         <div class="panel-body">
                             <h1 id="title2" style="display:none">Upcoming Appointments</h1>
                             <table id="table5" class="table table-hover" hidden="true">
@@ -204,23 +235,49 @@
                                     <th>Rating</th>
                                 </tr>
                             </table>
-                        </div>
+                            </div>
+                            </div>
+    <!--                     </div>
                     </div>
                 </div>
+            </div> -->
             </div>
+         </div>
+        <div id="right">
+        <div class="padding">
+        
+        	
+        	<div class="row stylish-panel">
+            
+        			<div style="display:inline-block; float:left; margin-left:50px; margin-right:150px">
+                            <p class="noDecorationHover">Jessica Adams</p>
+                            <figure><img src="http://tinyurl.com/jq9zu9o" alt="femaleVet" class="img-circle img-thumbnail"></figure>
+                    </div>
+                    <div style="display:inline-block">
+                            <p class="noDecorationHover">Tim Miller</p>
+                            <figure>
+                                <img src="http://tinyurl.com/hchzq49" alt="maleVet" class="img-circle img-thumbnail">
+                            </figure>
+                     </div>
+                     
+                     </div>
+                     
+                     
+                   
+        
             <div id="addItem">
-                <h5>Add Appointment</h5> Select vet
-                <br>
-                <select class="form-control" id="table1"> </select>
-                <br>Select pet
-                <br>
-                <select class="form-control" id="table9"> </select>
-                <br>Appointment Date
-                <input id="date" type="text">
-                <br> Description
-                <input id="description" type="text">
-                <br>
-                <input id="addAppt" type="submit" value="Add" onClick="logout()"> </div>
+                <h5>Add Appointment</h5>
+                <select class="form-control" id="table1"> 
+                	<option value="" disabled selected>Select a vet</option>
+                </select>
+                <select class="form-control" id="table9"> 
+                	<option value="" disabled selected>Select your pet</option>
+                </select>
+				<input id="date" class="form-control" type="text" placeholder="Appointment date as MM-DD-YYYY">
+				<textarea id="description" class="form-control" rows="3" placeholder="Enter a description"></textarea>
+                <input id="addAppt" type="submit" value="Submit Appointment" onClick="logout()" class="btn btn-primary btn-lg btn-block"> </div>
+        </div>
+        </div>
         </div>
     </div>
 </body>
@@ -266,7 +323,7 @@
             , success: function (resp) {
                 console.log(resp[0]);
                 for (var vet in resp) {
-                    $("#table1").append("<option value=\"" + resp[vet].userId + "\">" + resp[vet].username + "</option>")
+                    $("#table1").append("<option value=\"" + resp[vet].userId + "\">" + resp[vet].firstName + " " + resp[vet].lastName + "</option>")
                 }
             }
         })
