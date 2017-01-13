@@ -1,5 +1,6 @@
 package com.sherlockHomies.web;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.BeansException;
@@ -61,9 +62,12 @@ public class BusinessDelegate implements ApplicationContextAware{
 	/**
 	 * Inserts an appointment when given a user Id, vet Id, pet Id, description, appt date, and card number
 	 */
-	public void insertAppt(int userId, int vetId, int petId, String description, String apptDate, 
-			String cardNumber){
-		facade.createAndInsertAppt(userId, vetId, petId, description, apptDate, cardNumber);
+/*	public void insertAppt(int userId, int vetId, int petId, String description, String apptDate){
+		facade.createAndInsertAppt(userId, vetId, petId, description, apptDate);
+	}*/
+	public void insertAppt(int userId, int vetId, int petId, String description, Timestamp apptDate){
+		System.out.println("Entered insertAppt method in BD");
+		context.getBean(Facade.class).createAndInsertAppt(userId, vetId, petId, description, apptDate);
 	}
 
 	public User getUserByUsername(String username) {

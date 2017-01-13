@@ -104,7 +104,7 @@ public class Facade {
 	 * Creates and insert an appointment given an owner Id, vet Id, pet Id, description, appt date, card number
 	 */
 	@Transactional(isolation=Isolation.READ_COMMITTED, rollbackFor=Exception.class, propagation=Propagation.REQUIRES_NEW)
-	public void createAndInsertAppt(int ownerId, int vetId, int petId, String description, String apptDate, String cardNumber) {
+/*	public Appointment createAndInsertAppt(int ownerId, int vetId, int petId, String description, String apptDate) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss"); //TODO double check
 		Date parsedDate = null;
 		try {
@@ -114,10 +114,32 @@ public class Facade {
 		}
 		Timestamp apptDateTimestamp = new java.sql.Timestamp(parsedDate.getTime());
 		//to create an appointment object you need ownerId, vetId, date placed, date of appt, description 
-		Appointment appt = apptDao.createAppt(ownerId, vetId, petId, description, getCurrentTimeStamp(), apptDateTimestamp);
+		Appointment appt = apptDao.createAppt(ownerId, vetId, petId, description, getCurrentTimeStamp(), apptDate);
 		//return appt;
 		dao.insert(appt);
+		return appt;
+		//TODO Invoice invoice = InvoiceDAO.createInvoice();
+	}*/
+	public Appointment createAndInsertAppt(int ownerId, int vetId, int petId, String description, Timestamp apptDate) {
+/*		SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy hh:mm:ss"); //TODO double check
+		Date parsedDate = null;
+		try {
+			parsedDate = dateFormat.parse(apptDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		Timestamp apptDateTimestamp = new java.sql.Timestamp(parsedDate.getTime());*/
+		//to create an appointment object you need ownerId, vetId, date placed, date of appt, description 
+		System.out.println("Entered createAndInsertAppt method");
 		
+		
+		//TODO Appointment appt = apptDao.createAppt(ownerId, vetId, petId, description, getCurrentTimeStamp(), apptDate);
+		
+		Appointment appt = new Appointment(30, getUser(vetId), getPetById(petId), description, getCurrentTimeStamp(), apptDate);
+		System.out.println(appt + "!!!!!!!!!!!!!!!!!!");
+		//return appt;
+		dao.insert(appt);
+		return appt;
 		//TODO Invoice invoice = InvoiceDAO.createInvoice();
 	}
 	

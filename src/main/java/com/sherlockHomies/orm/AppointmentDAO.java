@@ -85,7 +85,13 @@ public class AppointmentDAO {
 	@Transactional(isolation=Isolation.READ_COMMITTED, propagation=Propagation.REQUIRED, rollbackFor=Exception.class)
 	public Appointment createAppt(int ownerId, int vetId, int petId, String description, 
 			Timestamp currentTimeStamp, Timestamp apptDate) {
-		return new Appointment(++freeAptId, userDAO.getById(vetId), petDAO.getById(petId), description, 
+		System.out.println("Entered createAppt method in apptDAO");
+		System.out.println(userDAO.getById(vetId));
+		System.out.println(petDAO.getById(petId));
+		System.out.println(description);
+		System.out.println(currentTimeStamp);
+		System.out.println(apptDate);
+		return new Appointment(30, userDAO.getById(vetId), petDAO.getById(petId), description, 
 				currentTimeStamp, apptDate);
 	}
 	

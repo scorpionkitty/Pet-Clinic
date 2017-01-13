@@ -1,5 +1,8 @@
 package com.sherlockHomies.orm;
 
+import java.util.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.BeforeClass;
@@ -31,6 +34,20 @@ public class DAOTest {
 	 */
 	
 	@Test
+	public void testAddAppt(){
+		Timestamp timestamp = null;
+		try{
+			SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+		    Date parsedDate = dateFormat.parse("02-02-2017");
+		    timestamp = new java.sql.Timestamp(parsedDate.getTime());
+		    System.out.println(timestamp.toString());
+		}catch(Exception e){}
+		Appointment appt = ctxt.getBean(Facade.class).createAndInsertAppt(3, 1, 1, "Funny walk", timestamp);
+		System.out.println(appt);
+	}
+	
+	@Test
+	@Ignore
 	public void testCompletedAppt(){
 		/*List<Appointment> appts = ctxt.getBean(AppointmentDAO.class).getAppointmentsBeforeTodayByUser(3);*/
 		List<Appointment> appts = ctxt.getBean(Facade.class).getPastAppointmentsByUser(3);

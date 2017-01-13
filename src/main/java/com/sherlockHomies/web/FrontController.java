@@ -106,9 +106,17 @@ public class FrontController {
     /**
      * Add a new appointment when given an appointment object newAppt
      */
-    @RequestMapping(value = "/add" , method = RequestMethod.POST)
+    @RequestMapping(value = "/add" , method = RequestMethod.POST, consumes="application/json")
     public void add(@RequestBody Appointment newAppt) {
     	System.out.println("New appointment: " + newAppt.toString());
+    	System.out.println(newAppt.getPet().getOwner().getUserId());
+    	System.out.println(newAppt.getVet().getUserId());
+    	System.out.println(newAppt.getPet().getPetId());
+    	System.out.println(newAppt.getDescription());
+    	System.out.println(newAppt.getApptDate().toString());
+    	//businessDelegate.insertAppt(userId, vetId, petId, description, apptDate, cardNumber);
+    	businessDelegate.insertAppt(newAppt.getPet().getOwner().getUserId(), newAppt.getVet().getUserId(), 
+    			newAppt.getPet().getPetId(), newAppt.getDescription(), newAppt.getApptDate());
     }
     
     @RequestMapping(value = "/validate", method = RequestMethod.POST)
