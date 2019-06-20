@@ -1,2 +1,2 @@
 # Pet-Clinic
-A virtual portal for vets and pet owners to manage appointments
+This project focuses on building a virtual portal for a pet clinic, managing incoming and publishing upcoming appointments and pet owner experience feedback. Pet owners can log in and select which vet they wish to see for a specific pet and the date and time they choose. Using JavaScript and AJAX, the pet owner will be able to view upcoming appointments and have the option to cancel. Pet owners will also be able to rate their experience after an appointment has been marked as completed. Vets will be able to log in and view their upcoming appointments. Using Java, HQL, Spring, and Hibernate as the back end, we use ORM to map our POJO to our relational database.
